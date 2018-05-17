@@ -77,7 +77,8 @@ boot-master
 #### **用户反馈：**
 - GitHub：https://github.com/apple987/boot_walk <br>
 - 码云仓库： https://gitee.com/bootstrap2table/boot_master<br>
--  邮箱地址: m15171479289@163.com<br>
+- 代码生成： https://github.com/apple987/AutoCode<br>
+- 邮箱地址:  m15171479289@163.com<br>
 		
 		
 
