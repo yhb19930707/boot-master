@@ -39,8 +39,8 @@ springBoot
 │ 
 ├─StartUpApplication 项目启动类
 │  
-├──resources<br>
-│  ├─page 页面资源(static,view)
+├──resources
+│  ├─page 页面资源
 │  │  ├─static 静态资源
 │  │  │  ├─css  css样式
 │  │  │  ├─js   js文件 
