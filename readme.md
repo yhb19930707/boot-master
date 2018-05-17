@@ -3,7 +3,7 @@
 #### 项目介绍
 boot_master是springBoot项目，结合项目中使用的技术点，目前升级到2.0.2版本,欢迎大家提出宝贵意见,您的宝贵意见，是我们进步的动力。<br>
  
-**项目特点**   
+#### **项目特点**   
 > * 友好的代码结构及注释，便于阅读及二次开发 。<br>
 > * 前端页面采用freemarker,模板化引擎设计,页面采用bootstrap-table灵活强大的表格插件。<br>
 > * 后端配置swagger在线文档，方便编写API接口文档。 <br>
@@ -23,27 +23,38 @@ boot_master是springBoot项目，结合项目中使用的技术点，目前升�
 
 #### **项目结构**
 ```
-springBoot<br>
-├─doc  项目SQL语句<br>
-│ <br>
-├─common 公共配置<br>
-│ <br>
-├─framework 框架配置<br>
-│ <br>
-├─modules 功能模块<br>
-│  ├─app API接口模块(APP调用)<br>
-│  ├─controller 系统模块<br>
-│  ├─mapper  mybatis的sql文件<br>
-│  ├─model   数据库实体类<br>
-│  └─service 业务逻辑层<br>
+springBoot
+├─doc  项目SQL语句
 │ 
-├─StartUpApplication 项目启动类<br>
+├─common 公共配置
+│ 
+├─framework 框架配置
+│ 
+├─modules 功能模块
+│  ├─app API接口模块(APP调用)
+│  ├─controller 系统模块
+│  ├─mapper  mybatis的sql文件
+│  ├─model   数据库实体类
+│  └─service 业务逻辑层
+│ 
+├─StartUpApplication 项目启动类
 │  
 ├──resources<br>
-│  ├─page 页面资源(static,view)<br>
-│  ├─application.properties 配置文件<br>
+│  ├─page 页面资源(static,view)
+│  │  ├─static 静态资源
+│  │  │  ├─css  css样式
+│  │  │  ├─js   js文件 
+│  │  │  ├─images  图片文件 
+│  │  │  └─plugins 前端插件
+│  │  │
+│  │  └─view  前端页面
+│  │     ├─error 系统错误页
+│  │     ├─inc   公共资源文件
+│  │     └─其他  系统功能页面
+│  │
+│  ├─application.properties 配置文件
 │  ├─banner.txt  自定义启动图标<br>
-│  ├─mybatis_config.xml mybatis配置项<br>
+│  ├─mybatis_config.xml mybatis配置项
 │  └─secure.jks  ssl安全证书<br>
 ```
 
