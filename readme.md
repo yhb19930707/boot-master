@@ -20,30 +20,30 @@ boot_master是springBoot项目，结合项目中使用的技术点，目前升�
 > * 配置https安全协议，提高系统安全性,配置log4j日志，系统出现异常自动发送邮件。<br>
 > * 配置poi和csv简单导出excel功能点,poi目前是多sheet智能导出。<br>
  <br> 
-#### **项目结构**
+#### **项目结构**<br>
 ```
-springBoot
-├─doc  项目SQL语句
+springBoot<br>
+├─doc  项目SQL语句<br>
+│ <br>
+├─common 公共配置<br>
+│ <br>
+├─framework 框架配置<br>
+│ <br>
+├─modules 功能模块<br>
+│  ├─app API接口模块(APP调用)<br>
+│  ├─controller 系统模块<br>
+│  ├─mapper  mybatis的sql文件<br>
+│  ├─model   数据库实体类<br>
+│  └─service 业务逻辑层<br>
 │ 
-├─common 公共配置
-│ 
-├─framework 框架配置
-│ 
-├─modules 功能模块
-│  ├─app API接口模块(APP调用)
-│  ├─controller 系统模块
-│  ├─mapper  mybatis的sql文件
-│  ├─model   数据库实体类
-│  └─service 业务逻辑层
-│ 
-├─StartUpApplication 项目启动类
+├─StartUpApplication 项目启动类<br>
 │  
-├──resources
-│  ├─page 页面资源(static,view)
-│  ├─application.properties 配置文件
-│  ├─banner.txt  自定义启动图标
-│  ├─mybatis_config.xml mybatis配置项
-│  └─secure.jks  ssl安全证书
+├──resources<br>
+│  ├─page 页面资源(static,view)<br>
+│  ├─application.properties 配置文件<br>
+│  ├─banner.txt  自定义启动图标<br>
+│  ├─mybatis_config.xml mybatis配置项<br>
+│  └─secure.jks  ssl安全证书<br>
 ```
 
  
