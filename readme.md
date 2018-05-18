@@ -50,13 +50,13 @@ boot-master
 │  │  │
 │  │  └─view  前端页面
 │  │     ├─error 系统错误页
-│  │     ├─inc   公共资源文件
-│  │     └─其他  系统功能页面
+│  │     ├─inc   公共资源页面
+│  │     └─其他   系统功能页面
 │  │
 │  ├─application.properties 配置文件
-│  ├─banner.txt  自定义启动图标<br>
+│  ├─banner.txt  自定义启动图标
 │  ├─mybatis_config.xml mybatis配置项
-│  └─secure.jks  ssl安全证书<br>
+│  └─secure.jks  ssl安全证书
 ```
 
  
