@@ -120,12 +120,12 @@ public class StudentController extends BaseController {
 	/* @RequestMapping(value="/selectPage",headers="Accept=application/json") */
 	@RequestMapping(value = "/selectPage", method = RequestMethod.POST)
 	@ResponseBody
-	// @Function("查询分页")
+	@Function("查询分页")
 	@ApiOperation(value = "分页列表", notes = "分页列表", httpMethod = "POST", response = Map.class)
 	public Map<String, Object> selectPage(@RequestHeader("Accept") String encoding, @RequestBody Student entity) {
 		System.err.println(encoding);
 		System.err.println(cacheUtil.get("apple"));
-		/* System.err.println(1/0); */
+	    /*System.err.println(1/0); */
 		return responseSelectPage(studentService.selectPage(entity));
 	}
 
