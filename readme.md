@@ -6,6 +6,7 @@ boot-master是springBoot项目，结合项目中使用的技术点，目前升�
 #### **项目特点**   
 > * 友好的代码结构及注释，便于阅读及二次开发 。<br>
 > * 前端页面采用freemarker,模板化引擎设计,页面采用bootstrap-table灵活强大的表格插件。<br>
+> * 前端采用jquery validate插件,快捷方便进行数据验证。<br>
 > * 后端配置swagger在线文档，方便编写API接口文档。 <br>
 > * 引入druib,fastjson,cors,xss,redis-cluster配置。<br>
 > * 引入API模板，根据token作为登录令牌，极大的方便了APP接口开发。<br>
