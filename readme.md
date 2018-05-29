@@ -9,11 +9,11 @@ boot-master是springBoot项目，结合项目中使用的技术点，目前升�
     ● 数据持久框架：MyBatis
     ● 数据库连接池：Alibaba Druid
     ● 系统缓存框架：Redis-cluster
-    ● 系统前端框架：Bootstrap+Jquery
+    ● 系统前端框架：Freemaker+Bootstrap+Jquery
     ● 搜索引擎框架：Solr
     ● 分布式线程锁：Redisson
     ● 系统消息队列：ActiveMq
-    ● 安全授权框架：JwtToken
+    ● 安全授权框架：JwtToken    
  
 #### **项目特点**   
 > * 友好的代码结构及注释，便于阅读及二次开发 。<br>
@@ -88,12 +88,15 @@ boot-master
 - 6.运行StartUpApplication启动项目，浏览器访问http://localhost。<br>
 
 	
-#### **用户反馈：**
+#### **友情链接：**
 - GitHub：https://github.com/apple987/boot_walk <br>
 - 码云仓库： https://gitee.com/bootstrap2table/boot_master<br>
 - mycat版本: https://gitee.com/bootstrap2table/boot_master/tree/feature/mycat<br>
 - 代码生成： https://github.com/apple987/AutoCode<br>
-- 邮箱地址:  m15171479289@163.com<br>
+
+#### **问题反馈：**
+- 意见反馈：https://gitee.com/bootstrap2table/boot_master/issues
+- 联系作者: m15171479289@163.com<br>
 		
 		
         
