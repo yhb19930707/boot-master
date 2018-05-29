@@ -8,6 +8,7 @@ boot-master是springBoot项目，结合项目中使用的技术点，目前升�
     ● 定时任务调度：ElasticJob+Zookeeper
     ● 数据持久框架：MyBatis
     ● 数据库连接池：Alibaba Druid
+    ● 系统监控插件：JavaMelody+Druid
     ● 系统缓存框架：Redis-cluster
     ● 系统前端框架：Freemaker+Bootstrap+Jquery
     ● 搜索引擎框架：Solr
