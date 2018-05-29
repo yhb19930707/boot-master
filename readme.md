@@ -38,6 +38,7 @@ boot-master是springBoot项目，结合项目中使用的技术点，目前升�
 #### **项目结构**
 ```
 boot-master
+│ 
 ├─doc  项目SQL语句
 │ 
 ├─common 公共配置
