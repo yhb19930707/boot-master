@@ -2,6 +2,18 @@
 
 #### 项目介绍
 boot-master是springBoot项目，结合项目中使用的技术点，目前升级到2.0.2版本,欢迎大家提意见，您的宝贵意见，是我们进步的动力。<br>
+
+#### 技术选型
+    ● 系统核心框架：SpringBoot  
+    ● 定时任务调度：ElasticJob+Zookeeper
+    ● 数据持久框架：MyBatis
+    ● 数据库连接池：Alibaba Druid
+    ● 系统缓存框架：Redis-cluster
+    ● 系统前端框架：Bootstrap+Jquery
+    ● 搜索引擎框架：Solr
+    ● 分布式线程锁：Redisson
+    ● 系统消息队列：ActiveMq
+    ● 安全授权框架：JwtToken
  
 #### **项目特点**   
 > * 友好的代码结构及注释，便于阅读及二次开发 。<br>
