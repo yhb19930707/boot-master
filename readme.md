@@ -94,6 +94,8 @@ boot-master
 - GitHub：https://github.com/apple987/boot_walk <br>
 - 码云仓库： https://gitee.com/bootstrap2table/boot_master<br>
 - mycat版本: https://gitee.com/bootstrap2table/boot_master/tree/feature/mycat<br>
+- mycat版本: https://gitee.com/bootstrap2table/boot_master/tree/feature/mycat<br>
+- jtaDruid版本: https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid<br>
 - 代码生成： https://github.com/apple987/AutoCode<br>
 
 #### **问题反馈：**
