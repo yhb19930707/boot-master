@@ -15,11 +15,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.context.request.RequestContextListener;
 
+import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator;
 import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
+import com.alibaba.druid.wall.WallConfig;
+import com.alibaba.druid.wall.WallFilter;
 import com.qdone.framework.util.xss.XssFilter;
 
 import net.bull.javamelody.MonitoringFilter;
@@ -120,6 +123,30 @@ public class FilterConfig {
 	@Bean
 	public Advisor druidStatAdvisor() {
 		return new DefaultPointcutAdvisor(druidStatPointcut(), druidStatInterceptor());
+	}
+	
+	 /**
+     * durid配置StatFilter
+     */
+	@Bean
+	public StatFilter statFilter() {
+		StatFilter statFilter = new StatFilter();
+		statFilter.setLogSlowSql(true); // slowSqlMillis用来配置SQL慢的标准，执行时间超过slowSqlMillis的就是慢。
+		statFilter.setMergeSql(true); // SQL合并配置
+		statFilter.setSlowSqlMillis(1000);// slowSqlMillis的缺省值为3000，也就是3秒。
+		return statFilter;
+	}
+    /**
+     * druid配置WallFilter
+     */
+	@Bean
+	public WallFilter wallFilter() {
+		WallFilter wallFilter = new WallFilter();
+		// 允许执行多条SQL
+		WallConfig config = new WallConfig();
+		config.setMultiStatementAllow(true);
+		wallFilter.setConfig(config);
+		return wallFilter;
 	}
 
 	/**

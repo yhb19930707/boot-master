@@ -4,11 +4,14 @@ import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 /**
  * 
  * @author 付为地
@@ -23,6 +26,17 @@ public class HttpsConfig {
 	
 	@Value("${server.port:8080}")
 	private int serverPort;
+	
+	@Autowired  
+    private RestTemplateBuilder builder;  
+    
+	/*
+	 * 配置RestTemplate
+	 */
+    @Bean  
+    public RestTemplate restTemplate() {  
+        return builder.build();  
+    }  
 
     /**
      * 针对springBoot2.0版本配置

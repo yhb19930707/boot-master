@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import javax.jms.Destination;
 
 import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.activemq.command.ActiveMQTopic;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.qdone.common.mq.JMSProducer;
 import com.qdone.module.controller.HelloController;
+
 /**
  * 简单MockMVC测试
  */
@@ -26,9 +28,9 @@ import com.qdone.module.controller.HelloController;
 public class DemoApplicationTests {
 
 	private MockMvc mockMvc;
-	
+
 	@Autowired
-    private JMSProducer jmsProducer;
+	private JMSProducer jmsProducer;
 
 	@Before
 	public void setUp() throws Exception {
@@ -40,17 +42,34 @@ public class DemoApplicationTests {
 
 	@Test
 	public void testHello() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.post("/testJson").accept(MediaType.APPLICATION_JSON_UTF8)).andDo(print());
+		mockMvc.perform(MockMvcRequestBuilders.post("/testJson").accept(MediaType.APPLICATION_JSON_UTF8))
+				.andDo(print());
 	}
-	
-	
 
-    @Test
-    public void testJms() {
-        Destination destination = new ActiveMQQueue("springboot.queue.test");
-        for (int i=0;i<10;i++) {
-            jmsProducer.sendMessage(destination,"hello,world!" + i);
-        }
-    }
-	
+	@Test
+	public void testJmsQueue() {
+		Destination destination = new ActiveMQQueue("springboot.queue.test");
+		for (int i = 0; i < 10; i++) {
+			jmsProducer.sendMessage(destination, "生成队列消息"+i);
+		}
+	}
+
+	@Test
+	public void testJmsTopic() {
+		Destination topic = new ActiveMQTopic("springboot.topic.test");
+		for (int i = 0; i < 10; i++) {
+			jmsProducer.publish(topic, "发布主题消息" + i);
+		}
+	}
+
+	@Test
+	public void testJms() {
+		Destination destination = new ActiveMQQueue("springboot.queue.test");
+		Destination topic = new ActiveMQTopic("springboot.topic.test");
+		for (int i = 0; i < 10; i++) {
+			jmsProducer.sendMessage(destination, "生成队列消息"+i);
+			jmsProducer.publish(topic, "发布主题消息" + i);
+		}
+	}
+
 }
