@@ -104,6 +104,8 @@ boot-master
 #### **问题反馈：**
 - 意见反馈：https://gitee.com/bootstrap2table/boot_master/issues
 - 联系作者: m15171479289@163.com<br>
+- 加入QQ群：<br>
+![boot-qq](https://github.com/apple987/static/raw/master/boot/image/qq.jpg "QQ群")<br>
 
 ### 效果图
 ![boot-start](https://github.com/apple987/static/raw/master/boot/image/start.png "项目启动")<br>	
