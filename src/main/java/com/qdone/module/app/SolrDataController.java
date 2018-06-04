@@ -6,8 +6,10 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,21 +33,28 @@ import io.swagger.annotations.ApiResponse;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller
-@Api(tags = "Solrj服务接口", description = "演示Solrj服务接口,(SolrClient方式)")
+@Api(tags = "Solrj服务接口", description = "演示Solrj服务接口,(SolrClient和CloudSolrClient)")
 @RequestMapping("/solrj")
 public class SolrDataController extends BaseController {
 
 	@Autowired
     private SolrClient client;
 	
+	@Value("${zookeeper.cluster.nodes}") 
+	private String zkNodes;
+	
 
 	@RequestMapping(value = "/testAdd", method = RequestMethod.PUT)
 	@ResponseBody
-	@ApiOperation(value = "Solrj添加数据", httpMethod = "PUT", notes = "测试Solrj添加数据", response = Void.class)
+	@ApiOperation(value = "Solrj添加数据(CloudSolrClient)", httpMethod = "PUT", notes = "测试Solrj添加数据(CloudSolrClient)", response = Void.class)
 	public void testAdd(@ApiParam(required = true, value = "传入JSON对象参数", name = "msg") @RequestBody SolrData msg)throws Exception {
 		/*HttpSolrClient*/
+		CloudSolrClient cloudSolrClient=new CloudSolrClient.Builder().withZkHost(zkNodes).build();
+		cloudSolrClient.setDefaultCollection("rainsoft");
 		client.addBean(msg);
 		client.commit();
+		cloudSolrClient.addBean(msg);
+		cloudSolrClient.commit();
 	}
 
 	@ApiOperation(value = "SolrJ多条件查询", notes = "SolrJ多条件列表信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
