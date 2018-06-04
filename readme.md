@@ -110,12 +110,19 @@ boot-master
 ![boot-ssl](https://github.com/apple987/static/raw/master/boot/image/ssl.png "初始化")<br>
 ![boot-index](https://github.com/apple987/static/raw/master/boot/image/index.png "欢迎页")<br>
 ![boot-swagger](https://github.com/apple987/static/raw/master/boot/image/swagger.png "swagger在线文档")<br>
+![boot-applogin](https://github.com/apple987/static/raw/master/boot/image/appLogin.jpg "app登陆接口")<br>
+![boot-appGetUser](https://github.com/apple987/static/raw/master/boot/image/appGetUser.jpg "app获得登陆信息接口")<br>
+![boot-emailError](https://github.com/apple987/static/raw/master/boot/image/emailError.jpg "邮件发送异常")<br>
+![boot-runmq](https://github.com/apple987/static/raw/master/boot/image/runmq.jpg "发送MQ消息")<br>
+![boot-mq](https://github.com/apple987/static/raw/master/boot/image/mq.jpg "MQ队列和订阅")<br>
+![boot-insertStaff](https://github.com/apple987/static/raw/master/boot/image/insertStaff.jpg "添加职员信息")<br>
 ![boot-durid](https://github.com/apple987/static/raw/master/boot/image/druid.png "durid监控")<br>
 ![boot-javaMelody](https://github.com/apple987/static/raw/master/boot/image/javaMelody.png "javaMelody监控")<br>	
 ![boot-qrcode](https://github.com/apple987/static/raw/master/boot/image/qrcode.png "生成二维码")<br>
 ![boot-print](https://github.com/apple987/static/raw/master/boot/image/print.png "打印二维码")<br>
 ![boot-solr](https://github.com/apple987/static/raw/master/boot/image/solr.png "solr导入数据")<br>
 ![boot-upload](https://github.com/apple987/static/raw/master/boot/image/upload.jpg "文本上传")<br>
+![boot-uploadError](https://github.com/apple987/static/raw/master/boot/image/uploadError.jpg "文件上传异常")<br>
 	
 
 		
