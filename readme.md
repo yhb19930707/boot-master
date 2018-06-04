@@ -81,6 +81,7 @@ boot-master
 - 1.项目依赖,redis-cluster集群,zookeeper,activeMq,solr工具,目前工具运行环境(win7 x64)。<br>
 - 2.doc目录里面有初始化sql，运行项目前，请先创建mysql。<br>
 - 3.工具地址:https://pan.baidu.com/s/1Bm7udGJc40xEENFgnJjsIw
+- 4.配置说明：https://gitee.com/bootstrap2table/boot_master/wikis
 
 	 
 #### **启动说明:**
