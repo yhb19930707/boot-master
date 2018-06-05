@@ -17,29 +17,31 @@ boot-master是springBoot项目，结合项目中使用的技术点，目前升�
     ● 搜索引擎框架：Solr/SolrCloud
     ● 分布式线程锁：Redisson
     ● 系统消息队列：ActiveMq
-    ● 安全授权框架：JwtToken    
+    ● 安全授权框架：JwtToken+AES 
  
 #### **项目特点**   
 
 > * 配套[代码生成工具](https://github.com/apple987/AutoCode):快速生成前后端代码，极大的提高开发效率。<br>
-> * 友好的代码结构及注释，便于阅读及二次开发 。<br>
-> * 前端页面采用freemarker,模板化引擎设计,页面采用bootstrap-table灵活强大的表格插件。<br>
-> * 前端采用jquery validate插件,快捷方便进行数据验证。<br>
-> * 后端配置swagger在线文档，方便编写API接口文档。 <br>
-> * 引入druid,fastjson,cors,xss,redis-cluster配置。<br>
-> * 引入API模板，根据token作为登录令牌，极大的方便了APP接口开发。<br>
-> * 引入Hibernate Validator校验框架，轻松实现后端校验。<br>
+> * 引入[ApacheCommons](https://gitee.com/bootstrap2table/boot_master/blob/master/src/test/java/com/qdone/DemoApacheCommonsTest.java)工具包，大幅简化开发中的io,file,collection,jexl等处理过程 。<br>
+> * 引入APP模块，根据token作为登录令牌，极大的方便了APP接口开发。<br>
+> * 引入[HibernateValidator](https://gitee.com/bootstrap2table/boot_master/blob/master/src/main/java/com/qdone/module/controller/TestController.java)校验框架，轻松实现后端校验。<br>
+> * 引入druid,javaMelody监控系统各项指标，分析系统瓶颈。<br>
+> * 前端采用freemarker模板化引擎,页面采用bootstrap-table灵活强大的表格插件。<br>
+> * 前端使用layui弹出层框架，极大的简化了弹出层的开发过程。
+> * 前端采用JqueryValidate插件,快捷方便进行数据验证。<br>
+> * 后端配置swagger在线文档，极大的节省前后端项目成员的沟通成本，快速文档同步。 <br>
+> * 配置druid,fastjson,cors,xss,redis-cluster组件服务。<br>
 > * 配置全局异常处理，通用日志打印,pagehelper分页。<br>
 > * 配置redisson集群模式,使用分布式锁，保证并发的数据一致性。<br>
 > * 配置全局errorPage和welcomeFile完善全局异常处理，优化异常处理代码。<br>
 > * 配置devtools热部署，针对page目录下的css,js,html页面资源修改之后，项目不需要重新启动。<br>
-> * 引入druid,javaMelody监控系统各项指标，分析系统瓶颈。<br>
 > * 配置elastic-job定时器，强悍的分布式定时任务配置。<br>
 > * 配置fileupload(默认配置最大100MB)，下载文件，生成二维码，二维码打印，mail发邮件等功能。<br>
 > * 配置https安全协议，提高系统安全性,配置log4j日志，系统出现异常自动发送邮件。<br>
 > * 配置poi和csv简单导出excel功能点,poi目前是多sheet智能导出。<br>
 > * 前端使用vkbeautify插件,页面格式化显示json数据。<br>
 > * 配置activeMq支持同时发送队列和主题消息。<br>
+> * 配置solr和solrCloud支持分词搜索查询。<br>
 
 
 #### **项目结构**
