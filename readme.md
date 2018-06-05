@@ -3,7 +3,7 @@
 #### 项目介绍
 boot-master是springBoot项目，结合项目中使用的技术点，目前升级到2.0.2版本,欢迎大家提意见，您的宝贵意见，是我们进步的动力。<br>
 
-#### [入门配置](https://gitee.com/bootstrap2table/boot_master/wikis/welcome) [分布式事务](https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid) [Dubbo服务](https://gitee.com/bootstrap2table/api-master)
+#### [入门配置](https://gitee.com/bootstrap2table/boot_master/wikis/welcome)  &nbsp;[分布式事务](https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid)  &nbsp;[SpringCloud](https://gitee.com/bootstrap2table/spring-cloud)   &nbsp;[Dubbo](https://gitee.com/bootstrap2table/api-master)
 
 
 #### 技术选型
@@ -29,8 +29,8 @@ boot-master是springBoot项目，结合项目中使用的技术点，目前升�
 > * 前端采用freemarker模板化引擎,页面采用bootstrap-table灵活强大的表格插件。<br>
 > * 前端使用layui弹出层框架，极大的简化了弹出层的开发过程。
 > * 前端采用JqueryValidate插件,快捷方便进行数据验证。<br>
-> * 后端配置swagger在线文档，极大的节省前后端项目成员的沟通成本，快速文档同步。 <br>
-> * 配置druid,fastjson,cors,xss,redis-cluster组件服务。<br>
+> * 后端配置swagger在线文档，极大的降低前后端项目成员的沟通成本，快速同步文档。 <br>
+> * 配置druid,fastjson,cors,xss,redis-cluster等组件服务。<br>
 > * 配置全局异常处理，通用日志打印,pagehelper分页。<br>
 > * 配置redisson集群模式,使用分布式锁，保证并发的数据一致性。<br>
 > * 配置全局errorPage和welcomeFile完善全局异常处理，优化异常处理代码。<br>
@@ -39,7 +39,7 @@ boot-master是springBoot项目，结合项目中使用的技术点，目前升�
 > * 配置fileupload(默认配置最大100MB)，下载文件，生成二维码，二维码打印，mail发邮件等功能。<br>
 > * 配置https安全协议，提高系统安全性,配置log4j日志，系统出现异常自动发送邮件。<br>
 > * 配置poi和csv简单导出excel功能点,poi目前是多sheet智能导出。<br>
-> * 前端使用vkbeautify插件,页面格式化显示json数据。<br>
+> * 前端使用vkbeautify插件,页面格式化json，xml,css,sql数据显示。<br>
 > * 配置activeMq支持同时发送队列和主题消息。<br>
 > * 配置solr和solrCloud支持分词搜索查询。<br>
 
