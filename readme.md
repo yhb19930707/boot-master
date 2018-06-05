@@ -117,25 +117,44 @@ boot-master
 - 加入QQ群：<br>
 ![boot-qq](https://github.com/apple987/static/raw/master/boot/image/qq.jpg "QQ群")<br>
 
-### 效果图
+### 项目截图
+**项目启动效果图：** 
 ![boot-start](https://github.com/apple987/static/raw/master/boot/image/start.png "项目启动")<br>	
+**Https跳转效果图：** 
 ![boot-ssl](https://github.com/apple987/static/raw/master/boot/image/ssl.png "初始化")<br>
+**学生管理效果图：** 
 ![boot-index](https://github.com/apple987/static/raw/master/boot/image/index.png "欢迎页")<br>
+**接口文档效果图：** 
 ![boot-swagger](https://github.com/apple987/static/raw/master/boot/image/swagger.png "swagger在线文档")<br>
+**登录接口效果图：** 
 ![boot-applogin](https://github.com/apple987/static/raw/master/boot/image/appLogin.jpg "app登陆接口")<br>
+**获取用户效果图：** 
 ![boot-appGetUser](https://github.com/apple987/static/raw/master/boot/image/appGetUser.jpg "app获得登陆信息接口")<br>
+**邮件异常效果图：** 
 ![boot-emailError](https://github.com/apple987/static/raw/master/boot/image/emailError.jpg "邮件发送异常")<br>
+**发送消息效果图：** 
 ![boot-runmq](https://github.com/apple987/static/raw/master/boot/image/runmq.jpg "发送MQ消息")<br>
+**接收消息效果图：** 
 ![boot-mq](https://github.com/apple987/static/raw/master/boot/image/mq.jpg "MQ队列和订阅")<br>
+**职员列表效果图：** 
 ![boot-selectStaff](https://github.com/apple987/static/raw/master/boot/image/selectStaff.jpg "职员信息列表")<br>
+**添加职员效果图：** 
 ![boot-insertStaff](https://github.com/apple987/static/raw/master/boot/image/insertStaff.jpg "添加职员信息")<br>
+**验证失败效果图：** 
 ![boot-insertError](https://github.com/apple987/static/raw/master/boot/image/insertStaffError.jpg "validate验证信息")<br>
+**AlibabaDurid效果图：** 
 ![boot-durid](https://github.com/apple987/static/raw/master/boot/image/druid.png "durid监控")<br>
-![boot-javaMelody](https://github.com/apple987/static/raw/master/boot/image/javaMelody.png "javaMelody监控")<br>	
+**JavaMelody效果图：** 
+![boot-javaMelody](https://github.com/apple987/static/raw/master/boot/image/javaMelody.png "javaMelody监控")<br>
+**生成二维码效果图：** 	
 ![boot-qrcode](https://github.com/apple987/static/raw/master/boot/image/qrcode.png "生成二维码")<br>
+**打印二维码效果图：** 
 ![boot-print](https://github.com/apple987/static/raw/master/boot/image/print.png "打印二维码")<br>
+**Solr操作效果图：** 
 ![boot-solr](https://github.com/apple987/static/raw/master/boot/image/solr.png "solr导入数据")<br>
+**文本上传效果图：** 
 ![boot-upload](https://github.com/apple987/static/raw/master/boot/image/upload.jpg "文本上传")<br>
+**上传出错效果图：**
 ![boot-uploadError](https://github.com/apple987/static/raw/master/boot/image/uploadError.jpg "文件上传异常")<br>
 	
 
