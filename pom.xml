@@ -22,12 +22,22 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<swagger.version>2.7.0</swagger.version>
+		<swagger.bootstrap.version>1.7</swagger.bootstrap.version>
+		<fastjson.version>1.2.44</fastjson.version>
+		<pagehelper.version>4.2.1</pagehelper.version>
+		<jsqlparser.version>0.9.4</jsqlparser.version>
+		<elastic-job.version>2.1.5</elastic-job.version>
+		<poi.version>3.8</poi.version>
+		<zookeeper.version>3.4.9</zookeeper.version>
 		<commons.lang.version>2.6</commons.lang.version>
 		<commons.fileupload.version>1.3.2</commons.fileupload.version>
 		<commons.io.version>2.5</commons.io.version>
 		<commons.codec.version>1.10</commons.codec.version>
 		<commons.configuration.version>1.10</commons.configuration.version>
-		<elastic-job.version>2.1.5</elastic-job.version>
+		<commons.collections.version>3.2.2</commons.collections.version>
+		<commons.beanutils.version>1.8.0</commons.beanutils.version>
+		<commons.csv.version>1.5</commons.csv.version>
+		<commons.jexl.version>2.1.1</commons.jexl.version>
 	</properties>
 
 	<!-- 配置Maven本地私服 ,如有Nexus私服, 取消注释并指向正确的服务器地址-->
@@ -98,13 +108,13 @@
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>swagger-bootstrap-ui</artifactId>
-			<version>1.7</version>
+			<version>${swagger.bootstrap.version}</version>
 		</dependency>
 		<!-- fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.44</version>
+			<version>${fastjson.version}</version>
 		</dependency>
 		<!-- redis -->
 		<dependency>
@@ -125,14 +135,14 @@
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
-			<version>4.2.1</version>
+			<version>${pagehelper.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.jsqlparser</groupId>
 			<artifactId>jsqlparser</artifactId>
-			<version>0.9.4</version>
+			<version>${jsqlparser.version}</version>
 		</dependency>
-		<!-- druib -->
+		<!-- druid -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
@@ -175,52 +185,70 @@
 			<artifactId>javase</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-		<!-- util jar -->
+		<!-- apache系列工具包 -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>${commons.lang.version}</version>
 		</dependency>
+		<!-- 上传组件包 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>${commons.fileupload.version}</version>
 		</dependency>
+		<!-- 集合工具包 -->
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.2.2</version>
+			<version>${commons.collections.version}</version>
 		</dependency>
+		<!-- IoUtils工具 -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>${commons.io.version}</version>
 		</dependency>
+		<!-- 常用DES、SHA1、MD5、Base64，URL，Soundx加密解密工具包 -->
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 		</dependency>
+		<!-- 读取properties配置工具 -->
 		<dependency>
 			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
 			<version>${commons.configuration.version}</version>
 		</dependency>
+		<!-- 处理javaBean工具包 -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.8.0</version>
+			<version>${commons.beanutils.version}</version>
 		</dependency>
 		<!-- csv工具 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
-			<version>1.5</version>
+			<version>${commons.csv.version}</version>
 		</dependency>
 		<!-- jexl表达式,动态计算表达式结果 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-jexl</artifactId>
-			<version>2.1.1</version>
+			<version>${commons.jexl.version}</version>
+		</dependency>
+		<!-- zip文件压缩 -->
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.9.7</version>
+		</dependency>
+		<!-- 正则日期等验证 -->
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.6</version>
 		</dependency>
 		<!-- javaMelody监控 -->
 		<dependency>
@@ -254,10 +282,11 @@
 			<groupId>com.dangdang</groupId>
 			<version>${elastic-job.version}</version>
 		</dependency>
+		<!-- zookeeper -->
 		<dependency>
 		    <groupId>org.apache.zookeeper</groupId>
 		    <artifactId>zookeeper</artifactId>
-		    <version>3.4.9</version>
+		    <version>${zookeeper.version}</version>
 		</dependency>
 		<!-- springBoot email -->
 		<dependency>
@@ -268,17 +297,17 @@
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi</artifactId>
-		    <version>3.8</version>
+		    <version>${poi.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-ooxml</artifactId>
-		    <version>3.8</version>
+		    <version>${poi.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-ooxml-schemas</artifactId>
-		    <version>3.8</version>
+		    <version>${poi.version}</version>
 		</dependency>
 		<!-- solr -->
 		<dependency>
