@@ -3,6 +3,9 @@
 #### 项目介绍
 boot-master是springBoot项目，结合项目中使用的技术点，目前升级到2.0.2版本,欢迎大家提意见，您的宝贵意见，是我们进步的动力。<br>
 
+#### [快速入门](https://gitee.com/bootstrap2table/boot_master/wikis/welcome)
+
+
 #### 技术选型
     ● 系统核心框架：SpringBoot  
     ● 定时任务调度：ElasticJob+Zookeeper
@@ -17,6 +20,8 @@ boot-master是springBoot项目，结合项目中使用的技术点，目前升�
     ● 安全授权框架：JwtToken    
  
 #### **项目特点**   
+
+> * 配套[代码生成工具](https://github.com/apple987/AutoCode):快速生成前后端代码，极大的提高开发效率。<br>
 > * 友好的代码结构及注释，便于阅读及二次开发 。<br>
 > * 前端页面采用freemarker,模板化引擎设计,页面采用bootstrap-table灵活强大的表格插件。<br>
 > * 前端采用jquery validate插件,快捷方便进行数据验证。<br>
@@ -33,7 +38,6 @@ boot-master是springBoot项目，结合项目中使用的技术点，目前升�
 > * 配置fileupload(默认配置最大100MB)，下载文件，生成二维码，二维码打印，mail发邮件等功能。<br>
 > * 配置https安全协议，提高系统安全性,配置log4j日志，系统出现异常自动发送邮件。<br>
 > * 配置poi和csv简单导出excel功能点,poi目前是多sheet智能导出。<br>
-> * 配套代码生成工具，快速生成前后端代码，极大的提高开发效率。<br>
 > * 前端使用vkbeautify插件,页面格式化显示json数据。<br>
 > * 配置activeMq支持同时发送队列和主题消息。<br>
 
