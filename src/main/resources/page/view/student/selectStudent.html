@@ -70,14 +70,7 @@
 		
         <div id="studentTb"  >
 			<div style="margin-bottom: 5px">
-			    <input type="button" value="添加" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="addStudent()" /> 
-				<input type="button" value="修改" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="editStudent()" /> 
-				<input type="button" value="删除" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="deleteStudent()" /> 
-				<input type="button" value="查询" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="findStudent()" /> 
-			    <input type="button" value="清空" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="clearStudent()" />
-			    <input type="button" id="btnVitalImport" value="导入" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" /> 
-			    <input type="button"  value="发邮件" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="sendEmail()" /> 
-			    <a href="${request.contextPath}/student/freemarker" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">freemarker</a>
+			 <a href="${request.contextPath}/student/freemarker" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">freemarker</a>
 			    <a href="${request.contextPath}/toZxingQrcode" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">二维码</a>
 			    <a href="${request.contextPath}/druid/" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">druib监控</a>
 			    <a href="${request.contextPath}/monitoring" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">JavaMelody监控</a>
@@ -86,7 +79,14 @@
 			    <a href="${request.contextPath}/student/exportCsv" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">CSV</a>
 			    <a href="${request.contextPath}/student/exportPoiExcel" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">POI</a>
 			    <a href="${request.contextPath}/staff/init" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">职员管理</a>
-			    <a href="${request.contextPath}/solr/init" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">solr管理</a>
+			    <a href="${request.contextPath}/solr/init" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">solr管理</a><br>
+			    <input type="button" value="添加" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="addStudent()" /> 
+				<input type="button" value="修改" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="editStudent()" /> 
+				<input type="button" value="删除" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="deleteStudent()" /> 
+				<input type="button" value="查询" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="findStudent()" /> 
+			    <input type="button" value="清空" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="clearStudent()" />
+			    <input type="button" id="btnVitalImport" value="导入" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" /> 
+			    <input type="button"  value="发邮件" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="sendEmail()" /> 
 			</div>
 			<div>
 			   <form id="studentQueryForm" method="post" action="">
