@@ -1,23 +1,26 @@
 package com.qdone.common.util;
 
-import com.qdone.framework.exception.RRException;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeSet;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
+
+import com.qdone.framework.exception.RRException;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPool;
-
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeSet;
 
 /**
  * @author 付为地 jwt工具类 也可以考虑,采用redis做tonken生成 采用token实现,服务器无状态,分布式等方式都方便
@@ -103,7 +106,28 @@ public class JwtUtils {
 	public boolean isTokenExpired(Date expiration) {
 		return expiration.before(new Date());
 	}
-
+	
+	/**
+	 * 更新token失效时间
+	 *   针对APP用户登陆成功，
+	 *     token未失效时，
+	 *     重新生成token失效时间 
+	 */
+	public String refreshTokenExpiration(String token) {
+		String refreshToken ="";
+		Claims claims=getClaimByToken(token);
+		if(!ObjectUtils.isEmpty(claims)&&!ObjectUtils.isEmpty(claims.getSubject())){
+			if (exists(AppTokenPrefix + claims.getSubject())&&!isTokenExpired(claims.getExpiration())) {
+				jedisCluster.del(AppTokenPrefix + claims.getSubject());
+			}
+			Long currentTimeMillis=System.currentTimeMillis();
+			refreshToken = Jwts.builder().setHeaderParam("typ", "JWT").setSubject(claims.getSubject()).setIssuedAt(new Date(currentTimeMillis))
+					.setExpiration(new Date(currentTimeMillis+expire)).signWith(SignatureAlgorithm.HS512, secret).compact();
+			return AESUtil.encrypt(refreshToken, null);
+		}
+		return "";
+	}
+	
 	public String getSecret() {
 		return secret;
 	}
