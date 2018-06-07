@@ -6,14 +6,10 @@ package com.qdone.framework.core.constant;
 public  class Constants {
 
 	public static final String CURRENT_USER = "user";//当前登录用户
-	public static final String CURRENT_WEB_PROJECT = "NGINX.WEB.GROUP";// 项目集群的本项目key名称
-	public static final String SESSION_FORCE_LOGOUT_KEY = "SESSION.FORCE.LOGOUT";// 1:页面强制剔除
-																					// 2:后来登陆账户剔除前者,其他表示正常登录
+	public static final String SESSION_FORCE_LOGOUT_KEY = "SESSION.FORCE.LOGOUT";// 1:页面强制剔除 2:后来登陆账户剔除前者,其他表示正常登录
 	public static final String RandomValidateCode = "validateCode";// 验证码
 	public static final boolean KickOutBeforeLogin = true;// 是否剔除前面登录的账户
 	/* shiro-redis配置默认缓存key前缀,后续加上当前项目名称，多项目使用时会更好 */
-	/*excel导出文件名*/
-	public static final String EXCEL_DAILYCHECK_NAME = "每日巡检导出.xls";
 	public static final String TEMPLATE = "view";//页面根目录
 	public static interface ShiroRedisKey {
 		String RedisCache = "SHIRO_REDIS_SESSION:";// RedisCache默认key前缀，
@@ -26,12 +22,6 @@ public  class Constants {
 	// 分隔符
 	public static final String ID_SPLIT = ",";
 	
-	//系统快速布控默认案件ID的key
-	public static final String QUICKLY_DEFAULT_CASEID = "QUICKLY_DEFAULT_CASEID";
-	//系统快速布控默认对象ID的key
-	public static final String QUICKLY_DEFAULT_OBJECTID = "QUICKLY_DEFAULT_OBJECTID";
-	//信息发送文件保存路径
-	public static final String  FILE_PATH = "D:/test/";
 
 	/**
 	 * mybatis-Paginator分页插件分割符
@@ -52,14 +42,6 @@ public  class Constants {
 	}
 	
 	/**
-	 * 菜单等级
-	 */
-	public static interface MENUSORT {
-		final String MENUSORT_ONE = "1";
-		final String MENUSORT_TWO = "2";
-		final String MENUSORT_THREE = "3";
-	}
-	/**
 	 * 页面字符集
 	 */
 	public static  interface ContentType {
@@ -68,6 +50,7 @@ public  class Constants {
 		String DEFAULT = UTF8;
 		String JSON = "application/json; charset=UTF-8";
 	}
+	
 	/**
 	 * LogPrinter异常日志类型
 	 */
@@ -93,10 +76,6 @@ public  class Constants {
 	}
 	/**
      * 定时任务状态
-     * 
-     * @author chenshun
-     * @email sunlightcs@gmail.com
-     * @date 2016年12月3日 上午12:07:22
      */
     public enum ScheduleStatus {
         /**

@@ -23,12 +23,16 @@ import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPool;
 
 /**
- * @author 付为地 jwt工具类 也可以考虑,采用redis做tonken生成 采用token实现,服务器无状态,分布式等方式都方便
- * 
+ * @author 付为地
+ *  jwt工具类 也可以考虑,采用redis做tonken生成 采用token实现,服务器无状态,分布式等方式都方便
+ *
  *         比如说第一次生成一个token，虽然token还没有过期，但是第二次继续登录，又重新生成一个token
  *         这就会导致，相同账户两个token都是有效的，那么获取数据的时候，使用第一次生成的token，也可以拿到数据吗？
  *         这显然不合适，这里需要加一个处理
  *         简单点就是以最后一次登录生成的token为有效，生成最后一次token时，销毁当前账户，以前的token，保证最后一次登录的token才有效果
+ *  jwt生成token对于自动续期的情况，只能请求接口时判断一下，接口的情况       
+ *         
+ *         
  */
 @Component
 public class JwtUtils {
@@ -117,9 +121,10 @@ public class JwtUtils {
 		String refreshToken ="";
 		Claims claims=getClaimByToken(token);
 		if(!ObjectUtils.isEmpty(claims)&&!ObjectUtils.isEmpty(claims.getSubject())){
-			if (exists(AppTokenPrefix + claims.getSubject())&&!isTokenExpired(claims.getExpiration())) {
+			//TODO 暂时不清除旧token
+			/*if (exists(AppTokenPrefix + claims.getSubject())&&!isTokenExpired(claims.getExpiration())) {
 				jedisCluster.del(AppTokenPrefix + claims.getSubject());
-			}
+			}*/
 			Long currentTimeMillis=System.currentTimeMillis();
 			refreshToken = Jwts.builder().setHeaderParam("typ", "JWT").setSubject(claims.getSubject()).setIssuedAt(new Date(currentTimeMillis))
 					.setExpiration(new Date(currentTimeMillis+expire)).signWith(SignatureAlgorithm.HS512, secret).compact();

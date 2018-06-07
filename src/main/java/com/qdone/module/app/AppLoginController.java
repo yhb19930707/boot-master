@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -100,18 +101,22 @@ public class AppLoginController {
     @GetMapping("userId")
     public Result<User> userInfo(
     		@ApiParam(required = false, value = "令牌", name = "token") @RequestHeader(value = "token")  String token,
-    		@ApiParam(required = false, value = "用户名", name = "userId") @RequestHeader(value = "userId")  String userId){
+    		@ApiParam(required = false, value = "用户名", name = "userId") @RequestHeader(value = "userId")  String userId,HttpServletRequest request){
     	System.err.println(token);
+    	System.err.println("新token:"+request.getAttribute("freshToken"));
    	    Result<User> res=new Result<User>();
         /*本处拦截器已经验证了token和userId的唯一对应关系，所以可以直接去userId*/
     	User usr1=jwtUtils.get((jwtUtils.AppTokenPrefix+userId).getBytes(), User.class);
     	System.err.println("序列化拿到的用户信息是:"+JSON.toJSONString(usr1));
+    	if(!ObjectUtils.isEmpty(request.getAttribute("freshToken"))){
+    		usr1.setFreshToken(request.getAttribute("freshToken").toString());
+    	}
     	res.setData(usr1);
     	return res;
     }
     
     /***********************************模拟多种方式传递参数，特殊性针对request,map,mutisort三种******************************************************************/
-    @ApiOperation(value = "logParam", httpMethod = "POST", notes = "logParam", response = Result.class)
+    @ApiOperation(hidden=true,value = "logParam",httpMethod = "POST", notes = "logParam", response = Result.class)
     @PostMapping("testParam")
     @Function("logParam")
     public Result<HashMap<String, Object>> testParam(@ApiParam(required = true, value = "账户名称", name = "userId") @RequestParam(value = "userId") String userId,
@@ -126,7 +131,7 @@ public class AppLoginController {
     	return res;
     }
     
-    @ApiOperation(value = "logParam1", httpMethod = "POST", notes = "logParam1", response = Result.class)
+    @ApiOperation(hidden=true,value = "logParam1", httpMethod = "POST", notes = "logParam1", response = Result.class)
     @PostMapping("testParam1")
     @Function("logParam1")
     public Result<HashMap<String, Object>> testParam1(@ApiParam(required = true, value = "账户名称", name = "userId") @RequestParam(value = "userId") String userId,
@@ -141,7 +146,7 @@ public class AppLoginController {
     	return res;
     }
     
-    @ApiOperation(value = "logParam2", httpMethod = "POST", notes = "logParam2", response = Result.class)
+    @ApiOperation(hidden=true,value = "logParam2", httpMethod = "POST", notes = "logParam2", response = Result.class)
     @PostMapping("testParam2")
     @Function("logParam2")
     public Result<HashMap<String, Object>> testParam2(@ApiParam(required = true, value = "账户名称", name = "userId") @RequestParam(value = "userId") String userId,
@@ -155,7 +160,7 @@ public class AppLoginController {
     	return res;
     }
     
-    @ApiOperation(value = "logParam3", httpMethod = "POST", notes = "logParam3", response = Result.class)
+    @ApiOperation(hidden=true,value = "logParam3", httpMethod = "POST", notes = "logParam3", response = Result.class)
     @PostMapping("testParam3")
     @Function("logParam3")
     public Result<HashMap<String, Object>> testParam3(@ApiParam(required = true, value = "账户名称", name = "userId") @RequestParam(value = "userId") String userId,
@@ -169,7 +174,7 @@ public class AppLoginController {
     }
     
     
-    @ApiOperation(value = "logParam4", httpMethod = "POST", notes = "logParam4", response = Result.class)
+    @ApiOperation(hidden=true,value = "logParam4", httpMethod = "POST", notes = "logParam4", response = Result.class)
     @PostMapping("testParam4")
     @Function("logParam4")
     public Result<HashMap<String, Object>> testParam4(HttpServletResponse resp){
@@ -177,7 +182,7 @@ public class AppLoginController {
     	return res;
     }
     
-    @ApiOperation(value = "logParam5", httpMethod = "POST", notes = "logParam5", response = Result.class)
+    @ApiOperation(hidden=true,value = "logParam5", httpMethod = "POST", notes = "logParam5", response = Result.class)
     @PostMapping("testParam5")
     @Function("logParam5")
     public Result<HashMap<String, Object>> testParam5(){

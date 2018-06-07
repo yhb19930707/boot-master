@@ -1,5 +1,7 @@
 package com.qdone.framework.filter;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -68,6 +70,11 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
             if(!userId.equals(claims.getSubject())){
             	throw new RRException(jwtUtils.getHeader() + "非法,请确保本人操作", HttpStatus.UNAUTHORIZED.value());
             }
+        }
+        /*token自动续期策略，重新生成新token使用，不考虑强制替换cookie内存储的旧token,半小时内重新生成新token*/
+        long remain=claims.getExpiration().getTime()-new Date().getTime();
+        if(remain<=180000000){
+        	request.setAttribute("freshToken", jwtUtils.refreshTokenExpiration(token));
         }
         //设置userId到request里，后续根据userId，获取用户信息
         /*request.setAttribute(USER_KEY, Long.parseLong(claims.getSubject()));*/

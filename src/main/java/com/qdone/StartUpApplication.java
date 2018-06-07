@@ -1,19 +1,20 @@
 package com.qdone;
 
 import org.springframework.boot.CommandLineRunner;
-//import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-/*import org.springframework.scheduling.annotation.EnableScheduling;*/
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * 启动器
+ * 启动器 
+ *  Session集群方案
+ *   1.@EnableRedisHttpSession+spring-session-data-redis:配置session采用redis同步
+ *   2.@EnableRedissonHttpSession+spring-session:配置redisson同步session
  */
 @SpringBootApplication
 @EnableTransactionManagement
-/*@EnableScheduling*/
-/*@MapperScan("com.qdone.module.mapper")*/
+@EnableRedisHttpSession
 public class StartUpApplication implements CommandLineRunner{
 
 	public static void main(String[] args) throws Exception {
@@ -23,7 +24,7 @@ public class StartUpApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.err.println("呀呼！系统初始化完成了！");
+		System.err.println("系统资源初始化完成！！！！！！");
 	}
 
 }

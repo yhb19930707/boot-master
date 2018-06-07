@@ -1,20 +1,22 @@
 package com.qdone.module.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.qdone.common.util.CacheUtil;
-import com.qdone.common.util.ExcelUtil;
-import com.qdone.common.util.SerialNo;
-import com.qdone.common.util.mail.MailService;
-import com.qdone.framework.annotation.Function;
-import com.qdone.framework.core.BaseController;
-import com.qdone.framework.exception.RRException;
-import com.qdone.framework.util.lock.RedisLock;
-import com.qdone.framework.util.lock.RedisLockKey;
-import com.qdone.module.model.Student;
-import com.qdone.module.service.StudentService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -29,22 +31,35 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import com.alibaba.fastjson.JSON;
+import com.qdone.common.util.CacheUtil;
+import com.qdone.common.util.ExcelUtil;
+import com.qdone.common.util.SerialNo;
+import com.qdone.common.util.SessionUtil;
+import com.qdone.common.util.mail.MailService;
+import com.qdone.framework.annotation.Function;
+import com.qdone.framework.core.BaseController;
+import com.qdone.framework.core.constant.Constants;
+import com.qdone.framework.exception.RRException;
+import com.qdone.framework.util.lock.RedisLock;
+import com.qdone.framework.util.lock.RedisLockKey;
+import com.qdone.module.model.Student;
+import com.qdone.module.model.User;
+import com.qdone.module.service.StudentService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 /**
  * student管理
@@ -84,6 +99,8 @@ public class StudentController extends BaseController {
 		 * request.setAttribute("clientToken",token);
 		 * request.getSession().setAttribute("serverToken",token);
 		 */
+		//模拟登陆信息
+		SessionUtil.setSessionObject(Constants.CURRENT_USER, new User("灭霸","123456",1500,""));
 		RAtomicLong atomicLong = redissonClient.getAtomicLong("test");
 		System.err.println(atomicLong.getAndAdd(10));
 		atomicLong.incrementAndGet();
@@ -105,7 +122,7 @@ public class StudentController extends BaseController {
 	 * 分页查询数据
 	 */
 	/* @RequestMapping(value="/selectPage",headers="Accept=application/json") */
-	@RequestMapping(value = "/selectPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/selectPage",method = RequestMethod.POST)
 	@ResponseBody
 	@Function("查询分页")
 	@ApiOperation(value = "分页列表", notes = "分页列表", httpMethod = "POST", response = Map.class)
@@ -389,12 +406,6 @@ public class StudentController extends BaseController {
 		}
 	}
 
-	@Scheduled(fixedRate = 5000)
-	public void reportCurrentTime() {
-		System.out.println("现在时间：" + new SimpleDateFormat("HH:mm:ss").format(new Date()));
-	}
-	
-	
 	@ApiOperation(value = "测试格式化显示", notes = "测试格式化显示", httpMethod = "GET")
 	@RequestMapping(value = "/formatCode", method = RequestMethod.GET)
 	public String formatCode(HttpServletRequest req) {
@@ -409,4 +420,8 @@ public class StudentController extends BaseController {
 		return "format_code";
 	}
 
+	/*@Scheduled(fixedRate = 5000)
+	public void reportCurrentTime() {
+		System.out.println("现在时间：" + new SimpleDateFormat("HH:mm:ss").format(new Date()));
+	}*/
 }

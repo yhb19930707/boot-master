@@ -33,17 +33,39 @@ public class User implements Serializable{
 	private Integer age;
 	@ApiModelProperty(value = "令牌", required = true)
 	private String token;
+	@ApiModelProperty(value = "新令牌", required = true)
+	private String freshToken;
 
 	public User() {
 		super();
 	}
-
+	
 	public User(String name, String password, Integer sex, String token) {
 		super();
 		this.name = name;
 		this.password = password;
 		this.sex = sex;
 		this.token = token;
+	}
+
+	public User(@NotEmpty(message = "姓名不能为空") String name, String password, Integer sex,
+			@NotNull(message = "年龄不能为空") @Min(value = 0, message = "年龄大于 0") @Max(value = 300, message = "年龄不大于 300") Integer age,
+			String token, String freshToken) {
+		super();
+		this.name = name;
+		this.password = password;
+		this.sex = sex;
+		this.age = age;
+		this.token = token;
+		this.freshToken = freshToken;
+	}
+
+	public String getFreshToken() {
+		return freshToken;
+	}
+
+	public void setFreshToken(String freshToken) {
+		this.freshToken = freshToken;
 	}
 
 	public String getToken() {

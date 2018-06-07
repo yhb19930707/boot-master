@@ -27,6 +27,8 @@
 	<p>获取request存储的map类型 代码:<#noparse>${map.sname}</#noparse> 结果:${map.sname}</p>
 	<p>获取request存储的map类型 代码:<#noparse>${map.sex}</#noparse> 结果:${map.sex}</p>
 	<p>获取request存储的map类型 代码:<#noparse>${map.age}</#noparse> 结果:${map.age}</p>
+	<p>获取session存储的user对象 代码:<#noparse>${user.name}</#noparse> 结果:${user.name}</p>
+	
 	<p><font color='blue'>freemakrer针对后台传递的参数中，含有特殊字符时，可以采用如下方式:<br>
 	         后台:req.setAttribute("special", "><");<br>
 	前台 代码:<#noparse><#if special ??>${special?html}&lt;/#if&gt;</#noparse> 结果:<#if special ??>${special?html}</#if>
