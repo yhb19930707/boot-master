@@ -90,7 +90,8 @@ boot-master
 - 1.项目依赖redis-cluster集群,zookeeper,activeMq,solr工具,目前工具运行环境(win7 x64)。<br>
 - 2.doc目录里面有初始化sql，运行项目前，请先创建mysql(编码UTF-8)。<br>
 - 3.工具地址:https://pan.baidu.com/s/1Bm7udGJc40xEENFgnJjsIw
-- 4.配置说明：https://gitee.com/bootstrap2table/boot_master/wikis/welcome
+- 4.SolrCloud: https://pan.baidu.com/s/1RbC4zS8izz9Ge8wuIdplXQ
+- 5.配置文档：https://gitee.com/bootstrap2table/boot_master/wikis/welcome
 
 	 
 #### **启动说明:**
@@ -104,12 +105,10 @@ boot-master
 	
 #### **友情链接：**
 - GitHub：https://github.com/apple987/boot_walk <br>
-- 码云仓库： https://gitee.com/bootstrap2table/boot_master<br>
 - mycat版本: https://gitee.com/bootstrap2table/boot_master/tree/feature/mycat<br>
 - sharding-jdbc版本: https://gitee.com/bootstrap2table/boot-sharding<br>
 - jtaDruid版本: https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid<br>
 - 代码生成： https://github.com/apple987/AutoCode<br>
-- SolrCloud: https://pan.baidu.com/s/1RbC4zS8izz9Ge8wuIdplXQ
 
 #### **问题反馈：**
 - 意见反馈：https://gitee.com/bootstrap2table/boot_master/issues
