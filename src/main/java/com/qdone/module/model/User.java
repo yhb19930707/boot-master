@@ -40,6 +40,14 @@ public class User implements Serializable{
 		super();
 	}
 	
+	public User(@NotEmpty(message = "姓名不能为空") String name, String token, String freshToken) {
+		super();
+		this.name = name;
+		this.token = token;
+		this.freshToken = freshToken;
+	}
+
+
 	public User(String name, String password, Integer sex, String token) {
 		super();
 		this.name = name;

@@ -96,6 +96,9 @@ public class AppLoginController {
      * @param token
      * @param userId
      * @return
+     * 刷新token之后，
+     *  本次请求直接不会进入控制器
+     *  直接抛出异常
      */
     @Login
     @GetMapping("userId")

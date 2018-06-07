@@ -121,10 +121,10 @@ public class JwtUtils {
 		String refreshToken ="";
 		Claims claims=getClaimByToken(token);
 		if(!ObjectUtils.isEmpty(claims)&&!ObjectUtils.isEmpty(claims.getSubject())){
-			//TODO 暂时不清除旧token
-			/*if (exists(AppTokenPrefix + claims.getSubject())&&!isTokenExpired(claims.getExpiration())) {
+			if (exists(AppTokenPrefix + claims.getSubject())&&!isTokenExpired(claims.getExpiration())) {
 				jedisCluster.del(AppTokenPrefix + claims.getSubject());
-			}*/
+			}
+			//TODO 清除旧的token，还需要用账户生成新token，此处没有模拟，直接暴力让其走登陆流程
 			Long currentTimeMillis=System.currentTimeMillis();
 			refreshToken = Jwts.builder().setHeaderParam("typ", "JWT").setSubject(claims.getSubject()).setIssuedAt(new Date(currentTimeMillis))
 					.setExpiration(new Date(currentTimeMillis+expire)).signWith(SignatureAlgorithm.HS512, secret).compact();
