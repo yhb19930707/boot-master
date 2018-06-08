@@ -80,7 +80,7 @@ public class FilterConfig {
 		filterRegistrationBean.addUrlPatterns("/*");
 		// 添加不需要忽略的格式信息.
 		filterRegistrationBean.addInitParameter("exclusions",
-				"/static/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.html,*.htm,*.woff,/druid,/druid/*,/monitoring,/monitoring/*");
+				"/static/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.mp3,*.html,*.htm,*.woff,/druid,/druid/*,/monitoring,/monitoring/*");
 		// 用于session监控页面的用户名显示 需要登录后主动将username注入到session里
 		filterRegistrationBean.addInitParameter("principalSessionName", "username");
 		return filterRegistrationBean;

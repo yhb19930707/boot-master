@@ -419,6 +419,13 @@ public class StudentController extends BaseController {
 		}
 		return "format_code";
 	}
+	
+	
+	@ApiOperation(value = "坦克大战", notes = "坦克大战", httpMethod = "GET")
+	@RequestMapping(value = "/tank", method = RequestMethod.GET)
+	public String tank() {
+		return "tank";
+	}
 
 	/*@Scheduled(fixedRate = 5000)
 	public void reportCurrentTime() {
