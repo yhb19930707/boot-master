@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
 import com.qdone.framework.exception.RRException;
+import com.qdone.module.model.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -38,9 +39,11 @@ import redis.clients.jedis.JedisPool;
 public class JwtUtils {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
+	/*秘钥*/
 	@Value("${jwt.token.secret:b65f414eaa7caf8914faacb2a211570f}")
 	private String secret;
 
+	/*有效期，一周单位秒*/
 	@Value("${jwt.token.expire:604800}")
 	private int expire;
 
@@ -52,28 +55,34 @@ public class JwtUtils {
 
 	/* 工具生成的app模块的token前缀 */
 	public final String AppTokenPrefix = "app_token_prefix_";
+	
 
 	/**
-	 * 生成jwt token 因为存储的是key=AppTokenPrefix+userId value=User方式 本处可以如下简单处理
+	 * 生成jwt token 
+	 * 因为存储的是key=AppTokenPrefix+userId 
+	 * value=User方式 本处可以如下简单处理
 	 */
 	public String generateToken(String userId) {
 		Date nowDate = new Date();
 		// 过期时间
 		Date expireDate = new Date(nowDate.getTime() + expire * 1000);
 		/* 销毁当前账户，本次登录之前的token信息 */
-		/*
-		 * TreeSet<String> ts = keys(AppTokenPrefix+"*"); Iterator<String> it =
-		 * ts.iterator(); while (it.hasNext()) { String key=it.next(); User
-		 * usr=get(key.getBytes(), User.class);
-		 * if(!ObjectUtils.isEmpty(usr)&&StringUtils.isNotEmpty(usr.getName())&&
-		 * usr.getName().equals(String.valueOf(userId))){ jedisCluster.del(key);
-		 * } }
-		 */
+		/*TreeSet<String> ts = keys(AppTokenPrefix + "*");
+		Iterator<String> it = ts.iterator();
+		while (it.hasNext()) {
+			String key = it.next();
+			User usr = get(key.getBytes(), User.class);
+			if (!ObjectUtils.isEmpty(usr) 
+				&& StringUtils.isNotEmpty(usr.getName())
+				&& usr.getName().equals(userId)) {
+				jedisCluster.del(key);
+			}
+		}*/
 		/* 因为存储的是key=AppTokenPrefix+userId value=User方式本处可以如下简单处理 */
 		if (exists(AppTokenPrefix + userId)) {
 			jedisCluster.del(AppTokenPrefix + userId);
 		}
-		String token = Jwts.builder().setHeaderParam("typ", "JWT").setSubject(userId + "").setIssuedAt(nowDate)
+		String token = Jwts.builder().setHeaderParam("typ", "JWT").setSubject(userId).setIssuedAt(nowDate)
 				.setExpiration(expireDate).signWith(SignatureAlgorithm.HS512, secret).compact();
 		/*
 		 * 本处模拟，用户登录信息处理，实际上是先根据用户userId查询到user信息，然后后续处理存储到redis中，同时生成token,
@@ -86,6 +95,7 @@ public class JwtUtils {
 		 */
 		return AESUtil.encrypt(token, null);
 	}
+	
 
 	/**
 	 * 验证token
@@ -133,6 +143,60 @@ public class JwtUtils {
 		return "";
 	}
 	
+	
+	/*****开始********采用redis的过期时间，token快过期自动续期，不使用jwt重新生成token策略*************************************************************************/
+	
+	/**
+	 * 生成jwt token 
+	 *  存储token对应用户信息,key=AppTokenPrefix+token 
+	 *  value=User方式 本处可以如下简单处理
+	 */
+	public String generateToken(User loginUser) {
+		Date nowDate = new Date();
+		// 过期时间
+		Date expireDate = new Date(nowDate.getTime() + expire * 1000);
+		/* 销毁当前账户，本次登录之前的token信息 */
+		if (exists(AppTokenPrefix + loginUser.getName())) {
+			jedisCluster.del(AppTokenPrefix + loginUser.getName());
+		}
+		String token = AESUtil.encrypt(Jwts.builder().setHeaderParam("typ", "JWT").setSubject(loginUser.getName()).setIssuedAt(nowDate)
+				.setExpiration(expireDate).signWith(SignatureAlgorithm.HS512, secret).compact(),null);
+		/*新token以及用户登陆信息存储redis*/
+		loginUser.setToken(token);
+		/*
+		 * 生成token，存入redis,
+		 *   key:AppTokenPrefix+loginUser.getName() 
+		 *   value:loginUser
+		 * token过期时间，直接采用redis剩余时间即可  
+		 */
+		set((AppTokenPrefix+loginUser.getName()).getBytes(), expire,loginUser);
+		return token;
+	}
+	
+	/**
+	 * token自动续期
+	 * 更新过期时间，expire单位秒
+	 */
+	public String refreshToken(String token) {
+		Claims claims=getClaimByToken(token);
+		if(!ObjectUtils.isEmpty(claims)&&!ObjectUtils.isEmpty(claims.getSubject())){
+			if (exists(AppTokenPrefix + claims.getSubject())) {
+				User loginUser=this.get((AppTokenPrefix+claims.getSubject()).getBytes(), User.class);
+				set((AppTokenPrefix+loginUser.getName()).getBytes(), expire,loginUser);
+			}
+		}
+		return token;
+	}
+	
+	/**
+	 * 获取userId剩余存活时间
+	 * 单位秒
+	 */
+	public long getTokenRemainTime(String userId) {
+		return geTttl((AppTokenPrefix+userId).getBytes());
+	}
+	
+	/****结束***********采用redis的过期时间，token快过期自动续期，不使用jwt重新生成token策略*************************************************************************/
 	public String getSecret() {
 		return secret;
 	}
@@ -207,4 +271,20 @@ public class JwtUtils {
 		return (T) SerializeUtils.deserialize(jedisCluster.get(key));
 	}
 
+	/**
+	 * 获取key剩余存活时间
+	 * 单位秒
+	 */
+	public long geTttl(byte[] key) {
+		return jedisCluster.ttl(key);
+	}
+	
+	/**
+	 * 获取key剩余存活时间
+	 * 单位毫秒
+	 */
+	public long getPttl(String  key) {
+		return jedisCluster.pttl(key);
+	}
+	
 }

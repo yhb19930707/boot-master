@@ -1,8 +1,5 @@
 package com.qdone.framework.filter;
 
-import java.io.PrintWriter;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,13 +10,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.alibaba.fastjson.JSON;
 import com.qdone.common.util.JwtUtils;
-import com.qdone.common.util.Result;
 import com.qdone.framework.annotation.Login;
 import com.qdone.framework.core.constant.Constants;
 import com.qdone.framework.exception.RRException;
-import com.qdone.module.model.User;
 
 import io.jsonwebtoken.Claims;
 
@@ -65,6 +59,8 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
         	throw new RRException(USER_KEY + ",不能为空", HttpStatus.UNAUTHORIZED.value());
         }
         //验证token时效
+       /* 
+                    方案一：采用jwttoken验证失效时间，本处未启用，想使用此方式的朋友，请自行打开对应代码
         Claims claims = jwtUtils.getClaimByToken(token);
         if(claims == null || jwtUtils.isTokenExpired(claims.getExpiration())){
             throw new RRException(jwtUtils.getHeader() + "失效，请重新登录", HttpStatus.UNAUTHORIZED.value());
@@ -78,9 +74,30 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
             	throw new RRException(jwtUtils.getHeader() + "非法,请确保本人操作", HttpStatus.UNAUTHORIZED.value());
             }
         }
-        /*token自动续期策略，重新生成新token使用，不考虑强制替换cookie内存储的旧token,半小时内重新生成新token*/
-        long remain=claims.getExpiration().getTime()-new Date().getTime();
-        if(remain<=180000000){
+        */
+        
+        /*
+         * 方案二，token自动续期策略,半小时内自动续期，长时间不操作的，直接过期重新去登陆
+         */
+        long remain=jwtUtils.getExpire();
+        Claims claims = jwtUtils.getClaimByToken(token);
+        if(claims == null||StringUtils.isEmpty(claims.getSubject())){
+        	 throw new RRException(jwtUtils.getHeader() + "失效，请重新登录", HttpStatus.UNAUTHORIZED.value());
+        }else{
+        	remain=jwtUtils.getTokenRemainTime(claims.getSubject());
+        	if(remain==-1||remain==-2){//针对token存在，但是没有设置失效时间(-1)，也认为不合法，必须设置失效时间
+                throw new RRException(jwtUtils.getHeader() + "失效，请重新登录", HttpStatus.UNAUTHORIZED.value());
+            }
+        }
+        /*验证本人使用*/
+        if(StringUtils.isNotBlank(userId)&&StringUtils.isNotBlank(token)&&claims!=null&&remain>0){
+            if(!userId.equals(claims.getSubject())){
+            	throw new RRException(jwtUtils.getHeader() + "非法,请确保本人操作", HttpStatus.UNAUTHORIZED.value());
+            }
+        }
+        /*方案一，token自动续期策略，重新生成新token使用，不考虑强制替换cookie内存储的旧token,半小时内重新生成新token*/
+       /* long remain=claims.getExpiration().getTime()-new Date().getTime();
+        if(remain<=1800000){
         	String freshToken=jwtUtils.refreshTokenExpiration(token);
         	request.setAttribute("freshToken", freshToken);
         	Result<User> resp=new Result<User>();
@@ -92,6 +109,10 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
         	pw.write(JSON.toJSONString(resp));
         	pw.close();
         	return false;
+        }*/
+        /*方案二，token自动续期策略,半小时内自动续期，长时间不操作的，直接过期重新去登陆*/
+        if(remain>0&&remain<=1800){//快过期30分钟(含)以内,自动续期token过期时间
+        	jwtUtils.refreshToken(token);
         }
         //设置userId到request里，后续根据userId，获取用户信息
         /*request.setAttribute(USER_KEY, Long.parseLong(claims.getSubject()));*/
