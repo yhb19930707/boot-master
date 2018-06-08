@@ -148,27 +148,18 @@ public class JwtUtils {
 	
 	/**
 	 * 生成jwt token 
-	 *  存储token对应用户信息,key=AppTokenPrefix+token 
-	 *  value=User方式 本处可以如下简单处理
+	 *  存储token对应用户信息,
+	 *   key=AppTokenPrefix+userId 
+	 *   value=User
 	 */
 	public String generateToken(User loginUser) {
 		Date nowDate = new Date();
 		// 过期时间
 		Date expireDate = new Date(nowDate.getTime() + expire * 1000);
-		/* 销毁当前账户，本次登录之前的token信息 */
-		if (exists(AppTokenPrefix + loginUser.getName())) {
-			jedisCluster.del(AppTokenPrefix + loginUser.getName());
-		}
 		String token = AESUtil.encrypt(Jwts.builder().setHeaderParam("typ", "JWT").setSubject(loginUser.getName()).setIssuedAt(nowDate)
 				.setExpiration(expireDate).signWith(SignatureAlgorithm.HS512, secret).compact(),null);
-		/*新token以及用户登陆信息存储redis*/
+		//token以及用户登陆信息存储redis
 		loginUser.setToken(token);
-		/*
-		 * 生成token，存入redis,
-		 *   key:AppTokenPrefix+loginUser.getName() 
-		 *   value:loginUser
-		 * token过期时间，直接采用redis剩余时间即可  
-		 */
 		set((AppTokenPrefix+loginUser.getName()).getBytes(), expire,loginUser);
 		return token;
 	}
