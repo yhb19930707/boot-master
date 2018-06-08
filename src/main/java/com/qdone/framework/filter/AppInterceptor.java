@@ -90,7 +90,8 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
             }
         }
         /*验证本人使用*/
-        if(StringUtils.isNotBlank(userId)&&StringUtils.isNotBlank(token)&&claims!=null&&remain>0){
+        if(StringUtils.isNotBlank(userId)&&StringUtils.isNotBlank(token)
+        	&&claims!=null&&!StringUtils.isEmpty(claims.getSubject())&&remain>0){
             if(!userId.equals(claims.getSubject())){
             	throw new RRException(jwtUtils.getHeader() + "非法,请确保本人操作", HttpStatus.UNAUTHORIZED.value());
             }
