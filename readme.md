@@ -21,6 +21,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
  
 #### **项目特点**   
 
+> * 配置坦克大战小游戏，让您在学习之余可以愉快的放松休息。<br>
 > * 配套[代码生成工具](https://github.com/apple987/AutoCode):快速生成前后端代码，极大的提高开发效率。<br>
 > * 引入[ApacheCommons](https://gitee.com/bootstrap2table/boot_master/blob/master/src/test/java/com/qdone/DemoApacheCommonsTest.java)工具包，大幅简化开发中的io,file,collection,jexl等处理过程 。<br>
 > * 引入APP模块，根据token作为登录令牌，支持token自动续期，极大的方便了APP接口开发。<br>
@@ -100,7 +101,7 @@ boot-master
 - 3.启动activeMq(默认单机版)。<br>
 - 4.启动solr(默认单机版)。<br>
 - 5.启动zookeeper(默认单机版本2181)。<br>
-- 6.运行StartUpApplication启动项目，浏览器访问http://localhost。<br>
+- 6.运行StartUpApplication启动项目，浏览器访问http://localhost<br>
 
 	
 #### **友情链接：**
@@ -123,8 +124,10 @@ boot-master
 ![boot-start](https://github.com/apple987/static/raw/master/boot/image/start.png "项目启动")<br>	
 **Https跳转效果图：** 
 ![boot-ssl](https://github.com/apple987/static/raw/master/boot/image/ssl.png "初始化")<br>
+**欢迎页面效果图：** 
+![boot-tank](https://github.com/apple987/static/raw/master/boot/image/tank.jpg "欢迎页面")<br>
 **学生管理效果图：** 
-![boot-index](https://github.com/apple987/static/raw/master/boot/image/index.png "欢迎页")<br>
+![boot-index](https://github.com/apple987/static/raw/master/boot/image/index.png "学生管理")<br>
 **接口文档效果图：** 
 ![boot-swagger](https://github.com/apple987/static/raw/master/boot/image/swagger.png "swagger在线文档")<br>
 **登录接口效果图：** 
