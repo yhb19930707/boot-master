@@ -13,7 +13,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
     ● 数据库连接池：Alibaba Druid
     ● 系统监控插件：JavaMelody+Druid
     ● 系统缓存框架：Redis-cluster
-    ● 系统前端框架：Freemaker+Bootstrap+Jquery
+    ● 系统前端框架：Freemaker+Bootstrap+Layui
     ● 搜索引擎框架：Solr/SolrCloud
     ● 分布式线程锁：Redisson
     ● 系统消息队列：ActiveMq
@@ -23,7 +23,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
 
 > * 配套[代码生成工具](https://github.com/apple987/AutoCode):快速生成前后端代码，极大的提高开发效率。<br>
 > * 引入[ApacheCommons](https://gitee.com/bootstrap2table/boot_master/blob/master/src/test/java/com/qdone/DemoApacheCommonsTest.java)工具包，大幅简化开发中的io,file,collection,jexl等处理过程 。<br>
-> * 引入APP模块，根据token作为登录令牌，极大的方便了APP接口开发。<br>
+> * 引入APP模块，根据token作为登录令牌，支持token自动续期，极大的方便了APP接口开发。<br>
 > * 引入[HibernateValidator](https://gitee.com/bootstrap2table/boot_master/blob/master/src/main/java/com/qdone/module/controller/TestController.java)校验框架，轻松实现后端校验。<br>
 > * 引入druid,javaMelody监控系统各项指标，分析系统瓶颈。<br>
 > * 前端采用freemarker模板化引擎,页面采用bootstrap-table灵活强大的表格插件。<br>
@@ -40,8 +40,8 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
 > * 配置https安全协议，提高系统安全性,配置log4j日志，系统出现异常自动发送邮件。<br>
 > * 配置poi和csv简单导出excel功能点,poi目前是多sheet智能导出。<br>
 > * 前端使用vkbeautify插件,页面格式化json，xml,css,sql数据显示。<br>
-> * 配置activeMq支持同时发送队列和主题消息。<br>
-> * 配置solr和solrCloud支持分词搜索查询。<br>
+> * 配置[activeMq](https://gitee.com/bootstrap2table/boot_master/blob/master/src/test/java/com/qdone/DemoApplicationTests.java)支持同时发送队列和主题消息。<br>
+> * 配置[solr和solrCloud](https://gitee.com/bootstrap2table/boot_master/blob/master/src/main/java/com/qdone/module/app/SolrDataController.java)支持分词搜索查询。<br>
 
 
 #### **项目结构**
