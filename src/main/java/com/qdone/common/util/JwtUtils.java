@@ -187,6 +187,12 @@ public class JwtUtils {
 		return geTttl((AppTokenPrefix+userId).getBytes());
 	}
 	
+	/**
+	 * 退出登录
+	 */
+	public long logout(String userId) {
+		return jedisCluster.del(AppTokenPrefix + userId);
+	}
 	/****结束***********采用redis的过期时间，token快过期自动续期，不使用jwt重新生成token策略*************************************************************************/
 	public String getSecret() {
 		return secret;

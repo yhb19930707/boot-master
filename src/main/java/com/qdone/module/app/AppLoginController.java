@@ -48,7 +48,7 @@ public class AppLoginController {
      */
     @Deprecated
     @ApiOperation(hidden=true,value = "APP登录", httpMethod = "POST", notes = "手机端登录", response = Result.class)
-    @PostMapping("login")
+    @PostMapping("doLogin")
     public Result<HashMap<String, Object>> login(@ApiParam(required = true, value = "账户名称", name = "userId") @RequestParam(value = "userId") String userId,
     		@ApiParam(required = true, value = "账户密码", name = "password") @RequestParam(value = "password")  String password){
     	Assert.isTrue(StringUtils.isNotEmpty(userId), "账户名称不能为空");
@@ -119,7 +119,7 @@ public class AppLoginController {
      *    2.以前没有登陆系统，本次登陆，重新生成token
      */
     @ApiOperation(value = "APP登录", httpMethod = "POST", notes = "手机端登录", response = Result.class)
-    @PostMapping("userLogin")
+    @PostMapping("login")
     public Result<User> userLogin(@ApiParam(required = true, value = "账户名称", name = "userId") @RequestParam(value = "userId") String userId,
     		@ApiParam(required = true, value = "账户密码", name = "password") @RequestParam(value = "password")  String password){
     	Assert.isTrue(StringUtils.isNotEmpty(userId), "账户名称不能为空");
@@ -143,7 +143,7 @@ public class AppLoginController {
      *     同时传递token和userId,确保是本人操作
      */
     @Login
-    @GetMapping("getUser")
+    @GetMapping("user")
     @ApiOperation(value = "APP获取登陆用户", httpMethod = "GET", notes = "APP获取登陆用户", response = Result.class)
     public Result<User> getUser(
     		@ApiParam(required = false, value = "令牌", name = "token") @RequestHeader(value = "token")  String token,
@@ -158,6 +158,27 @@ public class AppLoginController {
     		usr1.setFreshToken(request.getAttribute("freshToken").toString());
     	}
     	res.setData(usr1);
+    	return res;
+    }
+    
+    /**
+     * 退出登录
+     */
+    @Login
+    @GetMapping("logout")
+    @ApiOperation(value = "APP退出登录", httpMethod = "GET", notes = "APP退出登录", response = Result.class)
+    public Result<User> logout(
+    		@ApiParam(required = false, value = "令牌", name = "token") @RequestHeader(value = "token")  String token,
+    		@ApiParam(required = false, value = "用户名", name = "userId") @RequestHeader(value = "userId")  String userId){
+    	Assert.isTrue(StringUtils.isNotEmpty(userId), "账户名称不能为空");
+        Assert.isTrue(StringUtils.isNotEmpty(token), "登陆令牌不能为空");
+   	    Result<User> res=new Result<User>();
+        /*本处拦截器已经验证了token和userId的唯一对应关系，所以可以直接去userId*/
+    	User usr1=jwtUtils.get((jwtUtils.AppTokenPrefix+userId).getBytes(), User.class);
+    	jwtUtils.logout(userId);
+    	res.setCode(200);
+    	res.setData(usr1);
+    	res.setMsg("退出登录");
     	return res;
     }
     
