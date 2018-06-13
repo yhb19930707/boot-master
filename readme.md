@@ -160,6 +160,9 @@ boot-master
 ![boot-upload](https://github.com/apple987/static/raw/master/boot/image/upload.jpg "文本上传")<br>
 **上传出错效果图：**
 ![boot-uploadError](https://github.com/apple987/static/raw/master/boot/image/uploadError.jpg "文件上传异常")<br>
+**限流生效效果图：**
+![boot-ratelimter](https://github.com/apple987/static/raw/master/boot/image/ratelimter.jpg "限流接口请求")<br>
+
 	
 
 		
