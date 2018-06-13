@@ -31,6 +31,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
@@ -160,6 +161,12 @@ public class JedisClusterConfig {
 		    poolCofig.setTestOnBorrow(testOnBorrow); 
 		    return poolCofig; 
 	} 
+	
+	/*配置单机限流器*/
+	@Bean
+    public JedisPool jedisPool() {
+        return new JedisPool(poolCofig(), "127.0.0.1", 6387,0,null);
+    }
 	
 	/**
 	 * 配置redisson限流器

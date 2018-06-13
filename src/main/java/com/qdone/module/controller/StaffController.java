@@ -1,28 +1,35 @@
 package com.qdone.module.controller;
-import com.qdone.common.util.SerialNo;
-import com.qdone.framework.annotation.Function;
-import com.qdone.framework.core.BaseController;
-import com.qdone.module.model.Staff;
-import com.qdone.module.service.StaffService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.qdone.common.util.SerialNo;
+import com.qdone.framework.annotation.Function;
+import com.qdone.framework.core.BaseController;
+import com.qdone.module.model.Staff;
+import com.qdone.module.service.StaffService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 /**
  *staff管理
@@ -47,6 +54,7 @@ public class StaffController extends BaseController{
     @ApiOperation(value = "列表",notes = "进入列表页", httpMethod = "GET")
 	@RequestMapping(value = "init",method = RequestMethod.GET)
 	public String init(){
+    	System.err.println("进入staff初始化！");
 		return "staff/selectStaff";
 	}
 	

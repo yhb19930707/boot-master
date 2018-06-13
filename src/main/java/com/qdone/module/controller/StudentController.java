@@ -56,6 +56,7 @@ import com.qdone.common.util.SerialNo;
 import com.qdone.common.util.SessionUtil;
 import com.qdone.common.util.mail.MailService;
 import com.qdone.framework.annotation.Function;
+import com.qdone.framework.annotation.RateLimiter;
 import com.qdone.framework.core.BaseController;
 import com.qdone.framework.core.constant.Constants;
 import com.qdone.framework.exception.RRException;
@@ -461,6 +462,7 @@ public class StudentController extends BaseController {
 
 	@ApiOperation(value = "测试格式化显示", notes = "测试格式化显示", httpMethod = "GET")
 	@RequestMapping(value = "/formatCode", method = RequestMethod.GET)
+	@RateLimiter(limit = 1, timeout = 10000)
 	public String formatCode(HttpServletRequest req) {
 		System.err.println("formatJson");
 		List<Student> arr = studentService.selectList(null);

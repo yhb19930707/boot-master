@@ -70,6 +70,7 @@ public class RedisConfig extends CachingConfigurerSupport{
         jackson2JsonRedisSerializer.setObjectMapper(om);
         template.setValueSerializer(jackson2JsonRedisSerializer);
         template.afterPropertiesSet();
+        template.setEnableTransactionSupport(true);//开启事务支持
         return template;
     }
     

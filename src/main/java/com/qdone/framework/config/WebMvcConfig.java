@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.qdone.framework.filter.AppInterceptor;
+import com.qdone.framework.filter.RateLimiterInterceptor;
 
 /**
  * @author 付为地
@@ -24,6 +25,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Autowired
 	private AppInterceptor appInterceptor;
+	
+	@Autowired
+	private RateLimiterInterceptor rateLimiterInterceptor;
 
 	@Value("${swagger.open:true}")
 	private Boolean isOpen;
@@ -68,12 +72,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	}
 
 	/**
-	 * 添加api interceptor
+	 * 添加interceptor
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(appInterceptor).addPathPatterns("/app/**");
+		registry.addInterceptor(rateLimiterInterceptor).addPathPatterns("/student/**");
+		/*registry.addInterceptor(rateLimiterInterceptor).addPathPatterns("/**").excludePathPatterns("/page/static/**","swagger-ui.html","/webjars/**","/404,/500,/404,/static/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.mp3,*.html,*.htm,*.woff,/druid,/druid/*,/monitoring,/monitoring/*");*/
 	}
+	
+	
 	
    
 }
