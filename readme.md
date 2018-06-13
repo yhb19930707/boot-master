@@ -20,7 +20,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
     ● 安全授权框架：JwtToken+AES 
  
 #### **项目特点**   
-
+> * 配置单机Jedis限流器，使用信号量方式限制接口请求次数(redisson限流器暂未生效)。<br>
 > * 配置坦克大战小游戏，让您在学习之余可以愉快的放松休息。<br>
 > * 配套[代码生成工具](https://github.com/apple987/AutoCode):快速生成前后端代码，极大的提高开发效率。<br>
 > * 引入[ApacheCommons](https://gitee.com/bootstrap2table/boot_master/blob/master/src/test/java/com/qdone/DemoApacheCommonsTest.java)工具包，大幅简化开发中的io,file,collection,jexl等处理过程 。<br>
