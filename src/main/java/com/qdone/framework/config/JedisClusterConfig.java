@@ -11,9 +11,6 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.redisson.Redisson;
-import org.redisson.api.RRateLimiter;
-import org.redisson.api.RateIntervalUnit;
-import org.redisson.api.RateType;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,7 +28,6 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
-import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
@@ -162,21 +158,4 @@ public class JedisClusterConfig {
 		    return poolCofig; 
 	} 
 	
-	/*配置单机限流器*/
-	@Bean
-    public JedisPool jedisPool() {
-        return new JedisPool(poolCofig(), "127.0.0.1", 6387,0,null);
-    }
-	
-	/**
-	 * 配置redisson限流器
-	 *  每分钟最多1000个令牌
-	 */
-	@Bean
-	public RRateLimiter rRateLimiter(RedissonClient redissonClient){
-	     RRateLimiter rateLimiter = redissonClient.getRateLimiter("myRateLimiter");
-	     /*rateLimiter.trySetRate(RateType.PER_CLIENT, 1, 1, RateIntervalUnit.MINUTES)*/
-	     System.err.println("初始化流速1000设置:"+rateLimiter.trySetRate(RateType.OVERALL, 1000, 1, RateIntervalUnit.SECONDS));
-	     return rateLimiter;
-	}
 }

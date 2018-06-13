@@ -77,7 +77,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(appInterceptor).addPathPatterns("/app/**");
-		registry.addInterceptor(rateLimiterInterceptor).addPathPatterns("/student/**");
+		registry.addInterceptor(rateLimiterInterceptor).addPathPatterns("/student/**","/solr/**");
 		/*registry.addInterceptor(rateLimiterInterceptor).addPathPatterns("/**").excludePathPatterns("/page/static/**","swagger-ui.html","/webjars/**","/404,/500,/404,/static/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.mp3,*.html,*.htm,*.woff,/druid,/druid/*,/monitoring,/monitoring/*");*/
 	}
 	

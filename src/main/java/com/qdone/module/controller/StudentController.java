@@ -99,6 +99,8 @@ public class StudentController extends BaseController {
 	
 	@Autowired
 	RestTemplate restTemplate;
+	
+	
 
 	/**
 	 * 页面初始化
@@ -250,10 +252,11 @@ public class StudentController extends BaseController {
 
 	/**
 	 * 测试freemarker
+	 * @throws InterruptedException 
 	 */
 	@ApiOperation(value = "测试freemarker", notes = "测试freemarker", httpMethod = "GET")
 	@RequestMapping(value = "/freemarker", method = RequestMethod.GET)
-	public String freemarker(HttpServletRequest req) {
+	public String freemarker(HttpServletRequest req) throws InterruptedException {
 		System.err.println("freemarker");
 		List<Student> arr = studentService.selectList(null);
 		req.setAttribute("list", arr);
@@ -462,7 +465,7 @@ public class StudentController extends BaseController {
 
 	@ApiOperation(value = "测试格式化显示", notes = "测试格式化显示", httpMethod = "GET")
 	@RequestMapping(value = "/formatCode", method = RequestMethod.GET)
-	@RateLimiter(limit = 1, timeout = 10000)
+	@RateLimiter(limit = 1, timeout = 5,rateKey="formatCode")
 	public String formatCode(HttpServletRequest req) {
 		System.err.println("formatJson");
 		List<Student> arr = studentService.selectList(null);
@@ -475,6 +478,22 @@ public class StudentController extends BaseController {
 		return "format_code";
 	}
 	
+	 /**
+	  * 简单测试限流器
+	  */
+	 @ApiOperation(value = "简单测试限流器", notes = "简单测试限流器", httpMethod = "GET")
+	 @RequestMapping(value = "/testJson", method = RequestMethod.GET)
+	 @RateLimiter(limit = 1, timeout = 5,rateKey="testJson")
+	 @ResponseBody
+	 public Map<String,Object> testJson(){  
+	    	System.err.println("进入testJson方法");
+	    	/*Map<String,Object> result=new ConcurrentHashMap<String,Object>();*/
+	    	Map<String,Object> result=new HashMap<String,Object>();
+	    	result.put("a", null);
+	    	result.put("b", "");
+	    	result.put("c", "马大哈");
+	    	return result;
+	 }  
 	
 	@ApiOperation(value = "坦克大战", notes = "坦克大战", httpMethod = "GET")
 	@RequestMapping(value = "/tank", method = RequestMethod.GET)

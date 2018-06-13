@@ -1,13 +1,9 @@
 package com.qdone.module.controller;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.redisson.api.RRateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,16 +36,13 @@ public class SolrController extends BaseController{
 	private SolrService solrService;
     
     
-    @Autowired
-    private RRateLimiter rateLimiter;
-    
     /**
 	 * 页面初始化
 	 */
 	@ApiOperation(value = "列表",notes = "进入列表页", httpMethod = "GET")
 	@RequestMapping(value = "init",method = RequestMethod.GET)
 	public String init(){
-	    if(rateLimiter.tryAcquire(1,0, TimeUnit.SECONDS)){//获取令牌成功，尝试一次，直接返回
+	    /*if(rateLimiter.tryAcquire(1,0, TimeUnit.SECONDS)){//获取令牌成功，尝试一次，直接返回
 			try {
 				System.err.println("获取令牌成功，确定执行时刻:" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss S").format(new Date()));
 				// 模拟执行耗时5秒
@@ -59,7 +52,7 @@ public class SolrController extends BaseController{
 			}
 	    }else{
 	    	System.err.println("获取令牌失败，拒绝执行时刻:"+new SimpleDateFormat("yyyy-MM-dd hh:mm:ss S").format(new Date()));
-	    }
+	    }*/
 		return "solr/selectSolr";
 	}
 	
