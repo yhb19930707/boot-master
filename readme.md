@@ -20,7 +20,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
     ● 安全授权框架：JwtToken+AES 
  
 #### **项目特点**   
-
+> * 配置单机Jedis限流器，使用信号量方式限制接口请求次数(redisson限流器暂未生效)。<br>
 > * 配置坦克大战小游戏，让您在学习之余可以愉快的放松休息。<br>
 > * 配套[代码生成工具](https://github.com/apple987/AutoCode):快速生成前后端代码，极大的提高开发效率。<br>
 > * 引入[ApacheCommons](https://gitee.com/bootstrap2table/boot_master/blob/master/src/test/java/com/qdone/DemoApacheCommonsTest.java)工具包，大幅简化开发中的io,file,collection,jexl等处理过程 。<br>
@@ -86,6 +86,10 @@ boot-master
 - JDK1.8
 - MySQL5.5+
 - Maven3.0+
+
+#### **注意事项：**
+- 1.配置使用Jedis单机版，事务+信号量处理，实现接口限流控制，目前有效果（采用redisson3.7.1版本，RRateLimiter限流目前有问题）。
+- 2.需要单独配置一个单机版redis服务器，配置代码请参考：[JedisClusterConfig](https://gitee.com/bootstrap2table/boot_master/blob/master/src/main/java/com/qdone/framework/config/JedisClusterConfig.java "Redis配置")<br>
  
 #### **环境配置:**<br>
 - 1.项目依赖redis-cluster集群,zookeeper,activeMq,solr工具,目前工具运行环境(win7 x64)。<br>
@@ -93,7 +97,6 @@ boot-master
 - 3.工具地址:https://pan.baidu.com/s/1Bm7udGJc40xEENFgnJjsIw
 - 4.SolrCloud: https://pan.baidu.com/s/1RbC4zS8izz9Ge8wuIdplXQ
 - 5.配置文档：https://gitee.com/bootstrap2table/boot_master/wikis/welcome
-
 	 
 #### **启动说明:**
 - 1.创建mysql数据库isec实例,运行doc目录里面的sql文件。<br>
@@ -102,7 +105,6 @@ boot-master
 - 4.启动solr(默认单机版)。<br>
 - 5.启动zookeeper(默认单机版本2181)。<br>
 - 6.运行StartUpApplication启动项目，浏览器访问http://localhost<br>
-
 	
 #### **友情链接：**
 - GitHub：https://github.com/apple987/boot_walk <br>
@@ -160,6 +162,9 @@ boot-master
 ![boot-upload](https://github.com/apple987/static/raw/master/boot/image/upload.jpg "文本上传")<br>
 **上传出错效果图：**
 ![boot-uploadError](https://github.com/apple987/static/raw/master/boot/image/uploadError.jpg "文件上传异常")<br>
+**限流生效效果图：**
+![boot-ratelimter](https://github.com/apple987/static/raw/master/boot/image/ratelimter.jpg "限流接口请求")<br>
+
 	
 
 		
