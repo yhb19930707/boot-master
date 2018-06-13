@@ -86,6 +86,10 @@ boot-master
 - JDK1.8
 - MySQL5.5+
 - Maven3.0+
+
+#### **注意事项：**
+- 1.配置使用Jedis单机版，事务+信号量处理，实现接口限流控制，目前有效果（采用redisson3.7.1版本，RRateLimiter限流目前有问题）。
+- 2.需要单独配置一个单机版redis服务器，配置代码请参考：[JedisClusterConfig](https://gitee.com/bootstrap2table/boot_master/blob/master/src/main/java/com/qdone/framework/config/JedisClusterConfig.java "Redis配置")<br>
  
 #### **环境配置:**<br>
 - 1.项目依赖redis-cluster集群,zookeeper,activeMq,solr工具,目前工具运行环境(win7 x64)。<br>
@@ -93,7 +97,6 @@ boot-master
 - 3.工具地址:https://pan.baidu.com/s/1Bm7udGJc40xEENFgnJjsIw
 - 4.SolrCloud: https://pan.baidu.com/s/1RbC4zS8izz9Ge8wuIdplXQ
 - 5.配置文档：https://gitee.com/bootstrap2table/boot_master/wikis/welcome
-
 	 
 #### **启动说明:**
 - 1.创建mysql数据库isec实例,运行doc目录里面的sql文件。<br>
@@ -102,7 +105,6 @@ boot-master
 - 4.启动solr(默认单机版)。<br>
 - 5.启动zookeeper(默认单机版本2181)。<br>
 - 6.运行StartUpApplication启动项目，浏览器访问http://localhost<br>
-
 	
 #### **友情链接：**
 - GitHub：https://github.com/apple987/boot_walk <br>
