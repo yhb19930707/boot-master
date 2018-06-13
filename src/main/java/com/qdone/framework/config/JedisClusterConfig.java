@@ -11,6 +11,9 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.redisson.Redisson;
+import org.redisson.api.RRateLimiter;
+import org.redisson.api.RateIntervalUnit;
+import org.redisson.api.RateType;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -157,4 +160,16 @@ public class JedisClusterConfig {
 		    poolCofig.setTestOnBorrow(testOnBorrow); 
 		    return poolCofig; 
 	} 
+	
+	/**
+	 * 配置redisson限流器
+	 *  每分钟最多1000个令牌
+	 */
+	@Bean
+	public RRateLimiter rRateLimiter(RedissonClient redissonClient){
+	     RRateLimiter rateLimiter = redissonClient.getRateLimiter("myRateLimiter");
+	     /*rateLimiter.trySetRate(RateType.PER_CLIENT, 1, 1, RateIntervalUnit.MINUTES)*/
+	     System.err.println("初始化流速1000设置:"+rateLimiter.trySetRate(RateType.OVERALL, 1000, 1, RateIntervalUnit.SECONDS));
+	     return rateLimiter;
+	}
 }

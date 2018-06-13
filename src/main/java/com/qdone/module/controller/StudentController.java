@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -24,8 +25,14 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.aspectj.util.FileUtil;
+import org.redisson.api.RAtomicDouble;
 import org.redisson.api.RAtomicLong;
+import org.redisson.api.RBloomFilter;
+import org.redisson.api.RHyperLogLog;
+import org.redisson.api.RLongAdder;
+import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
+import org.redisson.api.listener.MessageListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +45,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -87,13 +95,18 @@ public class StudentController extends BaseController {
 
 	@Autowired
 	CacheUtil cacheUtil;
+	
+	@Autowired
+	RestTemplate restTemplate;
 
 	/**
 	 * 页面初始化
+	 * @throws InterruptedException 
 	 */
+	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "学生列表", notes = "进入学生列表页", httpMethod = "GET")
 	@RequestMapping(value = "init", method = RequestMethod.GET)
-	public String init(HttpServletRequest request) {
+	public String init(HttpServletRequest request) throws InterruptedException {
 		/*
 		 * String token=UUID.randomUUID().toString();
 		 * request.setAttribute("clientToken",token);
@@ -115,6 +128,41 @@ public class StudentController extends BaseController {
 		String[] arr = FileUtil.listFiles(new File(fileDir));
 		request.setAttribute("fileNames", arr);
 		cacheUtil.put("apple", "123456");
+		/*********************RLongAdder****************************/
+		RLongAdder atomicLongAdder = redissonClient.getLongAdder("myLongAdder");
+		atomicLongAdder.add(12);
+		atomicLongAdder.increment();
+		atomicLongAdder.decrement();
+		System.err.println("RLongAdder操作结果是:"+atomicLongAdder.sum());
+		atomicLongAdder.destroy();
+		/*********************RAtomicDouble****************************/
+		RAtomicDouble atomicDouble = redissonClient.getAtomicDouble("myAtomicDouble");
+		atomicDouble.set(2.81);
+		atomicDouble.addAndGet(4.11);
+		System.err.println("RLongAdder操作结果是:"+atomicDouble.get());
+		/*********************RBloomFilter****************************/
+		RBloomFilter<HashMap<String,Object>> bloomFilter = redissonClient.getBloomFilter("sample");
+		// 初始化布隆过滤器，预计统计元素数量为55000000，期望误差率为0.03
+		bloomFilter.tryInit(55000000L, 0.03);
+		bloomFilter.add((HashMap<String, Object>) new HashMap<String,Object>().put("field1Value", "field2Value"));
+		bloomFilter.add((HashMap<String, Object>) new HashMap<String,Object>().put("field5Value", "field8Value"));
+		System.err.println("RBloomFilter判断是否存在:"+bloomFilter.contains((HashMap<String, Object>) new HashMap<String,Object>().put("field1Value", "field2Value")));
+		/*********************RHyperLogLog****************************/
+		RHyperLogLog<Integer> log = redissonClient.getHyperLogLog("log");
+		log.add(1);
+		log.add(2);
+		log.add(3);
+		System.err.println("RHyperLogLog估算结果:"+log.count());
+		/*for (int i = 0; i < 70; i++) {
+			   Thread t = new Thread() {
+		            public void run() {
+		            	System.err.println("模拟线程并发，发起请求时刻:"+new SimpleDateFormat("yyyy-MM-dd hh:mm:ss S").format(new Date()));
+		            	restTemplate.getForObject("http://localhost:9090/solr/init",String.class);
+		            };
+		        };
+		        t.start();
+		        t.join();
+		}*/
 		return "student/selectStudent";
 	}
 
@@ -245,6 +293,7 @@ public class StudentController extends BaseController {
 	 * @return
 	 * @throws IOException
 	 */
+	@ApiOperation(value = "文件上传", notes = "文件上传", httpMethod = "POST")
 	@RequestMapping("/fileupload")
 	@ResponseBody
 	public Object fileupload(@RequestParam("vitalPeople") MultipartFile file, HttpServletRequest req, Student student,
@@ -280,6 +329,7 @@ public class StudentController extends BaseController {
 	/**
 	 * 文件下载
 	 */
+	@ApiOperation(value = "文件下载", notes = "文件下载", httpMethod = "GET")
 	@RequestMapping("/downLoad")
 	public void downLoad(HttpServletRequest req, HttpServletResponse resp, String fileId) {
 		try {
@@ -302,6 +352,7 @@ public class StudentController extends BaseController {
 	/**
 	 * 发邮件
 	 */
+	@ApiOperation(value = "发送邮件", notes = "发送邮件", httpMethod = "GET")
 	@RequestMapping("/sendEMail")
 	@ResponseBody
 	public Object baseMailTest() {
@@ -315,6 +366,7 @@ public class StudentController extends BaseController {
 	/**
 	 * 导出CSV
 	 */
+	@ApiOperation(value = "导出csv", notes = "导出csv", httpMethod = "GET")
 	@RequestMapping("/exportCsv")
 	public void exportCsv(HttpServletResponse response) throws UnsupportedEncodingException {
 
@@ -364,6 +416,7 @@ public class StudentController extends BaseController {
 	/**
 	 * 导出Excel
 	 */
+	@ApiOperation(value = "poi导出excel", notes = "poi导出excel", httpMethod = "GET")
 	@RequestMapping("/exportPoiExcel")
 	public void exportPoiExcel(HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -431,4 +484,31 @@ public class StudentController extends BaseController {
 	public void reportCurrentTime() {
 		System.out.println("现在时间：" + new SimpleDateFormat("HH:mm:ss").format(new Date()));
 	}*/
+	
+	/*********************测试Redisson的分布式话题RTopic对象实现了发布、订阅的机制***********************************************************/
+	@ApiOperation(value = "测试接收Redisson的分布式话题RTopic", notes = "测试接收Redisson的分布式话题RTopic", httpMethod = "GET")
+	@RequestMapping(value = "/reciveTopic", method = RequestMethod.GET)
+	@ResponseBody
+	public String reciveTopic(HttpServletRequest req) {
+		RTopic<Object> topic = redissonClient.getTopic("anyTopic");
+		topic.addListener(new MessageListener<Object>() {
+		    @Override
+		    public void onMessage(String channel, Object message) {
+		        System.err.println("reciveTopic接收到【anyTopic】消息渠道["+channel+"]\t 消息["+message+"]");
+		    }
+		});
+		return "success";
+	}
+	
+	@ApiOperation(value = "测试发送Redisson的分布式话题RTopic", notes = "测试Redisson的分布式话题RTopic", httpMethod = "GET")
+	@RequestMapping(value = "/sendTopic", method = RequestMethod.GET)
+	@ResponseBody
+	public String sendTopic(HttpServletRequest req) {
+		// 在其他线程或JVM节点
+		RTopic<Object> topic = redissonClient.getTopic("anyTopic");
+		String message="你好啊！我是Redisson,这里我将演示发送topic消息";
+		System.out.println("有:"+topic.publish(message)+"个客户端接收到anyTopic主题消息");
+		return "success";
+	}
+
 }

@@ -1,21 +1,29 @@
 package com.qdone.module.controller;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMethod;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.redisson.api.RRateLimiter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.qdone.common.util.SerialNo;
+import com.qdone.framework.annotation.Function;
+import com.qdone.framework.core.BaseController;
 import com.qdone.module.model.Solr;
 import com.qdone.module.service.SolrService;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import com.qdone.framework.annotation.Function;
-import com.qdone.framework.core.BaseController;
-import com.qdone.common.util.SerialNo;
 
 /**
  *solr管理
@@ -30,13 +38,28 @@ public class SolrController extends BaseController{
 
     @Autowired
 	private SolrService solrService;
-
+    
+    
+    @Autowired
+    private RRateLimiter rateLimiter;
+    
     /**
 	 * 页面初始化
 	 */
 	@ApiOperation(value = "列表",notes = "进入列表页", httpMethod = "GET")
 	@RequestMapping(value = "init",method = RequestMethod.GET)
 	public String init(){
+	    if(rateLimiter.tryAcquire(1,0, TimeUnit.SECONDS)){//获取令牌成功，尝试一次，直接返回
+			try {
+				System.err.println("获取令牌成功，确定执行时刻:" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss S").format(new Date()));
+				// 模拟执行耗时5秒
+				TimeUnit.SECONDS.sleep(5);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	    }else{
+	    	System.err.println("获取令牌失败，拒绝执行时刻:"+new SimpleDateFormat("yyyy-MM-dd hh:mm:ss S").format(new Date()));
+	    }
 		return "solr/selectSolr";
 	}
 	
