@@ -16,6 +16,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
     ● 系统前端框架：Freemaker+Bootstrap+Layui
     ● 搜索引擎框架：Solr/SolrCloud
     ● 分布式线程锁：Redisson
+    ● 分布式限流器：Redisson
     ● 系统消息队列：ActiveMq
     ● 安全授权框架：JwtToken+AES 
  
