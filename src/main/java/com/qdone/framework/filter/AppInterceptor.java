@@ -49,6 +49,7 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     	request.setCharacterEncoding(Constants.CHARSET.UTF8);
     	response.setCharacterEncoding(Constants.CHARSET.UTF8);
+    	boolean isCheck=true;
     	Login annotation;
         if(handler instanceof HandlerMethod) {
             annotation = ((HandlerMethod) handler).getMethodAnnotation(Login.class);
@@ -58,6 +59,8 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
         if(annotation == null){
             return true;
         }
+        //判断是否支持限流
+        isCheck=annotation.isCheck();
         //获取用户凭证
         String token = request.getHeader(jwtUtils.getHeader());
         if(StringUtils.isBlank(token)){
@@ -146,7 +149,7 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
          *        
          */
         //以前如果存储的有，token访问记录，本次处理
-        if(StringUtils.isNotBlank(token)&&jwtUtils.exists(jwtUtils.AppTokenRequestHistoryPrefix+token)){
+        if(isCheck&&StringUtils.isNotBlank(token)&&jwtUtils.exists(jwtUtils.AppTokenRequestHistoryPrefix+token)){
         	String url=request.getRequestURI();
         	Map<String,Object> history=jwtUtils.get((jwtUtils.AppTokenRequestHistoryPrefix+token).getBytes(), ConcurrentHashMap.class);
         	if(history.containsKey(url)){
@@ -192,63 +195,66 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
     			token = request.getParameter(jwtUtils.getHeader());
     		}
         	if(handlerMethod.hasMethodAnnotation(Login.class)&&!StringUtils.isEmpty(token)){
-                String url=request.getRequestURI();
-                long time=System.currentTimeMillis();
-                String className=handlerMethod.getBeanType().getName();
-                Method method = handlerMethod.getMethod();
-                String methodName=method.getName();
-                String functionName=className+"."+methodName;
-                TokenRequestHistory TokenRequest=new TokenRequestHistory(token,url,className,methodName,functionName,time);
-                /**
-                 * 存储格式
-                 *  key:jwtUtils.AppTokenRequestHistoryPrefix+token
-                 *  value:map
-                 *          key-url
-                 *          value-urlHistory
-                 */
-                //存储jwtUtils.AppTokenRequestHistoryPrefix+token对应请求url的请求最近5次数历史记录
-                Map<String,Object> history=new ConcurrentHashMap<String,Object>();
-                //默认记录相同url路径的5条最近记录
-                List<TokenRequestHistory> urlHistory=new ArrayList<TokenRequestHistory>(5);
-                //以前如果存储的有，token访问记录，本次处理
-		            if(jwtUtils.exists(jwtUtils.AppTokenRequestHistoryPrefix+token)){
-		                	history=jwtUtils.get((jwtUtils.AppTokenRequestHistoryPrefix+token).getBytes(), ConcurrentHashMap.class);
-		                	if(history.containsKey(url)){
-		                		urlHistory=(List<TokenRequestHistory>) history.get(url);
-		                		 if(!CollectionUtils.isEmpty(urlHistory)){
-			                		 //访问时间降序排列 
-			                		 Collections.sort(urlHistory, new Comparator<TokenRequestHistory>() {
-			                			 @Override  
-			             	             public int compare(TokenRequestHistory t1, TokenRequestHistory t2) {  
-			             	            	if(t1.getTime()>t2.getTime()){
-			             	            		return -1;
-			             	            	}else if(t1.getTime()==t2.getTime()){
-			             	            		return 0;
-			             	            	}else{
-			             	            		return 1;
-			             	            	}
-			             	            }  
-			                	     });  
-			                		//保证只存储相同接口的5条最近的请求历史记录
-			                		if(urlHistory.size()>=5){
-			                			urlHistory=urlHistory.subList(0, 5);
-			                			urlHistory.set(5, TokenRequest);//修改距离本次最远的第5条记录
-			                		}else{
-			                			urlHistory.add(TokenRequest);//不到五条，直接装
-			                		}
-			                    }else{//相同接口以前没有存储过，直接存入
-			                    	urlHistory.add(TokenRequest);
-			                    }
-		                }else{//以前没有存储过，直接存入
-		                	urlHistory.add(TokenRequest);
-		                }
-		                history.put(url, urlHistory);
-		         }else{
-		        	 urlHistory.add(TokenRequest);
-		        	 history.put(url, urlHistory);
-		         }
-                //存储登陆记录默认存储7天
-                jwtUtils.set((jwtUtils.AppTokenRequestHistoryPrefix+token).getBytes(), jwtUtils.getExpire(), history);
+        		Login login=handlerMethod.getMethodAnnotation(Login.class);
+        		if(login.isCheck()){
+                    String url=request.getRequestURI();
+                    long time=System.currentTimeMillis();
+                    String className=handlerMethod.getBeanType().getName();
+                    Method method = handlerMethod.getMethod();
+                    String methodName=method.getName();
+                    String functionName=className+"."+methodName;
+                    TokenRequestHistory TokenRequest=new TokenRequestHistory(token,url,className,methodName,functionName,time);
+                    /**
+                     * 存储格式
+                     *  key:jwtUtils.AppTokenRequestHistoryPrefix+token
+                     *  value:map
+                     *          key-url
+                     *          value-urlHistory
+                     */
+                    //存储jwtUtils.AppTokenRequestHistoryPrefix+token对应请求url的请求最近5次数历史记录
+                    Map<String,Object> history=new ConcurrentHashMap<String,Object>();
+                    //默认记录相同url路径的5条最近记录
+                    List<TokenRequestHistory> urlHistory=new ArrayList<TokenRequestHistory>(5);
+                    //以前如果存储的有，token访问记录，本次处理
+    		            if(jwtUtils.exists(jwtUtils.AppTokenRequestHistoryPrefix+token)){
+    		                	history=jwtUtils.get((jwtUtils.AppTokenRequestHistoryPrefix+token).getBytes(), ConcurrentHashMap.class);
+    		                	if(history.containsKey(url)){
+    		                		urlHistory=(List<TokenRequestHistory>) history.get(url);
+    		                		 if(!CollectionUtils.isEmpty(urlHistory)){
+    			                		 //访问时间降序排列 
+    			                		 Collections.sort(urlHistory, new Comparator<TokenRequestHistory>() {
+    			                			 @Override  
+    			             	             public int compare(TokenRequestHistory t1, TokenRequestHistory t2) {  
+    			             	            	if(t1.getTime()>t2.getTime()){
+    			             	            		return -1;
+    			             	            	}else if(t1.getTime()==t2.getTime()){
+    			             	            		return 0;
+    			             	            	}else{
+    			             	            		return 1;
+    			             	            	}
+    			             	            }  
+    			                	     });  
+    			                		//保证只存储相同接口的5条最近的请求历史记录
+    			                		if(urlHistory.size()>=5){
+    			                			urlHistory=urlHistory.subList(0, 5);
+    			                			urlHistory.set(5, TokenRequest);//修改距离本次最远的第5条记录
+    			                		}else{
+    			                			urlHistory.add(TokenRequest);//不到五条，直接装
+    			                		}
+    			                    }else{//相同接口以前没有存储过，直接存入
+    			                    	urlHistory.add(TokenRequest);
+    			                    }
+    		                }else{//以前没有存储过，直接存入
+    		                	urlHistory.add(TokenRequest);
+    		                }
+    		                history.put(url, urlHistory);
+    		         }else{
+    		        	 urlHistory.add(TokenRequest);
+    		        	 history.put(url, urlHistory);
+    		         }
+                    //存储登陆记录默认存储7天
+                    jwtUtils.set((jwtUtils.AppTokenRequestHistoryPrefix+token).getBytes(), jwtUtils.getExpire(), history);
+        		}
         	}
         }
 	}

@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,8 @@ public class RateLimiterInterceptor extends HandlerInterceptorAdapter {
          if (rateLimiter != null) {
              int limit = ObjectUtils.isEmpty(rateLimiter.limit())?RedisRateLimiter.REDISSON_RATE_LIMITER_PERMITS:rateLimiter.limit();
              long timeout = ObjectUtils.isEmpty(rateLimiter.timeout())?RedisRateLimiter.REDISSON_RATE_LIMITER_TIMEOUT:rateLimiter.timeout();
-             String rateKey=RedisRateLimiter.REDISSON_RATE_LIMITER_KEY+rateLimiter.rateKey();
+             String rateKey=StringUtils.isEmpty(rateLimiter.rateKey())?request.getRequestURI():rateLimiter.rateKey();//key为空判断
+             rateKey=RedisRateLimiter.REDISSON_RATE_LIMITER_KEY+rateKey;
              TimeUnit timeUnit=ObjectUtils.isEmpty(rateLimiter.timeout())?RedisRateLimiter.REDISSON_RATE_LIMITER_TIMEUNIt:rateLimiter.timeUnit();
              /*Boolean isAllow=RedisRateLimiter.acquire(redisClient, rateKey, limit, timeout, timeUnit);*/
              Boolean isAllow=RedisRateLimiter.tryAcquire(redisClient, rateKey, limit, timeout, timeUnit);
