@@ -31,7 +31,7 @@ public class DemoApplicationTests {
 
 	@Autowired
 	private JMSProducer jmsProducer;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		/**
@@ -40,6 +40,8 @@ public class DemoApplicationTests {
 		mockMvc = MockMvcBuilders.standaloneSetup(new HelloController()).build();
 	}
 
+	
+	
 	@Test
 	public void testHello() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/testJson").accept(MediaType.APPLICATION_JSON_UTF8))

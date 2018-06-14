@@ -145,7 +145,7 @@ public class AppLoginController {
     @Login
     @GetMapping("user")
     @ApiOperation(value = "APP获取登陆用户", httpMethod = "GET", notes = "APP获取登陆用户", response = Result.class)
-    public Result<User> getUser(
+    public Result<User> user(
     		@ApiParam(required = false, value = "令牌", name = "token") @RequestHeader(value = "token")  String token,
     		@ApiParam(required = false, value = "用户名", name = "userId") @RequestHeader(value = "userId")  String userId,HttpServletRequest request){
     	Assert.isTrue(StringUtils.isNotEmpty(userId), "账户名称不能为空");
@@ -154,6 +154,25 @@ public class AppLoginController {
         /*本处拦截器已经验证了token和userId的唯一对应关系，所以可以直接去userId*/
     	User usr1=jwtUtils.get((jwtUtils.AppTokenPrefix+userId).getBytes(), User.class);
     	System.err.println("序列化拿到的用户信息是:"+JSON.toJSONString(usr1));
+    	if(!ObjectUtils.isEmpty(request.getAttribute("freshToken"))){
+    		usr1.setFreshToken(request.getAttribute("freshToken").toString());
+    	}
+    	res.setData(usr1);
+    	return res;
+    }
+    
+    @Login
+    @GetMapping("getUser")
+    @ApiOperation(value = "getUser获取登陆用户", httpMethod = "GET", notes = "getUser获取登陆用户", response = Result.class)
+    public Result<User> getUser(
+    		@ApiParam(required = false, value = "令牌", name = "token") @RequestHeader(value = "token")  String token,
+    		@ApiParam(required = false, value = "用户名", name = "userId") @RequestHeader(value = "userId")  String userId,HttpServletRequest request){
+    	Assert.isTrue(StringUtils.isNotEmpty(userId), "账户名称不能为空");
+        Assert.isTrue(StringUtils.isNotEmpty(token), "登陆令牌不能为空");
+   	    Result<User> res=new Result<User>();
+        /*本处拦截器已经验证了token和userId的唯一对应关系，所以可以直接去userId*/
+    	User usr1=jwtUtils.get((jwtUtils.AppTokenPrefix+userId).getBytes(), User.class);
+    	System.err.println("getUser序列化拿到的用户信息是:"+JSON.toJSONString(usr1));
     	if(!ObjectUtils.isEmpty(request.getAttribute("freshToken"))){
     		usr1.setFreshToken(request.getAttribute("freshToken").toString());
     	}
@@ -176,6 +195,7 @@ public class AppLoginController {
         /*本处拦截器已经验证了token和userId的唯一对应关系，所以可以直接去userId*/
     	User usr1=jwtUtils.get((jwtUtils.AppTokenPrefix+userId).getBytes(), User.class);
     	jwtUtils.logout(userId);
+    	jwtUtils.clearRate(token);
     	res.setCode(200);
     	res.setData(usr1);
     	res.setMsg("退出登录");

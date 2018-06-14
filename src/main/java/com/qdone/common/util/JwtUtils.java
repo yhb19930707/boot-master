@@ -195,7 +195,22 @@ public class JwtUtils {
 	public long logout(String userId) {
 		return jedisCluster.del(AppTokenPrefix + userId);
 	}
+	
+	/**
+	 * 退出登录
+	 */
+	public long logout(User usr) {
+		return remove((AppTokenPrefix + usr.getName()).getBytes(),(AppTokenRequestHistoryPrefix+usr.getToken()).getBytes());
+	}
 	/****结束***********采用redis的过期时间，token快过期自动续期，不使用jwt重新生成token策略*************************************************************************/
+	/****开始***********采用redis的限制重复提交*************************************************************************/
+	public long getRateTokenRemainTime(String tokenKey) {
+		return geTttl(tokenKey.getBytes());
+	}
+	public long clearRate(String token) {
+		return jedisCluster.del(AppTokenRequestHistoryPrefix+token);
+	}
+	/****结束***********采用redis的限制重复提交*************************************************************************/
 	public String getSecret() {
 		return secret;
 	}
@@ -285,5 +300,18 @@ public class JwtUtils {
 	public long getPttl(String  key) {
 		return jedisCluster.pttl(key);
 	}
+
+	/**
+	 * 删除key
+	 */
+	public  long remove(byte[] key) {
+			return jedisCluster.del(key);
+	}
 	
+	/**
+	 * 删除多个key
+	 */
+	public  long remove(byte[]... keys) {
+			return jedisCluster.del(keys);
+	}
 }
