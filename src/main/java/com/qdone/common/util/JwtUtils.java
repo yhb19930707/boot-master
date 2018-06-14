@@ -56,6 +56,8 @@ public class JwtUtils {
 	/* 工具生成的app模块的token前缀 */
 	public final String AppTokenPrefix = "app_token_prefix_";
 	
+	/* redis记录接口请求记录前缀 */
+	public final String AppTokenRequestHistoryPrefix = "app_token_request_history_prefix_";
 
 	/**
 	 * 生成jwt token 
