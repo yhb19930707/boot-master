@@ -196,8 +196,14 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
     		}
         	if(handlerMethod.hasMethodAnnotation(Login.class)&&!StringUtils.isEmpty(token)){
         		Login login=handlerMethod.getMethodAnnotation(Login.class);
-        		/*1.开启限流记录接口请求历史 2.不开启限流，自定义指定记录接口请求历史 */
-        		if(login.isCheck()||(!login.isCheck()&&login.isSave())){
+        		/*1.开启限流记录接口请求历史 2.不开启限流，自定义指定记录接口请求历史
+        		 * 注意：A.(默认)正常情况下开启限流 isCheck，一般都会自动isSave保存(isCheck=true,isSave=true)
+        		 *     B.如果只想验证一次，不想更新接口请求历史记录(isCheck=true,isSave=false)
+        		 *     C.如果不想判断限流，只想保存接口请求记录(isCheck=false,isSave=true)
+        		 *   两者组合使用，看情况，支持您自己设定
+        		 if(login.isCheck()||(!login.isCheck()&&login.isSave())){*/
+        		/*本次记录更新接口请求历史记录*/
+        		if(login.isSave()){	
                     String url=request.getRequestURI();
                     long time=System.currentTimeMillis();
                     String className=handlerMethod.getBeanType().getName();
