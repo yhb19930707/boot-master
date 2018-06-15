@@ -10,5 +10,8 @@ import java.lang.annotation.*;
 @Documented
 public @interface Login {
 	String value() default "";
-	boolean isCheck() default true;//是否开启rate限流，针对多读情况，默认开启，不想使用请设置false
+	//是否开启限流，针对多读情况，默认开启，不想使用请设置false
+	boolean isCheck() default true;
+	//是否记录，url访问记录
+	boolean isSave() default true;
  }

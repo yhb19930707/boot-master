@@ -183,7 +183,7 @@ public class AppLoginController {
     /**
      * 退出登录
      */
-    @Login
+    @Login(isCheck=false,isSave=false)
     @GetMapping("logout")
     @ApiOperation(value = "APP退出登录", httpMethod = "GET", notes = "APP退出登录", response = Result.class)
     public Result<User> logout(

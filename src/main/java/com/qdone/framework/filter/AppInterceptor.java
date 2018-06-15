@@ -49,7 +49,7 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     	request.setCharacterEncoding(Constants.CHARSET.UTF8);
     	response.setCharacterEncoding(Constants.CHARSET.UTF8);
-    	boolean isCheck=true;
+    	boolean isCheck=true;//是否限流检测
     	Login annotation;
         if(handler instanceof HandlerMethod) {
             annotation = ((HandlerMethod) handler).getMethodAnnotation(Login.class);
@@ -148,7 +148,7 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
          *                   value-List<TokenRequestHistory>
          *        
          */
-        //以前如果存储的有，token访问记录，本次处理
+        //限流检测，不开启限流，就不会检查，以前如果存储的有，token访问记录，本次处理
         if(isCheck&&StringUtils.isNotBlank(token)&&jwtUtils.exists(jwtUtils.AppTokenRequestHistoryPrefix+token)){
         	String url=request.getRequestURI();
         	Map<String,Object> history=jwtUtils.get((jwtUtils.AppTokenRequestHistoryPrefix+token).getBytes(), ConcurrentHashMap.class);
@@ -196,7 +196,8 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
     		}
         	if(handlerMethod.hasMethodAnnotation(Login.class)&&!StringUtils.isEmpty(token)){
         		Login login=handlerMethod.getMethodAnnotation(Login.class);
-        		if(login.isCheck()){
+        		/*1.开启限流记录接口请求历史 2.不开启限流，自定义指定记录接口请求历史 */
+        		if(login.isCheck()||(!login.isCheck()&&login.isSave())){
                     String url=request.getRequestURI();
                     long time=System.currentTimeMillis();
                     String className=handlerMethod.getBeanType().getName();
@@ -258,5 +259,4 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
         	}
         }
 	}
-    
 }
