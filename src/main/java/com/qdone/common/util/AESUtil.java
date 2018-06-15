@@ -14,14 +14,12 @@ import org.springframework.util.SerializationUtils;
 
 import com.qdone.module.model.User;
 
-import net.bytebuddy.asm.Advice.This; 
-
 /**
  * @author 付为地
  *   AES工具类
  */
 public class AESUtil {
-	private static final Logger logger = LoggerFactory.getLogger(This.class);
+	private static final Logger logger = LoggerFactory.getLogger(AESUtil.class);
 	
 	
 	public final static String KEY = "!@#$%^&*(";

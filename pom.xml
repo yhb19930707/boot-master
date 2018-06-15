@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>springBoot</groupId>
-	<artifactId>springBoot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>boot-master</groupId>
+	<artifactId>boot-master</artifactId>
+	<version>1.0.0.RELEASE</version>
 
-	<name>springBoot</name>
-	<description>简单的springBoot项目</description>
+	<name>boot-master</name>
+	<description>简单的SpringBoot项目</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -322,7 +322,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
+		<finalName>${project.artifactId}-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
