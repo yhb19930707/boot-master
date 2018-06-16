@@ -171,7 +171,7 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
 			   	      	TokenRequestHistory max=urlHistory.get(0);//取出距离本次请求，最近那次请求记录
 			           	long now=System.currentTimeMillis();
 			           	if(url.equals(max.getUrl())&&(now-max.getTime()<=5000)){//间隔超过5秒(含)
-			           		throw new RRException("您请求的太过频繁了,请休息一下,稍后重试！", HttpStatus.UNAUTHORIZED.value());
+			           		throw new RRException("您请求的太过频繁了,请休息一下,稍后重试！", HttpStatus.SERVICE_UNAVAILABLE.value());
 			           	}
           		 }
         	}
