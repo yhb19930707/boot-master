@@ -49,7 +49,7 @@ public class RateLimiterInterceptor extends HandlerInterceptorAdapter {
              Boolean isAllow=RedisRateLimiter.tryAcquire(redisClient, rateKey, limit, timeout, timeUnit);
              if(!isAllow){
             	 logger.warn("很抱歉，服务器繁忙，请稍后重试!");
-            	 throw new RRException("服务器繁忙，请稍后重试!", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            	 throw new RRException("服务器繁忙，请稍后重试!", HttpStatus.SERVICE_UNAVAILABLE.value());
              }
          }
          return true;
