@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.filters.RemoteIpFilter;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -99,6 +100,8 @@ public class StudentController extends BaseController {
 	
 	@Autowired
 	RestTemplate restTemplate;
+	@Autowired
+	RemoteIpFilter remoteIpFilter;
 	
 	
 
@@ -498,6 +501,11 @@ public class StudentController extends BaseController {
 	@ApiOperation(value = "坦克大战", notes = "坦克大战", httpMethod = "GET")
 	@RequestMapping(value = "/tank", method = RequestMethod.GET)
 	public String tank() {
+        System.err.println(remoteIpFilter.getHttpsServerPort());
+        System.err.println(remoteIpFilter.getProtocolHeader());
+        System.err.println(remoteIpFilter.getProxiesHeader());
+        System.err.println(remoteIpFilter.getRemoteIpHeader());
+        System.err.println(remoteIpFilter.getRequestAttributesEnabled());
 		return "tank";
 	}
 

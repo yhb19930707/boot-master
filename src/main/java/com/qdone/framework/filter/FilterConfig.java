@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.DispatcherType;
 
+import org.apache.catalina.filters.RemoteIpFilter;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.JdkRegexpMethodPointcut;
@@ -34,6 +35,11 @@ import net.bull.javamelody.SessionListener;
 @Configuration
 public class FilterConfig {
 
+	@Bean
+	public RemoteIpFilter  remoteIpFilter(){
+		RemoteIpFilter ipf=new RemoteIpFilter();
+		return ipf;
+	}
 	
 	/**
 	 * 配置XSS
