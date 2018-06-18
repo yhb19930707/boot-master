@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
@@ -45,37 +46,39 @@ public class SpringSimpleJob implements SimpleJob {
 	        	String tokenKey=it.next();
 	           long rateTokenRemain= jwtUtils.getRateTokenRemainTime(tokenKey);//剩余存活时间秒数
 	        	Map<String,Object> history=jwtUtils.get(tokenKey.getBytes(), ConcurrentHashMap.class);
-	        	Iterator<Map.Entry<String, Object>> urlKeys=history.entrySet().iterator();
-	        	long now=System.currentTimeMillis();//取出tokenKey对应时间戳
-	        	int  initTokenKeySize=history.keySet().size();//初始key的长度,判断本次针对tokenKey是否需要更新内容
-	        	while(urlKeys.hasNext()){
-		        		Map.Entry<String, Object> me=urlKeys.next();
-		        		String url=me.getKey();
-		        		List<TokenRequestHistory> urlHistory=(List<TokenRequestHistory>) me.getValue();
-				           if(!CollectionUtils.isEmpty(urlHistory)){
-							        	//访问时间降序排列 
-							      	    Collections.sort(urlHistory, new Comparator<TokenRequestHistory>() {
-							      	       			     @Override  
-							      	    	             public int compare(TokenRequestHistory t1, TokenRequestHistory t2) {  
-							      	    	            	if(t1.getTime()>t2.getTime()){
-							      	    	            		return -1;
-							      	    	            	}else if(t1.getTime()==t2.getTime()){
-							      	    	            		return 0;
-							      	    	            	}else{
-							      	    	            		return 1;
-							      	    	            	}
-							      	    	            }  
-							      	       });
-							      	      //当前时间戳跟最近时刻比较，超过1小时(含)，直接删除url记录
-							      	   	long max=urlHistory.get(0).getTime();
-							      	     if(now-max>=1000*60*60){
-							      	       	       history.remove(url);
-							      	      }
-				          }
-		       	}
-	        	//判断history存储内容是否发生变化
-	        	if(initTokenKeySize!=history.keySet().size()){
-	        		jwtUtils.set((tokenKey).getBytes(), (int)rateTokenRemain, history);
+	        	if(!ObjectUtils.isEmpty(history)){
+		        	Iterator<Map.Entry<String, Object>> urlKeys=history.entrySet().iterator();
+		        	long now=System.currentTimeMillis();//取出tokenKey对应时间戳
+		        	int  initTokenKeySize=history.keySet().size();//初始key的长度,判断本次针对tokenKey是否需要更新内容
+		        	while(urlKeys.hasNext()){
+			        		Map.Entry<String, Object> me=urlKeys.next();
+			        		String url=me.getKey();
+			        		List<TokenRequestHistory> urlHistory=(List<TokenRequestHistory>) me.getValue();
+					           if(!CollectionUtils.isEmpty(urlHistory)){
+								        	//访问时间降序排列 
+								      	    Collections.sort(urlHistory, new Comparator<TokenRequestHistory>() {
+								      	       			     @Override  
+								      	    	             public int compare(TokenRequestHistory t1, TokenRequestHistory t2) {  
+								      	    	            	if(t1.getTime()>t2.getTime()){
+								      	    	            		return -1;
+								      	    	            	}else if(t1.getTime()==t2.getTime()){
+								      	    	            		return 0;
+								      	    	            	}else{
+								      	    	            		return 1;
+								      	    	            	}
+								      	    	            }  
+								      	       });
+								      	      //当前时间戳跟最近时刻比较，超过1小时(含)，直接删除url记录
+								      	   	long max=urlHistory.get(0).getTime();
+								      	     if(now-max>=1000*60*60){
+								      	       	       history.remove(url);
+								      	      }
+					          }
+			       	}
+		        	//判断history存储内容是否发生变化
+		        	if(initTokenKeySize!=history.keySet().size()){
+		        		jwtUtils.set((tokenKey).getBytes(), (int)rateTokenRemain, history);
+		        	}
 	        	}
         }
     }
