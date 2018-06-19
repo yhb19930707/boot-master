@@ -1,11 +1,14 @@
 package com.qdone.framework.config;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.async.DeferredResult;
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -18,11 +21,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.ArrayList;
-
 @Configuration
 @EnableSwagger2
 @ComponentScan(basePackages = {"com.qdone"})//必须存在
+/*@ConditionalOnExpression("${swagger.open:true}")*/
 public class SwaggerConfig{
 	
 	 @Value("${swagger.open:true}")
