@@ -310,7 +310,7 @@ public class StudentController extends BaseController {
 			System.err.println(JSON.toJSONString(student));
 		}
 		if (file != null) {
-			File dist = new File(fileDir + "\\" + file.getOriginalFilename());
+			File dist = new File(fileDir + "/" + file.getOriginalFilename());
 			try {
 				if (!dist.exists()) {
 					dist.getParentFile().mkdirs();
