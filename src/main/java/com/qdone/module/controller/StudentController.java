@@ -24,6 +24,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.aspectj.util.FileUtil;
 import org.redisson.api.RAtomicDouble;
@@ -91,7 +92,10 @@ public class StudentController extends BaseController {
 
 	@Value("${upload.file.dir}")
 	private String fileDir;
-
+	
+	@Value("${qrcode.logo}") 
+	private String attachFile;
+	
 	@Autowired
 	private MailService mailService;
 
@@ -182,7 +186,7 @@ public class StudentController extends BaseController {
 	@ApiOperation(value = "分页列表", notes = "分页列表", httpMethod = "POST", response = Map.class)
 	public Map<String, Object> selectPage(@RequestHeader("Accept") String encoding, @RequestBody Student entity) {
 		System.err.println(encoding);
-		System.err.println(cacheUtil.get("apple"));
+		/*System.err.println(cacheUtil.get("apple"));*/
 	    /*System.err.println(1/0); */
 		return responseSelectPage(studentService.selectPage(entity));
 	}
@@ -216,7 +220,9 @@ public class StudentController extends BaseController {
 	@ApiOperation(value = "跳转更新", notes = "进入更新页面", httpMethod = "GET")
 	@RequestMapping(value = "/preUpdate", method = RequestMethod.GET)
 	public String preUpdate(HttpServletRequest request) {
-		request.setAttribute("student", studentService.view(Integer.parseInt(request.getParameter("id"))));
+		if(!StringUtils.isEmpty(request.getParameter("id"))){
+			request.setAttribute("student", studentService.view(Integer.parseInt(request.getParameter("id"))));
+		}
 		return "student/updateStudent";
 	}
 
@@ -364,7 +370,7 @@ public class StudentController extends BaseController {
 	@ResponseBody
 	public Object baseMailTest() {
 		Map<String, Object> result = getRootMap();
-		mailService.sendAttachmentsMail("1335157415@qq.com", ">王大锤<邀请你一起听歌曲", "有附件，请查收!", "D:\\mail\\upload\\timg.jpg");
+		mailService.sendAttachmentsMail("1335157415@qq.com", ">王大锤<邀请你一起听歌曲", "有附件，请查收!", attachFile);
 		System.out.println("email send ok");
 		result.put("status", "200");
 		return result;

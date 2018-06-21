@@ -35,24 +35,27 @@ public class RateLimiterInterceptor extends HandlerInterceptorAdapter {
 	
 	
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		 HandlerMethod handlerMethod = (HandlerMethod) handler;
-         Method method = handlerMethod.getMethod();
-         RateLimiter rateLimiter = method.getAnnotation(RateLimiter.class);
-         if (rateLimiter != null) {
-             int limit = ObjectUtils.isEmpty(rateLimiter.limit())?RedisRateLimiter.REDISSON_RATE_LIMITER_PERMITS:rateLimiter.limit();
-             long timeout = ObjectUtils.isEmpty(rateLimiter.timeout())?RedisRateLimiter.REDISSON_RATE_LIMITER_TIMEOUT:rateLimiter.timeout();
-             String rateKey=StringUtils.isEmpty(rateLimiter.rateKey())?request.getRequestURI():rateLimiter.rateKey();//key为空判断
-             rateKey=RedisRateLimiter.REDISSON_RATE_LIMITER_KEY+rateKey;
-             TimeUnit timeUnit=ObjectUtils.isEmpty(rateLimiter.timeout())?RedisRateLimiter.REDISSON_RATE_LIMITER_TIMEUNIt:rateLimiter.timeUnit();
-             /*Boolean isAllow=RedisRateLimiter.acquire(redisClient, rateKey, limit, timeout, timeUnit);*/
-             Boolean isAllow=RedisRateLimiter.tryAcquire(redisClient, rateKey, limit, timeout, timeUnit);
-             if(!isAllow){
-            	 logger.warn("很抱歉，服务器繁忙，请稍后重试!");
-            	 throw new RRException("服务器繁忙，请稍后重试!", HttpStatus.SERVICE_UNAVAILABLE.value());
-             }
-         }
-         return true;
-	}
-
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)  {
+			if(handler instanceof HandlerMethod){
+				 HandlerMethod handlerMethod = (HandlerMethod) handler;
+		         Method method = handlerMethod.getMethod();
+		         RateLimiter rateLimiter = method.getAnnotation(RateLimiter.class);
+		         if (rateLimiter != null) {
+		             int limit = ObjectUtils.isEmpty(rateLimiter.limit())?RedisRateLimiter.REDISSON_RATE_LIMITER_PERMITS:rateLimiter.limit();
+		             long timeout = ObjectUtils.isEmpty(rateLimiter.timeout())?RedisRateLimiter.REDISSON_RATE_LIMITER_TIMEOUT:rateLimiter.timeout();
+		             String rateKey=StringUtils.isEmpty(rateLimiter.rateKey())?request.getRequestURI():rateLimiter.rateKey();//key为空判断
+		             rateKey=RedisRateLimiter.REDISSON_RATE_LIMITER_KEY+rateKey;
+		             TimeUnit timeUnit=ObjectUtils.isEmpty(rateLimiter.timeout())?RedisRateLimiter.REDISSON_RATE_LIMITER_TIMEUNIt:rateLimiter.timeUnit();
+		             /*Boolean isAllow=RedisRateLimiter.acquire(redisClient, rateKey, limit, timeout, timeUnit);*/
+		             Boolean isAllow=RedisRateLimiter.tryAcquire(redisClient, rateKey, limit, timeout, timeUnit);
+		             if(!isAllow){
+		            	 logger.warn("很抱歉，服务器繁忙，请稍后重试!");
+		            	 throw new RRException("服务器繁忙，请稍后重试!", HttpStatus.SERVICE_UNAVAILABLE.value());
+		             }
+		         }
+			}
+			return true;
+		}
+	
+	
 }
