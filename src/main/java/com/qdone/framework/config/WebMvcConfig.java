@@ -1,10 +1,15 @@
 
 package com.qdone.framework.config;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
+import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -78,10 +83,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(appInterceptor).addPathPatterns("/app/**");
 		registry.addInterceptor(rateLimiterInterceptor).addPathPatterns("/student/**","/solr/**");
+		//spring-device使用
+		registry.addInterceptor(new DeviceResolverHandlerInterceptor());
 		/*registry.addInterceptor(rateLimiterInterceptor).addPathPatterns("/**").excludePathPatterns("/page/static/**","swagger-ui.html","/webjars/**","/404,/500,/404,/static/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.mp3,*.html,*.htm,*.woff,/druid,/druid/*,/monitoring,/monitoring/*");*/
 	}
-	
-	
+	/**
+	 *添加设备类型判断 
+	 */
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+	    argumentResolvers.add(new DeviceHandlerMethodArgumentResolver());
+	}
 	
    
 }

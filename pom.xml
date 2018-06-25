@@ -325,6 +325,12 @@
 		    <artifactId>xstream</artifactId>
 		    <version>1.4.10</version>
 		</dependency>
+		<!-- mobile device -->
+		<dependency>
+		    <groupId>org.springframework.mobile</groupId>
+		    <artifactId>spring-mobile-device</artifactId>
+		    <version>1.1.5.RELEASE</version>
+		</dependency>
 	</dependencies>
 
 	<build>

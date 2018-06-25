@@ -303,7 +303,9 @@
 		function checkFilePrfeix() {
 			var vitalTxt=$("#vitalPeople").val();
 			if(vitalTxt==""){
-				alert("请选择需要导入的人口库文本文件!");
+				alert("请选择需要导入的文本文件!");
+			}else if(/[^\x00-\xFF]/.test(vitalTxt)){
+				alert("文件名称不能含有中文!");
 			}else{
 				var afPfx=vitalTxt.substring(vitalTxt.lastIndexOf(".")+1);
 				if(afPfx=='txt'){

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,22 +21,18 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
-import redis.clients.jedis.JedisCluster;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Api(tags = "测试接口", description = "简单测试接口")
 @RestController
 public class TestController {
 	
-	@Autowired
-	JedisCluster jedisCluster;
 
 	@ApiOperation(value = "模拟拿postData数据", notes = "测试postData", httpMethod = "POST", response = Solr.class)
 	@RequestMapping(value = "/test/postData", method = RequestMethod.POST)
 	@ApiResponse(code = 200, message = "TestController响应请求成功", response = Solr.class, responseContainer = "Set")
 	public Solr getData(@ApiParam(name = "Solr对象", value = "传入json格式", required = true) @RequestBody Solr entity) {
 		System.err.println("传入对象名称name:" + entity.getName());
-		jedisCluster.set("apple", entity.getName());
 		Solr sr = new Solr();
 		sr.setId("123456");
 		sr.setPrice(250);
@@ -52,7 +47,6 @@ public class TestController {
 	@RequestMapping(value = "/getJSP", method = RequestMethod.GET)
 	public String getJSP(@RequestParam Map<String, Object> param) {
 		System.err.println("传入参数:" + param);
-		System.err.println("通过jedis集群获取参数是:" + jedisCluster.get("apple"));
 		return "solr/selectSolr";
 	}
 

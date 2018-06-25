@@ -27,11 +27,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.aspectj.util.FileUtil;
-import org.redisson.api.RAtomicDouble;
-import org.redisson.api.RAtomicLong;
-import org.redisson.api.RBloomFilter;
-import org.redisson.api.RHyperLogLog;
-import org.redisson.api.RLongAdder;
 import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 import org.redisson.api.listener.MessageListener;
@@ -40,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -49,6 +45,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -113,7 +110,6 @@ public class StudentController extends BaseController {
 	 * 页面初始化
 	 * @throws InterruptedException 
 	 */
-	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "学生列表", notes = "进入学生列表页", httpMethod = "GET")
 	@RequestMapping(value = "init", method = RequestMethod.GET)
 	public String init(HttpServletRequest request) throws InterruptedException {
@@ -123,46 +119,46 @@ public class StudentController extends BaseController {
 		 * request.getSession().setAttribute("serverToken",token);
 		 */
 		//模拟登陆信息
-		SessionUtil.setSessionObject(Constants.CURRENT_USER, new User("灭霸","123456",1500,""));
-		RAtomicLong atomicLong = redissonClient.getAtomicLong("test");
-		System.err.println(atomicLong.getAndAdd(10));
-		atomicLong.incrementAndGet();
-		System.err.println("addAndGet:" + atomicLong.addAndGet(5));
-		System.err.println("decrementAndGet:" + atomicLong.decrementAndGet());
-		System.err.println("getAndDecrement:" + atomicLong.getAndDecrement());
-		System.err.println("获取的分布式uuid是:" + atomicLong.get());
-		atomicLong.set(0);
-		System.err.println(atomicLong.isExists());
-		atomicLong.delete();
-		System.err.println(atomicLong.isExists());
+//		SessionUtil.setSessionObject(Constants.CURRENT_USER, new User("灭霸","123456",1500,""));
+//		RAtomicLong atomicLong = redissonClient.getAtomicLong("test");
+//		System.err.println(atomicLong.getAndAdd(10));
+//		atomicLong.incrementAndGet();
+//		System.err.println("addAndGet:" + atomicLong.addAndGet(5));
+//		System.err.println("decrementAndGet:" + atomicLong.decrementAndGet());
+//		System.err.println("getAndDecrement:" + atomicLong.getAndDecrement());
+//		System.err.println("获取的分布式uuid是:" + atomicLong.get());
+//		atomicLong.set(0);
+//		System.err.println(atomicLong.isExists());
+//		atomicLong.delete();
+//		System.err.println(atomicLong.isExists());
 		String[] arr = FileUtil.listFiles(new File(fileDir));
 		request.setAttribute("fileNames", arr);
-		cacheUtil.put("apple", "123456");
+//		cacheUtil.put("apple", "123456");
 		/*********************RLongAdder****************************/
-		RLongAdder atomicLongAdder = redissonClient.getLongAdder("myLongAdder");
-		atomicLongAdder.add(12);
-		atomicLongAdder.increment();
-		atomicLongAdder.decrement();
-		System.err.println("RLongAdder操作结果是:"+atomicLongAdder.sum());
-		atomicLongAdder.destroy();
+//		RLongAdder atomicLongAdder = redissonClient.getLongAdder("myLongAdder");
+//		atomicLongAdder.add(12);
+//		atomicLongAdder.increment();
+//		atomicLongAdder.decrement();
+//		System.err.println("RLongAdder操作结果是:"+atomicLongAdder.sum());
+//		atomicLongAdder.destroy();
 		/*********************RAtomicDouble****************************/
-		RAtomicDouble atomicDouble = redissonClient.getAtomicDouble("myAtomicDouble");
-		atomicDouble.set(2.81);
-		atomicDouble.addAndGet(4.11);
-		System.err.println("RLongAdder操作结果是:"+atomicDouble.get());
+//		RAtomicDouble atomicDouble = redissonClient.getAtomicDouble("myAtomicDouble");
+//		atomicDouble.set(2.81);
+//		atomicDouble.addAndGet(4.11);
+//		System.err.println("RLongAdder操作结果是:"+atomicDouble.get());
 		/*********************RBloomFilter****************************/
-		RBloomFilter<HashMap<String,Object>> bloomFilter = redissonClient.getBloomFilter("sample");
+//		RBloomFilter<HashMap<String,Object>> bloomFilter = redissonClient.getBloomFilter("sample");
 		// 初始化布隆过滤器，预计统计元素数量为55000000，期望误差率为0.03
-		bloomFilter.tryInit(55000000L, 0.03);
-		bloomFilter.add((HashMap<String, Object>) new HashMap<String,Object>().put("field1Value", "field2Value"));
-		bloomFilter.add((HashMap<String, Object>) new HashMap<String,Object>().put("field5Value", "field8Value"));
-		System.err.println("RBloomFilter判断是否存在:"+bloomFilter.contains((HashMap<String, Object>) new HashMap<String,Object>().put("field1Value", "field2Value")));
+//		bloomFilter.tryInit(55000000L, 0.03);
+//		bloomFilter.add((HashMap<String, Object>) new HashMap<String,Object>().put("field1Value", "field2Value"));
+//		bloomFilter.add((HashMap<String, Object>) new HashMap<String,Object>().put("field5Value", "field8Value"));
+//		System.err.println("RBloomFilter判断是否存在:"+bloomFilter.contains((HashMap<String, Object>) new HashMap<String,Object>().put("field1Value", "field2Value")));
 		/*********************RHyperLogLog****************************/
-		RHyperLogLog<Integer> log = redissonClient.getHyperLogLog("log");
-		log.add(1);
-		log.add(2);
-		log.add(3);
-		System.err.println("RHyperLogLog估算结果:"+log.count());
+//		RHyperLogLog<Integer> log = redissonClient.getHyperLogLog("log");
+//		log.add(1);
+//		log.add(2);
+//		log.add(3);
+//		System.err.println("RHyperLogLog估算结果:"+log.count());
 		/*for (int i = 0; i < 70; i++) {
 			   Thread t = new Thread() {
 		            public void run() {
@@ -309,33 +305,35 @@ public class StudentController extends BaseController {
 	@ApiOperation(value = "文件上传", notes = "文件上传", httpMethod = "POST")
 	@RequestMapping("/fileupload")
 	@ResponseBody
-	public Object fileupload(@RequestParam("vitalPeople") MultipartFile file, HttpServletRequest req, Student student,
-			HttpServletResponse resp) {
+	public Object fileupload(HttpServletRequest req, Student student) {
 		Map<String, Object> result = getRootMap();
 		if (student != null) {
 			System.err.println(JSON.toJSONString(student));
 		}
-		if (file != null) {
-			File dist = new File(fileDir + "/" + file.getOriginalFilename());
-			try {
-				if (!dist.exists()) {
-					dist.getParentFile().mkdirs();
-					dist.createNewFile();
+		if(req instanceof MultipartHttpServletRequest){
+			MultipartFile file =  ((MultipartHttpServletRequest) req).getFile("vitalPeople");
+			if (file != null) {
+				File dist = new File(fileDir +File.separator+ file.getOriginalFilename());
+				try {
+					if (!dist.exists()) {
+						dist.getParentFile().mkdirs();
+						dist.createNewFile();
+					}
+					file.transferTo(dist);
+					result.put("status", "成功");
+					result.put("msg", "成功上传");
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+					result.put("status", "失败");
+					result.put("msg", e.getMessage());
+				} catch (Exception e) {
+					e.printStackTrace();
+					result.put("status", "失败");
+					result.put("msg", e.getMessage());
 				}
-				file.transferTo(dist);
-				result.put("status", "成功");
-				result.put("msg", "成功上传");
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-				result.put("status", "失败");
-				result.put("msg", e.getMessage());
-			} catch (Exception e) {
-				e.printStackTrace();
-				result.put("status", "失败");
-				result.put("msg", e.getMessage());
+				result.put("total", 1);
 			}
 		}
-		result.put("total", 1);
 		return result;
 	}
 
@@ -348,8 +346,8 @@ public class StudentController extends BaseController {
 		try {
 			/* fileId = Base64Utils.decode(fileId.getBytes(), "UTF-8"); */
 			/* fileId = new String(Base64Utils.decode(fileId.getBytes())); */
-			InputStream is = new FileInputStream(new File(fileDir + "/" + fileId));
-			String fileName = fileId.substring(fileId.lastIndexOf("/") + 1);
+			InputStream is = new FileInputStream(new File(fileDir + File.separator + fileId));
+			String fileName = fileId.substring(fileId.lastIndexOf(File.separator) + 1);
 			resp.setContentType("application/octet-stream");
 			resp.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
 			resp.setCharacterEncoding("UTF-8");
@@ -506,12 +504,24 @@ public class StudentController extends BaseController {
 	
 	@ApiOperation(value = "坦克大战", notes = "坦克大战", httpMethod = "GET")
 	@RequestMapping(value = "/tank", method = RequestMethod.GET)
-	public String tank() {
+	public String tank(Device device) {
+		SessionUtil.setSessionObject(Constants.CURRENT_USER, new User("灭霸","123456",1500,""));
         System.err.println(remoteIpFilter.getHttpsServerPort());
         System.err.println(remoteIpFilter.getProtocolHeader());
         System.err.println(remoteIpFilter.getProxiesHeader());
         System.err.println(remoteIpFilter.getRemoteIpHeader());
         System.err.println(remoteIpFilter.getRequestAttributesEnabled());
+        String deviceType="unknown";
+        if(device.isNormal()){
+        	deviceType = "normal";//Pc端
+        }
+        else if (device.isMobile()){
+        	deviceType = "mobile";//手机端
+        }
+        else if (device.isTablet()){
+        	deviceType = "tablet";//平板
+        }
+        System.err.println("访问类型是:"+deviceType);
 		return "tank";
 	}
 
