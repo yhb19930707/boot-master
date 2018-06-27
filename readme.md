@@ -124,8 +124,10 @@ boot-master
 ![boot-start](https://github.com/apple987/static/raw/master/boot/image/start.png "项目启动")<br>	
 **Https跳转效果图：** 
 ![boot-ssl](https://github.com/apple987/static/raw/master/boot/image/ssl.png "初始化")<br>
+**登陆页面效果图：** 
+![boot-login](https://github.com/apple987/static/raw/master/boot/image/login.jpg "登陆页面")<br>
 **欢迎页面效果图：** 
-![boot-tank](https://github.com/apple987/static/raw/master/boot/image/tank.jpg "欢迎页面")<br>
+![boot-welcome](https://github.com/apple987/static/raw/master/boot/image/welcome.jpg "欢迎页面")<br>
 **学生管理效果图：** 
 ![boot-index](https://github.com/apple987/static/raw/master/boot/image/index.png "学生管理")<br>
 **接口文档效果图：** 
