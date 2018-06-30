@@ -234,8 +234,8 @@ desired effect
         $(function () {
             var menuArry = [
 	            { id: 1, name: "系统主页",url:'${request.contextPath}/hello',icon:"fa fa-home",open:null,perms:"user:list",type:"1",pid: 0 },
-	            { id: 2, name: "坦克大战",url:'${request.contextPath}/student/tank',icon:"fa fa-coffee",open:null,perms:"user:list",type:"1",pid: 0 },
-	            { id: 3, name: "水果忍者",url:'https://bootstrap2table.gitee.io/fruit',icon:"fa fa-beer",open:null,perms:"user:list",type:"1", pid: 0 },
+	            { id: 2, name: "休闲娱乐",url:null,icon:"fa fa-coffee",open:null,perms:"user:list",type:"0",pid: 0 },
+	            { id: 3, name: "坦克大战",url:'${request.contextPath}/student/tank',icon:"fa fa-coffee",open:null,perms:"user:list",type:"1",pid: 2 },
 	            { id: 4, name: "接口文档",url:null,icon:"fa fa fa-bar-chart-o",open:null,perms:"user:list",type:"0", pid: 0},
 	            { id: 5, name: "Swagger",url:'${request.contextPath}/swagger-ui.html',icon:"fa fa-circle-o",open:null,perms:"user:list",type:"1", pid: 4 },
 	            { id: 6, name: "Bootstrap",url:'${request.contextPath}/doc.html',icon:"fa fa-circle-o",open:null,perms:"user:list",type:"1", pid: 4 },
@@ -267,6 +267,7 @@ desired effect
 	            { id: 32, name: "Mycat",url:"https://pan.baidu.com/s/1Z82j-w9H3LXo4H6BDYlHpg",icon:null,open:null,perms:"user:list",type:"1", pid: 23},
 	            { id: 33, name: "配置文档",url:"https://gitee.com/bootstrap2table/boot_master/wikis/welcome",icon:'fa fa-book',open:null,perms:"user:list",type:"1", pid: 21},
 	            { id: 34, name: "下载功能",url:"${request.contextPath}/student/showDownload",icon:'fa fa-cloud-download',open:null,perms:"user:list",type:"1", pid: 14},
+	            { id: 35, name: "水果忍者",url:'https://bootstrap2table.gitee.io/fruit',icon:"fa fa-beer",open:null,perms:"user:list",type:"1", pid: 2 }
             ];
             GetData(0, menuArry);//0表示最顶级菜单生成
             $("#treeview").append(menus);
