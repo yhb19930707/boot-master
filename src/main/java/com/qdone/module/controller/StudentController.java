@@ -52,7 +52,6 @@ import com.alibaba.fastjson.JSON;
 import com.qdone.common.util.CacheUtil;
 import com.qdone.common.util.ExcelUtil;
 import com.qdone.common.util.SerialNo;
-import com.qdone.common.util.SessionUtil;
 import com.qdone.common.util.mail.MailService;
 import com.qdone.framework.annotation.Function;
 import com.qdone.framework.annotation.RateLimiter;
@@ -62,7 +61,6 @@ import com.qdone.framework.exception.RRException;
 import com.qdone.framework.util.lock.RedisLock;
 import com.qdone.framework.util.lock.RedisLockKey;
 import com.qdone.module.model.Student;
-import com.qdone.module.model.User;
 import com.qdone.module.service.StudentService;
 
 import io.swagger.annotations.Api;
@@ -103,6 +101,8 @@ public class StudentController extends BaseController {
 	RestTemplate restTemplate;
 	@Autowired
 	RemoteIpFilter remoteIpFilter;
+	
+	
 	
 	
 
@@ -171,6 +171,20 @@ public class StudentController extends BaseController {
 		}*/
 		return "student/selectStudent";
 	}
+	
+	/**
+	 * 演示下载功能
+	 * @param request 请求参数
+	 * @return 下载页面
+	 */
+	@ApiOperation(value = "演示下载功能", notes = "演示下载功能", httpMethod = "GET")
+	@RequestMapping(value = "/showDownload", method = RequestMethod.GET)
+	public String showDownload(HttpServletRequest request) {
+		String[] arr = FileUtil.listFiles(new File(fileDir));
+		request.setAttribute("fileNames", arr);
+		return "student/download";
+	}
+	
 
 	/**
 	 * 分页查询数据
@@ -504,8 +518,8 @@ public class StudentController extends BaseController {
 	
 	@ApiOperation(value = "坦克大战", notes = "坦克大战", httpMethod = "GET")
 	@RequestMapping(value = "/tank", method = RequestMethod.GET)
-	public String tank(Device device) {
-		SessionUtil.setSessionObject(Constants.CURRENT_USER, new User("灭霸","123456",1500,""));
+	public String tank(HttpServletRequest request,Device device) {
+		//SessionUtil.setSessionObject(Constants.CURRENT_USER, new User("灭霸","123456",1500,""));
         System.err.println(remoteIpFilter.getHttpsServerPort());
         System.err.println(remoteIpFilter.getProtocolHeader());
         System.err.println(remoteIpFilter.getProxiesHeader());
@@ -513,7 +527,7 @@ public class StudentController extends BaseController {
         System.err.println(remoteIpFilter.getRequestAttributesEnabled());
         String deviceType="unknown";
         if(device.isNormal()){
-        	deviceType = "normal";//Pc端
+        	deviceType = "pc";//Pc端
         }
         else if (device.isMobile()){
         	deviceType = "mobile";//手机端
@@ -522,6 +536,7 @@ public class StudentController extends BaseController {
         	deviceType = "tablet";//平板
         }
         System.err.println("访问类型是:"+deviceType);
+        request.setAttribute(Constants.CURRENT_DEVICE_TYPE, deviceType);
 		return "tank";
 	}
 

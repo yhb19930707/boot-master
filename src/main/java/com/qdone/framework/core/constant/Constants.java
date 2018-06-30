@@ -6,6 +6,7 @@ package com.qdone.framework.core.constant;
 public  class Constants {
 
 	public static final String CURRENT_USER = "user";//当前登录用户
+	public static final String CURRENT_DEVICE_TYPE = "deviceType";//访问设备类型
 	public static final String SESSION_FORCE_LOGOUT_KEY = "SESSION.FORCE.LOGOUT";// 1:页面强制剔除 2:后来登陆账户剔除前者,其他表示正常登录
 	public static final String RandomValidateCode = "validateCode";// 验证码
 	public static final boolean KickOutBeforeLogin = true;// 是否剔除前面登录的账户

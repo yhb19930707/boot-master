@@ -14,7 +14,8 @@ import org.apache.commons.lang.time.DateFormatUtils;
 
 /**
  * 时间处理
- * @author傅为地 
+ * @author
+ *   傅为地 
  * 
  */
 public class DateUtil extends org.apache.commons.lang.time.DateUtils{
@@ -31,8 +32,8 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	/**
 	 * 获取转换后日期字符串
 	 * 
-	 * @param date
-	 * @return
+	 * @param date 源日期
+	 * @return  格式化结果
 	 */
 	public static synchronized String getStringDateByDate(Date date) {
 		String dateString = "";
@@ -48,7 +49,6 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	 * @param day
 	 *            (间隔天数(负数提前,正数滞后))
 	 * @return [参数说明]
-	 * @see [类、类#方法、类#成员]
 	 */
 	public static synchronized Date getDateFromToday(int day) {
 		Calendar c = Calendar.getInstance();
@@ -58,6 +58,9 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 
 	/**
 	 * 获取年月日
+	 *  @param cal 
+	 *         源日历
+	 *  @return 格式化结果
 	 */
 	public static synchronized  String getDateByCalendar(Calendar cal) {
 		return DateFormatUtils.format(cal.getTime(),"yyyy-MM-dd");
@@ -65,8 +68,10 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 
 	/**
 	 * 获取开始 、结束日期 flag : 0 当天； 1 近一周；2 当月 ； 3 近一月
+	 *  @param flag
+	 *         标志 flag : 0 当天； 1 近一周；2 当月 ； 3 近一月
+	 *  @return 运算结果
 	 */
-
 	public static synchronized Map<String, Object> getDateMap(String flag) {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		Calendar ca = Calendar.getInstance();
@@ -118,7 +123,7 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	 * 
 	 * @param flag
 	 *            true:月初时间 false:月末时间
-	 * @return
+	 * @return 运算结果
 	 */
 	public static synchronized Date getNowMonthDate(boolean flag) {
 		Calendar rightNow = Calendar.getInstance();
@@ -144,7 +149,7 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	 * 
 	 * @param date:统计时刻
 	 * @param flag：统计标识
-	 * @return
+	 * @return 运算结果
 	 */
 	public static synchronized Date getMonthDate(Date date, boolean flag) {
 		Calendar rightMonth = Calendar.getInstance();
@@ -168,8 +173,7 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 
 	/**
 	 * 得到当前时间
-	 * 
-	 * @return
+	 * @return 当前时间
 	 */
 	public static synchronized Date getNowDate() {
 		Calendar cl = Calendar.getInstance();
@@ -178,8 +182,7 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 
 	/**
 	 * 格式化时间
-	 * 
-	 * @return
+	 * @return 当前时间
 	 */
 	public static synchronized String getFullTime() {
 		Calendar cl = Calendar.getInstance();
@@ -189,8 +192,11 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 
 	/**
 	 * 格式化时间
-	 * 
-	 * @return
+	 * @param date
+	 *        源日期
+	 * @param parent
+	 *        日期格式
+	 * @return 格式化结果
 	 */
 	public static synchronized String getDateFormat(Date date, String parent) {
 		return DateFormatUtils.format(date,parent);
@@ -207,6 +213,7 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	 *            日期1和日期2的日期格式
 	 * @return 相差的月份数
 	 * @throws ParseException
+	 *         解析数据日期异常
 	 */
 	public static synchronized int countBetweenMonths(String date1, String date2, String pattern) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -234,8 +241,9 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	 *            true:月初时间 false:月末时间
 	 * @param dateString:日期字符串
 	 * @param pattern:日期格式
-	 * @return
+	 * @return 执行结果
 	 * @throws ParseException
+	 *        解析日期异常
 	 */
 	public static synchronized Date getInputMonthDate(boolean flag, String dateString, String pattern) throws ParseException {
 		Calendar rightNow = Calendar.getInstance();
@@ -260,8 +268,14 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	/**
 	 * 获取开始 、结束日期 inputDate:输入一个时刻，日期 flag : 0 当天； 1 近一周；2 当月 ； 3 近一月
 	 * direction:0 向前 1 向后 比如：某个时刻，向后退一个月 flag:0 direction:1
+	 * @param inputDate
+	 *         源日期
+	 * @param flag
+	 *        日期 flag : 0 当天； 1 近一周；2 当月 ； 3 近一月
+	 * @param direction
+	 *        方向:0 向前 1 向后
+	 * @return 获取开始 、结束日期的执行结果
 	 */
-
 	public static synchronized Map<String, Object> getDateRangeMap(Date inputDate, String flag, String direction) {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		Calendar ca = Calendar.getInstance();
@@ -324,7 +338,17 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	}
 
 	/**
+	 * 
+	 */
+	/**
 	 * 输入的某个时刻inputDate，向前或者向后 推(index)个月 direction:0 向前 1 向后 向前或向后推:index 个月
+	 * @param inputDate 
+	 *         源数据
+	 * @param index
+	 *        月数
+	 * @param direction
+	 *        方向 0 向前 1 向后
+	 * @return 输入的某个时刻inputDate，向前或者向后 推(index)个月 direction:0 向前 1 向后 向前或向后推:index 个月
 	 */
 	public static synchronized Map<String, Object> getRangeMonthMap(Date inputDate, int index, String direction) {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
@@ -354,11 +378,13 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 
 	/**
 	 * 计算执行时刻，所在具体间隔区间段 时间跨度单位是月
-	 * 
-	 * @param start:规则起始时刻
-	 * @param end:重置执行时刻
-	 * @param range循环时间步长
-	 * @return
+	 * @param start
+	 *       规则起始时刻
+	 * @param end
+	 *        重置执行时刻
+	 * @param range
+	 *        循环时间步长
+	 * @return  计算执行时刻，所在具体间隔区间段 时间跨度单位是月
 	 */
 	public static synchronized int getRangeStepMonth(Date start, Date end, int range) {
 		int step = 0;// 间隔数目
@@ -377,10 +403,13 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	/**
 	 * 计算执行时刻，所在具体间隔区间段 时间跨度是天
 	 * 
-	 * @param start:规则起始时刻
-	 * @param end:充值执行时刻
-	 * @param range循环时间步长
-	 * @return
+	 * @param start
+	 *         规则起始时刻
+	 * @param end
+	 *         充值执行时刻
+	 * @param range
+	 *         循环时间步长
+	 * @return 计算执行时刻，所在具体间隔区间段 时间跨度是天
 	 */
 	public static synchronized int getRangeStepDay(Date start, Date end, int range) {
 		int step = 0;// 间隔数目
@@ -404,7 +433,7 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	 * @param range:单位天
 	 * @param type:
 	 *            05 年，04季度, 03月, 02周, 01天
-	 * @return
+	 * @return 计算开始时刻，到截止时刻之间 经过了多少周期跨度
 	 */
 	public static synchronized int getRangeStep(Date start, Date end, String type, int range) {
 		Double daySecond = 24 * 60 * 60 * 1000.00;// 毫秒数/天
@@ -431,8 +460,10 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	/**
 	 * 获得距离某个时刻，指定天数间隔的时间结点
 	 * 
-	 * @param date:输入的起始时刻
-	 * @param day:间隔天数(负数提前,正数滞后)
+	 * @param date
+	 *        输入的起始时刻
+	 * @param day
+	 *        间隔天数(负数提前,正数滞后)
 	 * @return Date 截止时刻
 	 */
 	public static synchronized Date getDateRangeDay(Date date, int day) {
@@ -444,10 +475,11 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 
 	/**
 	 * 获得距离某个时刻，指定月数间隔的时间结点
-	 * 
-	 * @param date:输入的起始时刻
-	 * @param day:间隔月数(负数提前,正数滞后)
-	 * @return Date 截止时刻
+	 * @param date
+	 *        输入的起始时刻
+	 * @param range
+	 *        间隔月数(负数提前,正数滞后)
+	 * @return 截止时刻
 	 */
 	public static synchronized Date getDateRangeMonth(Date date, int range) {
 		Calendar ca = Calendar.getInstance();
@@ -458,6 +490,9 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 
 	/**
 	 * 判断当前时刻是星期几 返回所在自然周的起始时刻，截止时刻 Date[0]:自然周的起始时刻 Date[1]:自然周的截止时刻
+	 * @param date 
+	 *        源日期
+	 * @return 判断当前时刻是星期几 返回所在自然周的起始时刻，截止时刻 Date[0]:自然周的起始时刻 Date[1]:自然周的截止时刻
 	 */
 	public static synchronized Date[] getDateWeekInfo(Date date) {
 		Date[] result = new Date[2];
@@ -490,8 +525,9 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	/**
 	 * 获取某个时刻所在年 起始时刻和截止时刻
 	 * 
-	 * @param date
-	 * @return
+	 * @param date 
+	 *        源日期
+	 * @return 获取某个时刻所在年 起始时刻和截止时刻
 	 */
 	public static synchronized Date[] getDateYearInfo(Date date) {
 		Date[] result = new Date[2];
@@ -508,8 +544,10 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	 * 获得某一时刻的当天的起始时刻，截止时刻
 	 * 
 	 * @param date
+	 *        源日期
 	 * @param flag
-	 * @return
+	 *        是否起始时刻
+	 * @return 获得某一时刻的当天的起始时刻，截止时刻
 	 */
 	public static synchronized Date getDayInfo(Date date, boolean flag) {
 		Calendar ca = Calendar.getInstance();
@@ -533,7 +571,7 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	 *            要转换的字符串
 	 * @param format
 	 *            日期格式
-	 * @return
+	 * @return  格式化结果
 	 */
 	public static synchronized Date parseDate(String src, String format) {
 		Date date = null;
@@ -555,9 +593,7 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	 * 
 	 * @param src
 	 *            要转换的字符串
-	 * @param format
-	 *            日期格式
-	 * @return
+	 * @return  依指定格式将一个字符串转化为java.util.Date类型
 	 */
 	public static synchronized Date parseDate(String src) {
 		Date date = null;
@@ -573,7 +609,7 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	/**
 	 * 当前时间格式化
 	 * 
-	 * @return
+	 * @return 当前时间格式化
 	 */
 	public static synchronized String getCurDateString() {
 		return getDateString(new Date(), "yyyy-MM-dd HH:mm:ss SSS");
@@ -583,7 +619,8 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	 * 当前时间特定格式化
 	 * 
 	 * @param formatString
-	 * @return
+	 *        日期格式
+	 * @return 当前时间特定格式化
 	 */
 	public static synchronized String getCurrentDateString(String formatString) {
 		Date currentDate = new Date();
@@ -593,10 +630,11 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	/**
 	 * 格式化时间
 	 * 
-	 * @param date
+	 * @param date 
+	 *        源日期
 	 * @param formatString
-	 * @param locale
-	 * @return
+	 *        日期格式
+	 * @return 解析结果
 	 */
 	public static synchronized String getDateString(Date date, String formatString) {
 		return getDateString(date, formatString, Locale.PRC);
@@ -605,10 +643,13 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	/**
 	 * 格式化时间
 	 * 
-	 * @param date
+	 * @param date 
+	 *         源日期
 	 * @param formatString
+	 *        日期格式
 	 * @param locale
-	 * @return
+	 *        日期区域
+	 * @return 格式化时间
 	 */
 	public static synchronized String getDateString(Date date, String formatString, Locale locale) {
 		if (date == null) {
@@ -621,6 +662,9 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	
 	/**
 	 * 得到日期时间字符串，转换格式（yyyy-MM-dd HH:mm:ss）
+	 * @param date
+	 *        源日期
+	 * @return 得到日期时间字符串，转换格式（yyyy-MM-dd HH:mm:ss）
 	 */
 	public static synchronized String formatDateTime(Date date) {
 		return date==null?"":DateFormatUtils.format(date, "yyyy-MM-dd HH:mm:ss");
@@ -628,6 +672,11 @@ public class DateUtil extends org.apache.commons.lang.time.DateUtils{
 	
 	/**
 	 * 得到日期时间字符串，转换指定格式
+	 * @param date
+	 *        源日期
+	 * @param pattern
+	 *        日期格式
+	 * @return 得到日期时间字符串，转换指定格式
 	 */
 	public static synchronized String formatDateTime(Date date, String pattern) {
 		pattern=StringUtils.isEmpty(pattern)?"yyyy-MM-dd HH:mm:ss":pattern;

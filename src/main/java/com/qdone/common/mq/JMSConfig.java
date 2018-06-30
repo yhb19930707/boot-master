@@ -18,10 +18,12 @@ import org.springframework.jms.support.converter.MessageType;
 @Configuration
 public class JMSConfig {
 	
-	
 	/**
-	 * 队列类型的queue
-	 * 对应JmsListenerContainer
+	 * 队列类型的queue对应JmsListenerContainer
+	 * @param activeMQConnectionFactory
+	 *        ActiveMQ连接配置
+	 * @return 
+	 *       队列JmsListenerContainer
 	 */
 	@Bean(name = "queueListenerContainerFactory")
 	public JmsListenerContainerFactory<?> jmsListenerContainerQueue(ConnectionFactory activeMQConnectionFactory) {
@@ -34,6 +36,8 @@ public class JMSConfig {
     
 	/**
 	 * 消息体序列化
+	 * @return 
+	 *       信息解析器
 	 */
 	@Bean 
 	public MessageConverter jacksonJmsMessageConverter() {
@@ -44,8 +48,11 @@ public class JMSConfig {
 	}
 	
 	/**
-	 * 发布订阅类型的topic
-	 * 对应JmsListenerContainer
+	 * 发布订阅类型的topic对应JmsListenerContainer
+	 * @param activeMQConnectionFactory
+	 *        ActiveMQ连接配置
+	 * @return 
+	 *       订阅JmsListenerContainer
 	 */
     @Bean(name="topicListenerContainerFactory")
     public JmsListenerContainerFactory<?> jmsListenerContainerTopic(ConnectionFactory activeMQConnectionFactory) {

@@ -27,8 +27,11 @@ public class AESUtil {
 	/**
 	 * AES加密
 	 * @param content
+	 *        源数据
 	 * @param Aeskey
+	 *        加密私钥
 	 * @return
+	 *        加密结果
 	 */
 	public static synchronized String encrypt(String content, String Aeskey) {
 		logger.debug("执行AESUtil.encrypt加密,传入参数:content=["+content+"] Aeskey=["+Aeskey+"]");
@@ -57,8 +60,11 @@ public class AESUtil {
     /**
      * AES解密
      * @param content
+     *        源数据
      * @param Aeskey
+     *        解密私钥
      * @return
+     *        解密结果
      */
 	public static synchronized String decrypt(String content, String Aeskey) {
 		logger.debug("执行AESUtil.decrypt解密,传入参数:content=["+content+"] Aeskey=["+Aeskey+"]");

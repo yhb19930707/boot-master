@@ -26,14 +26,14 @@ import com.qdone.module.model.TokenRequestHistory;
  *   key:jwtUtils.AppTokenRequestHistoryPrefix+token
  *   value:map
  *            key-url
- *            value-List<TokenRequestHistory>
+ *            value-List[TokenRequestHistory]
  */
 public class SpringSimpleJob implements SimpleJob {
 	
     @Autowired
     private JwtUtils jwtUtils;
     
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	@Override
     public void execute(final ShardingContext context) {
     	System.out.println(String.format("Item: %s | Time: %s | Thread: %s | %s",

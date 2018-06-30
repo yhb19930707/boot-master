@@ -254,7 +254,7 @@
 		<dependency>
 			<groupId>net.bull.javamelody</groupId>
 			<artifactId>javamelody-core</artifactId>
-			<version>1.70.0</version>
+			<version>1.73.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.lowagie</groupId>
@@ -331,6 +331,13 @@
 		    <artifactId>spring-mobile-device</artifactId>
 		    <version>1.1.5.RELEASE</version>
 		</dependency>
+		<!-- doc -->
+		<dependency>
+		    <groupId>com.google.code.findbugs</groupId>
+		    <artifactId>jsr305</artifactId>
+		    <version>3.0.2</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -343,6 +350,41 @@
 					<fork>true</fork>
 				</configuration>
 			</plugin>
+			<!--生成源码jar包-->
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-source-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <id>attach-sources</id>
+			            <goals>
+			                <goal>jar</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			</plugin>
+			<!--配置生成Javadoc包-->
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-javadoc-plugin</artifactId>
+	            <configuration>
+	                <encoding>UTF-8</encoding>
+	                <aggregate>true</aggregate>
+	                <charset>UTF-8</charset>
+	                <docencoding>UTF-8</docencoding>
+	            </configuration>
+	            <executions>
+	                <execution>
+	                    <id>attach-javadocs</id>
+	                    <goals>
+	                        <goal>jar</goal>
+	                    </goals>
+	                    <configuration>
+			                <additionalparam>-Xdoclint:none</additionalparam>
+			            </configuration>
+	                </execution>
+	            </executions>
+	        </plugin>
 		</plugins>
 		 <!--本处需要，resources和java两个路径都指定-->
 		<resources>

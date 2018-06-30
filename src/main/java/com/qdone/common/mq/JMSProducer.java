@@ -19,7 +19,9 @@ public class JMSProducer {
     /**
      * 向指定队列发送消息
      * @param destination
+     *        队列消息目的地
      * @param message
+     *        消息体
      */
 	public void sendMessage(Destination destination, String message) {
 		this.jmsTemplate.convertAndSend(destination, message);
@@ -28,7 +30,9 @@ public class JMSProducer {
 	 /**
      * 向指定的topic发布消息
      * @param topic
+     *        主题消息目的地
      * @param msg
+     *        消息体
      */
     public void publish(Destination topic,String msg) {
     	this.jmsTemplate.send(topic, (MessageCreator) session -> {

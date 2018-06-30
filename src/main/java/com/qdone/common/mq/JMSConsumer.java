@@ -16,6 +16,7 @@ public class JMSConsumer {
     /**
      * 接收队列消息
      * @param msg
+     *        接收的队列消息
      */
     @JmsListener(destination = "springboot.queue.test",containerFactory="queueListenerContainerFactory")
     public void receiveQueue(String msg) {
@@ -24,6 +25,8 @@ public class JMSConsumer {
     
     /*
      * 接收主题消息
+     * @param msg
+     *        接收的订阅消息
      */
     @JmsListener(destination = "springboot.topic.test",containerFactory="topicListenerContainerFactory")
     public void receiveTopic(String text) {

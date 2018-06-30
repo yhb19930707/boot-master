@@ -19,10 +19,24 @@
         var _opt = $.extend(opt,{  
             error:function(XMLHttpRequest, textStatus, errorThrown){  
                 //错误方法增强处理  
-            	console.error('ajax加载服务端数据出错');
-            	console.log(XMLHttpRequest.responseText);
-				$("body").empty().append(XMLHttpRequest.responseText);
-                fn.error(XMLHttpRequest, textStatus, errorThrown); 
+            	console.error('ajax加载服务端数据出错'+JSON.stringify(XMLHttpRequest));
+            	if(XMLHttpRequest.responseText!=undefined){
+            		$("body").empty().append(XMLHttpRequest.responseText);
+            		fn.error(XMLHttpRequest, textStatus, errorThrown); 
+            	}else{
+            		   var indexHome=$.common.basePath+"/main";
+            		   var err='<div class="error-content" style="padding: 50px;text-align:center;">';
+	            	         err+='<h1>非常抱歉！系统发生错误</h1><br>';
+	            	         err+='<font size="3">请把错误信息发送给我们的客服人员或研发人员，我们会尽快帮您解决</font><br><br>';
+	            	         err+='<button id="back" onclick="$(\'.error-content\').hide();window.parent.location.href=\''+indexHome+'\';">返回主页</button>&nbsp;&nbsp;&nbsp;';
+	            		     err+='<button onclick="layer.msg(\'正在玩命完善中...，请耐心等待！\',{icon:5,time:5000});">信息反馈</button><br><br>';
+	            		     err+='<p><a  href="#" onclick="$(\'#error-msg\').toggle();" id="toggle-error" >查看错误详情</a></p>';
+	            		     err+='<div id="error-msg" style="display:none;">';
+	            		     err+='错误状态: ERROR<br>';
+	            		     err+='错误信息: 操作过于频繁,稍后再试！';
+	            		     err+='</div></div>';
+            	             $("body").empty().append(err);
+            	}
             },  
             success:function(data, textStatus){  
                 //成功回调方法增强处理  

@@ -210,7 +210,13 @@ public class ExcelUtil {
 			return null;
 		}
 	}
-
+    /**
+     * 写出excel
+     * @param result
+     *        源数据
+     * @param path
+     *        文件路径
+     */
 	public static void writeExcel(ArrayList<ArrayList<Object>> result, String path) {
 		if (result == null) {
 			return;
@@ -269,9 +275,15 @@ public class ExcelUtil {
 		ExcelUtil.nf = nf;
 	}
 
-    /***
-     * 设置下载EXCEL头文件
-     */
+	/**
+	 * 设置下载EXCEL头文件
+	 * @param request 
+	 *        请求request
+	 * @param response
+	 *        响应response
+	 * @param fileName
+	 *        文件名称
+	 */
 	public static void setFileDownloadHeader(HttpServletRequest request, HttpServletResponse response,
 			String fileName) {
 		String userAgent = request.getHeader("USER-AGENT").toLowerCase();
@@ -290,13 +302,20 @@ public class ExcelUtil {
 
 	/**
 	 * 多sheet导出
-	 * 
-	 * @param workbook
+	 * @param wb 
+	 *        工作簿
 	 * @param mainTitle
+	 *        主标题
 	 * @param titles
+	 *        标题集合
 	 * @param contents
+	 *        内容集合
 	 * @param sheetNum
+	 *        工作簿编号
 	 * @param totalSheet
+	 *        工作簿总数
+	 * @param os
+	 *        输出流
 	 */
 	public final static void buildExcel(SXSSFWorkbook wb, String mainTitle, String[] titles, List<Object[]> contents,
 			int sheetNum, int totalSheet, OutputStream os) {
@@ -341,12 +360,20 @@ public class ExcelUtil {
 	/**
 	 * 多sheet导出
 	 *   创建excel存储本地
-	 * @param workbook
+	 * @param wb
+	 *        工作簿
 	 * @param mainTitle
+	 *        主标题
 	 * @param titles
+	 *        标题头集合
 	 * @param contents
+	 *        内容集合
 	 * @param sheetNum
+	 *        工作簿编号
+	 * @param totalSheet  
+	 *        工作簿总数     
 	 * @param path
+	 *        文件路径
 	 */
 	public final static void buildExcel(SXSSFWorkbook wb, String mainTitle, String[] titles, List<Object[]> contents,
 			int sheetNum, int totalSheet, String path) {

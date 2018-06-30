@@ -11,44 +11,43 @@
 <meta name="screen-orientation" content="portrait">
 <meta name="format-detection" content="telephone=no" />
 <#include "/inc/common.html">
-<style>
-.nowrap dt {
-	float: left;
-}
-
-tr td {
-	width: 100px !important;
-}
-</style>
 </head>
 <body>
-	<h2 class="contentTitle">格式化显示</h2>
-	<h3>使用vkbeautify.js格式化显示json,xml,css,sql数据</h3>
-	<div class="pageFormContent" layoutH="60"
-		style="width: 400px; height: 700px;">
-		<table border=0 style="width: 400px; height: 700px;">
-			<tr style="height: 50px; border: 0; text-align: center;">
-				<td>JSON源数据</td>
-				<tD>JSON格式化</td>
-				<td>XML源数据</td>
-				<td>XML格式化</td>
-				<td>CSS源数据</td>
-				<tD>CSS格式化</td>
-				<td>SQL源数据</td>
-				<td>sql格式化</td>
+<h4 class="contentTitle">使用vkbeautify.js格式化显示json,xml,css,sql数据</h4>
+<div class="table-responsive">
+	<table class="table table-bordered row mx-0 text-white">
+		<!-- <caption>使用vkbeautify.js格式化显示json,xml,css,sql数据</caption> -->
+		<thead>
+			<tr>
+				<th class="col-md-2" style='text-align: center;'>类型</th>
+				<th class="col-md-6" style='text-align: center;'>源数据</th>
+				<th class="col-md-5" style='text-align: center;'>格式化</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+			    <td class="col-md-2" style='text-align: center;'>JSON</td>
+				<td class="col-md-6"><textarea id="bqs" name="bqs" readonly="true" cols="68" rows="12">${jsonData}</textarea></td>
+				<td class="col-md-4"><textarea id="td" name="td" readonly="true" cols="55" rows="12">${jsonData}</textarea></td>
 			</tr>
 			<tr>
-				<td><textarea id="bqs" name="bqs" readonly="true" cols="65" rows="80">${jsonData}</textarea></td>
-				<tD><textarea id="td" name="td" readonly="true" cols="65" rows="80">${jsonData}</textarea></td>
-				<td><textarea id="dhb" name="dhb" readonly="true" cols="65" rows="80">${xmlData}</textarea></td>
-				<td><textarea id="mg" name="mg" readonly="true" cols="65" rows="80">${xmlData}</textarea></td>
-				<td><textarea id="cs" name="cs" readonly="true" cols="65" rows="80">${cssData}</textarea></td>
-				<td><textarea id="csc" name="csc" readonly="true" cols="65" rows="80">${cssData}</textarea></td>
-				<td><textarea id="sq" name="sq" readonly="true" cols="65" rows="80">${sqlData}</textarea></td>
-				<td><textarea id="sqs" name="sqs" readonly="true" cols="65" rows="80">${sqlData}</textarea></td>
+			    <td class="col-md-2" style='text-align: center;'>XML</td>
+				<td class="col-md-6" ><textarea id="dhb" name="dhb" readonly="true" cols="68" rows="3">${xmlData}</textarea></td>
+				<td class="col-md-4"><textarea id="mg" name="mg" readonly="true" cols="55" rows="3">${xmlData}</textarea></td>
 			</tr>
-		</table>
-	</div>
+			<tr>
+			    <td class="col-md-2" style='text-align: center;'>CSS</td>
+				<td class="col-md-6"><textarea id="cs" name="cs" readonly="true" cols="68" rows="5">${cssData}</textarea></td>
+				<td class="col-md-4"><textarea id="csc" name="csc" readonly="true" cols="55" rows="5">${cssData}</textarea></td>
+			</tr>
+			<tr>
+			    <td class="col-md-2" style='text-align: center;'>SQL</td>
+				<td class="col-md-6"><textarea id="sq" name="sq" readonly="true" cols="68" rows="4">${sqlData}</textarea></td>
+				<td class="col-md-4"><textarea id="sqs" name="sqs" readonly="true" cols="55" rows="4">${sqlData}</textarea></td>
+			</tr>
+		</tbody>
+</table>
+</div>  	
 </body>
 <script type="text/javascript">
 $(function(){

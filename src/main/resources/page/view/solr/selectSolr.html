@@ -18,7 +18,7 @@
 				    data-content-type="application/json"
 				    data-url="${request.contextPath}/solr/selectPage"
 				    data-toolbar="#solrTb"
-				    data-height="355"
+				    data-height="300"
 					data-show-header="true" 
 					data-cache="false"
 					data-click-to-select="true"  
@@ -69,7 +69,10 @@
 				<input type="button" value="删除" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="deleteSolr()" /> 
 				<input type="button" value="查询" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="findSolr()" /> 
 			    <input type="button" value="清空" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="clearSolr()" /> 
-			    <a href="http://47.93.97.92:8280/solr/#/rainsoft/dataimport//dataimport" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">导入solr库</a>
+			    <a href="http://47.93.97.92:8280/solr/#/rainsoft/dataimport//dataimport"    target="_blank">
+			        <input type="button" value="导入solr库"  style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary"  />
+			    </a> 
+			    
 			</div>
 			<div>
 			   <form id="solrQueryForm" method="post" action="">

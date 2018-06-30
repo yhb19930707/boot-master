@@ -20,7 +20,7 @@
 				    data-content-type="application/json"
 				    data-url="${request.contextPath}/student/selectPage"
 				    data-toolbar="#studentTb"
-				    data-height="355"
+				    data-height="300"
 					data-show-header="true" 
 					data-cache="false"
 					data-click-to-select="true"  
@@ -70,25 +70,15 @@
 		
         <div id="studentTb"  >
 			<div style="margin-bottom: 5px">
-			   <a href="${request.contextPath}/student/tank" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">坦克大战</a>
-			   <a href="${request.contextPath}/student/freemarker" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">freemarker</a>
-			    <a href="${request.contextPath}/toZxingQrcode" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">二维码</a>
-			    <a href="${request.contextPath}/druid/" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">druid监控</a>
-			    <a href="${request.contextPath}/monitoring" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">JavaMelody监控</a>
-			    <a href="${request.contextPath}/swagger-ui.html" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">swagger</a>
-			    <a href="${request.contextPath}/doc.html" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">接口文档</a>
-			    <a href="${request.contextPath}/student/formatCode" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">代码格式化</a>
-			    <a href="${request.contextPath}/student/exportCsv" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">CSV</a>
-			    <a href="${request.contextPath}/student/exportPoiExcel" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">POI</a>
-			    <a href="${request.contextPath}/staff/init" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">职员管理</a>
-			    <a href="${request.contextPath}/solr/init" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">solr管理</a><br>
 			    <input type="button" value="添加" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="addStudent()" /> 
 				<input type="button" value="修改" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="editStudent()" /> 
 				<input type="button" value="删除" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="deleteStudent()" /> 
 				<input type="button" value="查询" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="findStudent()" /> 
 			    <input type="button" value="清空" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="clearStudent()" />
 			    <input type="button" id="btnVitalImport" value="导入" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" /> 
-			    <input type="button"  value="发邮件" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="sendEmail()" /> 
+			    <input type="button"  value="发邮件" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="sendEmail()" />
+			    <input type="button"  value="CSV" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="window.location.href='${request.contextPath}/student/exportCsv'" /> 
+			    <input type="button"  value="POI" style="width: 80px; height: 30px; vertical-align: top; line-height: 10px;" class="btn-primary" onclick="window.location.href='${request.contextPath}/student/exportPoiExcel'" />
 			</div>
 			<div>
 			   <form id="studentQueryForm" method="post" action="">
@@ -110,17 +100,18 @@
 			   </form>
 			</div>
 		</div>
-		<!-- 下载功能区 -->
-		<button id="back" onclick="$('div.download').toggle();">下载功能</button>&nbsp;&nbsp;&nbsp;<br>
+	<!-- 下载功能区 -->
+     <button id="back" onclick="$('div.download').toggle();">下载功能</button>&nbsp;&nbsp;&nbsp;<br>
 		<div class="download">
 			 <p>
 			  <#if fileNames??>
 					     <#list fileNames as item>  
-					        <a href="${request.contextPath}/student/downLoad?fileId=${item}" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">下载${item}</a>
+					        <a href="${request.contextPath}/student/downLoad?fileId=${item}" class="btn-primary" target="J_iframe"  style="width: 80px; height: 100px;">${item}</a>
 					     </#list>
 			  </#if>
 			</p>
 		</div>
+		
 		<!-- 导入  开始 -->
 		<div class="modal fade" id="editVitaldddDvdModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel">

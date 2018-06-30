@@ -28,17 +28,28 @@ public class CacheUtil {
 	private final String name="default";//默认使用cacheName="default"的缓存区
 	private final String keyPrfx="_cu_"+name+"_";//默认生成的key前缀：_cu_default_
 	
-    /**
-     * 设置key
-     */
+	/**
+	 * 设置key
+	 * @param key
+	 *        存储键
+	 * @param value
+	 *        存储内容
+	 * @param liveTime
+	 *        存活时间
+	 */
 	@SuppressWarnings("unchecked")
 	public void put(String key,Object value,final long liveTime) {
 		ValueOperations<String, Object> valueops = redisTemplate.opsForValue();
 		valueops.set(getUkPrfex(key), value,liveTime);
 	}
+	
 	/**
-     * 设置key
-     */
+	 * 设置key
+	 * @param key
+	 *        存储键
+	 * @param value
+	 *        存储内容
+	 */
 	@SuppressWarnings("unchecked")
 	public void put(String key,Object value) {
 		ValueOperations<String, Object> valueops = redisTemplate.opsForValue();
@@ -46,6 +57,12 @@ public class CacheUtil {
 	}
 	/**
 	 * 设置key对应元素存活时间
+	 * @param key
+	 *        存储键
+	 * @param value
+	 *        存储内容
+	 * @param liveTime
+	 *        存活时间
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void set(final  String key, final  String value, final long liveTime) {
@@ -61,6 +78,12 @@ public class CacheUtil {
     }
 	/**
 	 *  设置key对应元素存活时间
+	  * @param key
+	 *         存储键
+	 *  @param value
+	 *         存储内容
+	 *  @param liveTime
+	 *          存活时间
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void set(final  String key, final  Object value, final long liveTime) {
@@ -76,6 +99,11 @@ public class CacheUtil {
     }
 	/**
 	 * 设置key存活时间
+	 * @param key
+	 *        存储键
+	 * @param liveTime
+	 *        存活时间
+	 * @return 执行结果    
 	 */
 	@SuppressWarnings("unchecked")
 	public Boolean set(final  String key, final long liveTime) {
@@ -85,8 +113,12 @@ public class CacheUtil {
 			}
 		}, true);
     }
+
 	/**
 	 * 设置key元素到endDate时刻到期
+	 * @param key 存储键
+	 * @param endDate 截止时刻
+	 * @return 执行结果
 	 */
 	@SuppressWarnings("unchecked")
 	public Boolean set(String key,  Date endDate) {
@@ -96,6 +128,7 @@ public class CacheUtil {
 	
 	/**
 	 * 持久化key对应元素
+	 *  @param key 存储键
 	 */
 	@SuppressWarnings("unchecked")
 	public void persist(String key) {
@@ -103,6 +136,8 @@ public class CacheUtil {
 	}
 	/**
 	 * 修改key值
+	 *  @param oldKey 旧键
+	 *  @param newKey  新键
 	 */
 	@SuppressWarnings("unchecked")
 	public void rename(String oldKey,String newKey) {
@@ -111,6 +146,8 @@ public class CacheUtil {
 	
 	/**
 	 * 根据key获得元素
+	 * @param key 存储键
+	 * @return 执行结果
 	 */
 	@SuppressWarnings("unchecked")
 	public Object get(String key) {
@@ -120,6 +157,8 @@ public class CacheUtil {
 	}
 	/**
 	 * 获得key对应元素存活时间
+	 * @param key 存储键
+	 * @return 剩余存活秒数
 	 */
 	@SuppressWarnings("unchecked")
 	public long getKeyExpire(Object key) {
@@ -128,6 +167,7 @@ public class CacheUtil {
 	
 	/**
 	 * 移除key
+	 * @param key 存储键
 	 */
 	@SuppressWarnings("unchecked")
 	public void remove(String key){
@@ -135,6 +175,7 @@ public class CacheUtil {
 	}
 	/**
 	 * 移除keys
+	 * @param keys 存储键
 	 */
 	@SuppressWarnings("unchecked")
 	public void removeAll(List<String> keys){
@@ -145,6 +186,8 @@ public class CacheUtil {
 	}
    /**
     * 是否含有key
+    * @param key 存储键
+    * @return 执行结果
 	*/
 	@SuppressWarnings("unchecked")
 	public Boolean hasKey(String key) {
@@ -152,6 +195,7 @@ public class CacheUtil {
 	}
 	/**
 	 * 返回所有keys
+	 *  @return 返回所有键
 	 */
 	@SuppressWarnings("unchecked")
 	public Set<?> getAllKeys(){
@@ -161,6 +205,7 @@ public class CacheUtil {
 	}
 	/**
 	 * 返回所有values
+	 * @return 返回所有值
 	 */
 	@SuppressWarnings("unchecked")
 	public Map<String,Object> getAllValues(){
@@ -180,6 +225,7 @@ public class CacheUtil {
 	}
 	/**
 	 * 检查是否连接成功
+	 * @return 执行结果
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public String ping() {
@@ -191,6 +237,7 @@ public class CacheUtil {
     }
 	/**
 	 * 查看redis里有多少数据
+	 * @return 执行结果
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public long dbSize() {
@@ -200,7 +247,10 @@ public class CacheUtil {
 	            }
 	        });
 	 }
-	/**依赖构造器**/
+	/**
+	 * 依赖构造器
+	 * @return 执行结果
+	 */
 	@SuppressWarnings("rawtypes")
 	public RedisTemplate getRedisTemplate() {
 		return redisTemplate;

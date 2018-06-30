@@ -18,7 +18,7 @@
 				    data-content-type="application/json"
 				    data-url="${request.contextPath}/staff/selectPage"
 				    data-toolbar="#staffTb"
-				    data-height="355"
+				    data-height="300"
 					data-show-header="true" 
 					data-cache="false"
 					data-click-to-select="true"  
@@ -72,21 +72,29 @@
 				<input type="button" value="修改" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="editStaff()" /> 
 				<input type="button" value="删除" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="deleteStaff()" /> 
 				<input type="button" value="查询" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="findStaff()" /> 
-			    <input type="button" value="清空" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="clearStaff()" /> 
-			    <a href="https://www.2cto.com/kf/201503/379743.html" class="btn-primary" target="_blank"  style="width: 80px; height: 100px;">jquery validate常用文件类型</a>
+			    <input type="button" value="清空" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="clearStaff()" />
+			    <a href="https://www.2cto.com/kf/201503/379743.html"    target="_blank">
+			         <input type="button" value="资料"  style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary"  />
+			    </a> 
 			</div>
 			<div>
 			   <form id="staffQueryForm" method="post" action="">
                            <table align="left">
                               <tr>
-                                      <td>pkid:<input id='pkid' name='pkid'  style="width: 80px;height:25px;"/></td>
+                                      <!-- <td>pkid:<input id='pkid' name='pkid'  style="width: 80px;height:25px;"/></td> -->
                                       <td>职员姓名:<input id='sname' name='sname'  style="width: 80px;height:25px;"/></td>
-                                      <td>职员性别:<input id='sex' name='sex'  style="width: 80px;height:25px;"/></td>
+                                       <td>
+                                                                                                              职员性别:<select id='sex' name='sex' style="width:60px;" class="publicSelect2" >
+                                            <option value="">全部</option>
+						              	    <option value="1">男</option>
+						             	    <option value="0">女</option>
+						                 </select>
+                                      </td>
                                       <td>职员年龄:<input id='age' name='age'  style="width: 80px;height:25px;"/></td>
-                                      <td>创建职员时间:<input id='createDate' name='createDate'  readonly='true' onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" style="width: 80px;height:25px;"/></td>
-                                      <td>职员创建者:<input id='createby' name='createby'  style="width: 80px;height:25px;"/></td>
+                                      <td>创建时间:<input id='createDate' name='createDate'  readonly='true' onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" style="width: 80px;height:25px;"/></td>
+                                      <!--<td>职员创建者:<input id='createby' name='createby'  style="width: 80px;height:25px;"/></td>
                                       <td>更新职员时间:<input id='updateDate' name='updateDate'  readonly='true' onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" style="width: 80px;height:25px;"/></td>
-                                      <td>职员信息更新人:<input id='updateby' name='updateby'  style="width: 80px;height:25px;"/></td>
+                                      <td>职员信息更新人:<input id='updateby' name='updateby'  style="width: 80px;height:25px;"/></td> -->
                                       <!-- <td>police:<input id='police' name='police'  style="width: 80px;height:25px;"/></td> -->
                              </tr>
                            </table>         
@@ -94,6 +102,11 @@
 			</div>
 		</div>
 		<script type="text/javascript">
+		$(function(){
+			$(".publicSelect2").select2();
+		    Waves.init();
+		    Waves.attach('.waves');
+		})
 	   function staffQueryParams(params){
 			params.sname=$('#sname').val();
 			params.sex=$('#sex').val();

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>欢迎页面</title>
+    <!-- shortcut icon -->
+  <link rel="shortcut icon" href="${request.contextPath}/page/static/adminLTE/dist/img/favicon.ico">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="${request.contextPath}/page/static/adminLTE/bootstrap/css/bootstrap.css">
+  <!-- Font Awesome -->
+    <link rel="stylesheet" href="${request.contextPath}/page/static/adminLTE/bootstrap/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"> -->
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="${request.contextPath}/page/static/adminLTE/dist/css/AdminLTE.css">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect.
+  -->
+  <link rel="stylesheet" href="${request.contextPath}/page/static/adminLTE/dist/css/skins/skin-blue.css">
+ 
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="index2.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>演示</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>演示系统</b></span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <!-- /.messages-menu -->
+
+          <!-- Notifications Menu -->
+          <!-- Tasks Menu -->
+  
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img src="${request.contextPath}/page/static/adminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs">${user.name}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <li class="user-header">
+                <img src="${request.contextPath}/page/static/adminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                 ${user.name}- 研发人员
+                  <small>2017年12月加入项目组</small>
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+                <div class="row">
+                  <div class="col-xs-4 text-center">
+                    <a href="https://gitee.com/bootstrap2table/boot_master/watchers"   target="menuFrame">Watchers </a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="https://gitee.com/bootstrap2table/boot_master/stargazers"  target="menuFrame">Stars</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="https://gitee.com/bootstrap2table/boot_master/members"  target="menuFrame">Forks</a>
+                  </div>
+                </div>
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">修改密码</a>
+                </div>
+                <div class="pull-right">
+                  <a href="${request.contextPath}/logout"  target="_self" class="btn btn-default btn-flat">退出系统</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+         <!--  <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li> -->
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="${request.contextPath}/page/static/adminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>${user.name}</p>
+          <!-- Status -->
+          <a href="#"><i class="fa fa-circle text-success"></i> 在线状态</a>
+        </div>
+      </div>
+
+      <!-- search form (Optional) -->
+      <form action="${request.contextPath}/main"  method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="查找的内容">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+
+      <!-- 开始菜单树 -->
+      <ul  id="treeview" class="sidebar-menu">
+        <li class="header">导航菜单</li>
+       
+      </ul>
+      <!-- /.结束菜单树 -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <ol id="nav_title" class="breadcrumb" style="position: static; float: none;">
+				<li class="active"><i class="fa fa-home" style="font-size: 20px; position: relative; top: 2px; left: -3px;"></i> &nbsp; 首页</li>
+				<li class="active" id="activeTitleName">控制台</li>
+			</ol>
+      <!--<h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>-->
+    </section>
+
+    <!-- 主要内容区域 -->
+    <section class="content" style="background:#fff;">
+       <iframe id="menuFrame" name="menuFrame" src="${request.contextPath}/hello" scrolling="yes" frameborder="0" style="width:100%;min-height:200px;overflow:visible;background:#fff;" ></iframe>
+    </section>
+    
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+      Version 1.0.0
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2018 <a href="https://gitee.com/bootstrap2table/boot_master">付为地</a>.</strong>  All Rights Reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 2.2.3 -->
+<script src="${request.contextPath}/page/static/adminLTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="${request.contextPath}/page/static/adminLTE/bootstrap/js/bootstrap.js"></script>
+<!-- AdminLTE App -->
+<script src="${request.contextPath}/page/static/adminLTE/dist/js/app.js"></script>
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+	 
+<!-- JS生成菜单树 -->     
+<script type="text/javascript">
+    	
+        $(function () {
+            var menuArry = [
+	            { id: 1, name: "系统主页",url:'${request.contextPath}/hello',icon:"fa fa-home",open:null,perms:"user:list",type:"1",pid: 0 },
+	            { id: 2, name: "坦克大战",url:'${request.contextPath}/student/tank',icon:"fa fa-coffee",open:null,perms:"user:list",type:"1",pid: 0 },
+	            { id: 3, name: "水果忍者",url:'https://bootstrap2table.gitee.io/fruit',icon:"fa fa-beer",open:null,perms:"user:list",type:"1", pid: 0 },
+	            { id: 4, name: "接口文档",url:null,icon:"fa fa fa-bar-chart-o",open:null,perms:"user:list",type:"0", pid: 0},
+	            { id: 5, name: "Swagger",url:'${request.contextPath}/swagger-ui.html',icon:"fa fa-circle-o",open:null,perms:"user:list",type:"1", pid: 4 },
+	            { id: 6, name: "Bootstrap",url:'${request.contextPath}/doc.html',icon:"fa fa-circle-o",open:null,perms:"user:list",type:"1", pid: 4 },
+	            { id: 7, name: "表单功能",url:null,icon:"fa fa-envelope",open:null,perms:"user:list",type:"0", pid: 0 },
+	            { id: 8, name: "学生管理",url:"${request.contextPath}/student/init",icon:"fa fa-cog",open:null,perms:"user:list",type:"1", pid: 7 },
+	            { id: 9, name: "职员管理",url:"${request.contextPath}/staff/init",icon:"fa fa-cog",open:null,perms:"user:list",type:"1", pid: 7 },
+	            { id: 10, name: "Solr管理",url:"${request.contextPath}/solr/init",icon:"fa fa-cog",open:null,perms:"user:list",type:"1", pid: 7 },
+	            { id: 11, name: "系统监控",url:null,icon:"fa fa-edit",open:null,perms:"user:list",type:"0", pid: 0 },
+	            { id: 12, name: "Druid监控",url:"${request.contextPath}/druid",icon:"fa fa-cog",open:null,perms:"user:list",type:"1", pid: 11},
+	            { id: 13, name: "JavaMelody",url:"${request.contextPath}/monitoring",icon:"fa fa-cog",open:null,perms:"user:list",type:"1", pid:11},
+	            { id: 14, name: "页面功能",url:null,icon:"fa fa-desktop",open:null,perms:"user:list",type:"0", pid:0},
+	            { id: 15, name: "二维码",url:"${request.contextPath}/toZxingQrcode",icon:null,open:null,perms:"user:list",type:"1", pid: 14 },
+	            { id: 16, name: "格式化",url:"${request.contextPath}/student/formatCode",icon:null,open:null,perms:"user:list",type:"1", pid: 14 },
+	            { id: 17, name: "模板引擎",url:"${request.contextPath}/student/freemarker",icon:null,open:null,perms:"user:list",type:"1", pid: 14 },
+	            { id: 18, name: "导出功能",url:null,icon:"fa fa-hand-o-right",open:null,perms:"user:list",type:"0", pid: 14 },
+	            { id: 19, name: "POI",url:"${request.contextPath}/student/exportPoiExcel",icon:null,open:null,perms:"user:list",type:"1", pid: 18},
+	            { id: 20, name: "CSV",url:"${request.contextPath}/student/exportCsv",icon:null,open:null,perms:"user:list",type:"1", pid: 18},
+	            { id: 21, name: "技术资料",url:null,icon:'fa fa-book',open:null,perms:"user:list",type:"0", pid: 0},
+	            { id: 22, name: "项目列表",url:null,icon:"fa fa-hand-o-right",open:null,perms:"user:list",type:"0", pid: 21},
+	            { id: 23, name: "工具列表",url:null,icon:"fa fa-hand-o-right",open:null,perms:"user:list",type:"0", pid: 21},
+	            { id: 24, name: "Api-Master",url:"https://gitee.com/bootstrap2table/api-master",icon:null,open:null,perms:"user:list",type:"1", pid: 22},
+	            { id: 25, name: "Auto-Code",url:"https://github.com/apple987/AutoCode",icon:null,open:null,perms:"user:list",type:"1", pid: 22},
+	            { id: 26, name: "Boot-Master",url:"https://gitee.com/bootstrap2table/boot_master",icon:null,open:null,perms:"user:list",type:"1", pid: 22},
+	            { id: 27, name: "Mvc-Master",url:"https://gitee.com/bootstrap2table/mvc-master",icon:null,open:null,perms:"user:list",type:"1", pid: 22},
+	            { id: 28, name: "Spring-Cloud",url:"https://gitee.com/bootstrap2table/spring-cloud",icon:null,open:null,perms:"user:list",type:"1", pid: 22},
+	            { id: 29, name: "Boot-Sharding",url:"https://gitee.com/bootstrap2table/boot-sharding",icon:null,open:null,perms:"user:list",type:"1", pid: 22},
+	            { id: 30, name: "依赖组件",url:"https://pan.baidu.com/s/1Bm7udGJc40xEENFgnJjsIw",icon:null,open:null,perms:"user:list",type:"1", pid: 23},
+	            { id: 31, name: "Solr-Cloud",url:"https://pan.baidu.com/s/1RbC4zS8izz9Ge8wuIdplXQ",icon:null,open:null,perms:"user:list",type:"1", pid: 23},
+	            { id: 32, name: "Mycat",url:"https://pan.baidu.com/s/1Z82j-w9H3LXo4H6BDYlHpg",icon:null,open:null,perms:"user:list",type:"1", pid: 23},
+	            { id: 33, name: "配置文档",url:"https://gitee.com/bootstrap2table/boot_master/wikis/welcome",icon:'fa fa-book',open:null,perms:"user:list",type:"1", pid: 21},
+	            { id: 34, name: "下载功能",url:"${request.contextPath}/student/showDownload",icon:'fa fa-cloud-download',open:null,perms:"user:list",type:"1", pid: 14},
+            ];
+            GetData(0, menuArry);//0表示最顶级菜单生成
+            $("#treeview").append(menus);
+            
+            $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height()-50);
+				    //菜单点击
+				    $(".J_menuItem").on('click',function(){
+						      var id=$(this).attr("id").replace(new RegExp("menu_","g"),"");
+						      var node=getNodeById(parseInt(id),menuArry);
+						      var arr=findParent(menuArry,getNodeById(id,menuArry));
+						      //当前点击节点所有父节点
+						      var activeTitles="";
+						      for(var i=arr.length-1;i>=0;i--){ 
+											if(i==arr.length-1){
+											    activeTitles+='<li class="active"><i class="fa fa-home" style="font-size: 20px; position: relative; top: 2px; left: -3px;"></i> &nbsp; '+arr[i].name+'</li>';
+											}else{
+												activeTitles+='<li class="active" id="activeTitleName">'+arr[i].name+'</li>';
+											}
+						      }
+						      //拼接当前选择节点
+						      if(arr.length==0){
+						      	activeTitles+='<li class="active"><i class="fa fa-home" style="font-size: 20px; position: relative; top: 2px; left: -3px;"></i> &nbsp; '+$(this).text()+'</li>';
+						      }else{
+						         activeTitles+='<li class="active" id="activeTitleName">'+$(this).text()+'</li>';
+						      }
+						      $("#nav_title").empty().append(activeTitles);
+							  $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height()-50);
+					    });
+            
+        });
+ 
+        //菜单列表html
+        var menus = '';
+ 
+        //根据菜单主键id生成菜单列表html
+        //id：菜单主键id
+        //arry：菜单数组信息
+        function GetData(id, arry) {
+            var childArry = findChildren(id, arry);
+            if (childArry.length > 0) {
+	            	if(id!=0){//最顶级，不加ul
+	            		menus += '<ul class="treeview-menu">';
+	            	}
+	                for (var i in childArry) {
+	                	var curl=(childArry[i].url!=null&&childArry[i].url!=undefined&&childArry[i].url!="")?childArry[i].url:"#";
+	                	var cicon=(childArry[i].icon!=null&&childArry[i].icon!=undefined&&childArry[i].icon!="")?childArry[i].icon:"fa fa-circle-o";
+	                	//判断当前节点，子节点是否为叶子节点，叶子节点不生成右侧图标<i class="fa fa-angle-left pull-right"></i>
+	                	var cSubArr=findChildren(childArry[i].id, arry);
+	                	if(cSubArr.length>0){
+	                		if(curl==="#"){
+	                		   menus += '<li class="treeview"><a id="menu_'+childArry[i].id+'" href="'+curl+'" ><i class="'+cicon+'"></i>' + childArry[i].name+'<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+		                	}else{
+		                		menus += '<li class="treeview"><a  id="menu_'+childArry[i].id+'"  href="'+curl+'" class="J_menuItem" target="menuFrame"><i class="'+cicon+'"></i>' + childArry[i].name+'<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+		                	}
+		                    GetData(childArry[i].id, arry);
+		                    menus += '</li>';
+	                	}else{
+	                		if(curl==="#"){
+	                		    menus += '<li class="treeview"><a id="menu_'+childArry[i].id+'" href="'+curl+'" ><i class="'+cicon+'"></i>' + childArry[i].name+'<span class="pull-right-container"></span></a>';
+		                	}else{
+		                		menus += '<li class="treeview"><a id="menu_'+childArry[i].id+'" href="'+curl+'" class="J_menuItem" target="menuFrame"><i class="'+cicon+'"></i>' + childArry[i].name+'<span class="pull-right-container"></span></a>';
+		                	}
+		                    GetData(childArry[i].id, arry);
+		                    menus += '</li>';
+	                	}
+	                }
+                 if(id!=0){//最顶级，不加ul
+                	menus += '</ul>';
+				 }
+            }
+        }
+        //根据菜单主键id获取下级菜单
+        //id：菜单主键id
+        //arry：菜单数组信息
+        function findChildren(id, arry) {
+            var newArry = new Array();
+            for (var i in arry) {
+                if (arry[i].pid == id)
+                    newArry.push(arry[i]);
+            }
+            return newArry;
+        }
+        //根据菜单id获取菜单数组对应节点
+        //id：某菜单主键id
+        //arry：菜单数组
+        function getNodeById(id, arry) {
+            for (var i in arry) {
+                if (arry[i].id == id){
+                	   return arry[i];
+                }
+            }
+            return new Object();
+        }
+	     //根据node获取对应所有父节点
+	     //node：某节点
+	     //arry：节点数组
+	     function  findParent(arry,node) {
+				    var ans=new Array();
+				    for(var i=0;i<arry.length;i++){
+				        if(node.pid==arry[i].id){
+				            if(arry[i].id==0){//顶级节点
+				               return arry[i];
+				            }
+				            ans.push(arry[i]);
+				            return  ans.concat(findParent(arry,arry[i]));
+				        }
+				    }
+				    return ans;
+			}
+        </script>
+</body>
+</html>

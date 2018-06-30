@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>文件下载</title>
+  <meta name="description" content="" />
+  <meta name="author" content="pc" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <meta name="screen-orientation"content="portrait">
+  <meta name="format-detection" content="telephone=no" />
+  <#include "/inc/common.html">
+</head>
+<body>
+<div class="container">
+<h4>&nbsp;&nbsp;&nbsp;操作指南</h4>
+         <ul>
+            <li>1.系统登陆页面，输入用户名和密码信息，登录系统。</li>
+            <li>2.系统登录成功，进入表单功能>学生管理页面。</li>
+            <li>3.选择需要上传的文本(文本文件名字不允许含有中文)，上传文本文件到服务器。</li>
+            <li>4.进入页面功能>文件下载操作页面，点击下载功能展开文件列表。</li>
+            <li>5.点击需要下载的文件，下载完毕服务器会自动删除源文件。</li>
+        </ul>
+	<div class="row">
+	     <!-- 下载功能区 -->
+		   <button id="back" onclick="$('div.download').toggle();">下载功能</button>&nbsp;&nbsp;&nbsp;<br>
+			<div class="download">
+			 <p>
+			  <#if fileNames??>
+					     <#list fileNames as item>  
+					        <a href="${request.contextPath}/student/downLoad?fileId=${item}" class="btn-primary" target="J_iframe"  style="width: 80px; height: 100px;">${item}</a>
+					     </#list>
+			  </#if>
+			</p>
+		</div>
+    </div>
+</div>
+
+ </body>
+</html>
