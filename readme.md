@@ -13,7 +13,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
     ● 数据库连接池：Alibaba Druid
     ● 系统监控插件：JavaMelody+Druid
     ● 系统缓存框架：Redis-cluster
-    ● 系统前端框架：Freemaker+Bootstrap+Layui
+    ● 系统前端框架：Freemaker+AdminLte
     ● 搜索引擎框架：Solr/SolrCloud
     ● 分布式线程锁：Redisson
     ● 分布式限流器：Redisson
