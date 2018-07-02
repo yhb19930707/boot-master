@@ -119,10 +119,10 @@ desired effect
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">修改密码</a>
+                  <a href="#" onclick="updatePassword()" class="btn btn-default btn-flat">修改密码</a>
                 </div>
                 <div class="pull-right">
-                  <a href="${request.contextPath}/logout"  target="_self" class="btn btn-default btn-flat">退出系统</a>
+                  <a  onclick="logout()"  class="btn btn-default btn-flat">退出系统</a>
                 </div>
               </li>
             </ul>
@@ -214,6 +214,31 @@ desired effect
 </div>
 <!-- ./wrapper -->
 
+
+  <!-- 修改密码 -->
+<div id="passwordLayer" style="display: none;">
+	<form class="form-horizontal" style="overflow:hidden"  >
+			<div class="form-group">
+				<div class="form-group" >
+				   	<div class="col-sm-2 control-label">登陆账号</div>
+				    <span class="label label-primary" style="vertical-align: bottom;">${user.name}</span>
+				</div>
+				<div class="form-group" >
+				   	<div class="col-sm-2 control-label">原密码</div>
+				   	<div class="col-sm-8">
+				      <input type="password" class="form-control" style="width:200px;" placeholder="原密码"/>
+				    </div>
+				</div>
+				<div class="form-group" >
+				   	<div class="col-sm-2 control-label">新密码</div>
+				   	<div class="col-sm-8">
+				      <input type="text" class="form-control" style="width:200px;" placeholder="新密码"/>
+				    </div>
+				</div>
+			</div>
+	</form>
+</div>
+
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 2.2.3 -->
@@ -222,6 +247,8 @@ desired effect
 <script src="${request.contextPath}/page/static/adminLTE/bootstrap/js/bootstrap.js"></script>
 <!-- AdminLTE App -->
 <script src="${request.contextPath}/page/static/adminLTE/dist/js/app.js"></script>
+<!-- layer弹出层 -->
+<script type="text/javascript"src="${request.contextPath}/page/static/plugins/layer/layer.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
@@ -230,7 +257,6 @@ desired effect
 	 
 <!-- JS生成菜单树 -->     
 <script type="text/javascript">
-    	
         $(function () {
             var menuArry = [
 	            { id: 1, name: "系统主页",url:'${request.contextPath}/hello',icon:"fa fa-home",open:null,perms:"user:list",type:"1",pid: 0 },
@@ -272,7 +298,7 @@ desired effect
             GetData(0, menuArry);//0表示最顶级菜单生成
             $("#treeview").append(menus);
             
-            $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height());
+            $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height()-48);
 				    //菜单点击
 				    $(".J_menuItem").on('click',function(){
 						      var id=$(this).attr("id").replace(new RegExp("menu_","g"),"");
@@ -294,7 +320,7 @@ desired effect
 						         activeTitles+='<li class="active" id="activeTitleName">'+$(this).text()+'</li>';
 						      }
 						      $("#nav_title").empty().append(activeTitles);
-							  $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height());
+							 $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height()-48);
 					    });
             
         });
@@ -377,6 +403,56 @@ desired effect
 				    }
 				    return ans;
 			}
+	     
+	      //iframe自适应
+		  $(window).on('resize', function() {
+			  $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height()-48);
+		  }).resize();
+	     /*更新密码*/
+	     var updatePassword=function(){
+				layer.open({
+					type: 1,
+					skin: 'layui-layer-lan',
+					title: "修改密码",
+					area: ['600px', '300px'],
+					shadeClose: false,
+					content: jQuery("#passwordLayer"),
+					btnAlign: 'c',
+					btn: ['修改','取消'],
+					btn1: function (index) {
+						/* var data = "password="+vm.password+"&newPassword="+vm.newPassword;
+						$.ajax({
+							type: "POST",
+						    url: "sys/user/password",
+						    data: data,
+						    dataType: "json",
+						    success: function(result){
+								if(result.code == 0){
+									layer.close(index);
+									layer.alert('修改成功', function(index){
+										location.reload();
+									});
+								}else{
+									layer.alert(result.msg);
+								}
+							}
+						}); */
+						layer.alert('修改成功', function(index){
+							location.reload();
+						});
+		            }
+				});
+			} 
+	     //退出系统
+	     var logout=function(){
+	    	 layer.confirm('您确定要退出系统？', {
+	    		    skin: 'layui-layer-lan',
+	    		    btnAlign: 'c',
+		    	  	btn: ['确定','取消'] //按钮
+			    	}, function(){
+			    	   window.location.href="${request.contextPath}/logout";
+			    	});
+	     }
         </script>
 </body>
 </html>
