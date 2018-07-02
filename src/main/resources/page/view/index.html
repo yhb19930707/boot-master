@@ -272,7 +272,7 @@ desired effect
             GetData(0, menuArry);//0表示最顶级菜单生成
             $("#treeview").append(menus);
             
-            $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height()-50);
+            $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height());
 				    //菜单点击
 				    $(".J_menuItem").on('click',function(){
 						      var id=$(this).attr("id").replace(new RegExp("menu_","g"),"");
@@ -294,7 +294,7 @@ desired effect
 						         activeTitles+='<li class="active" id="activeTitleName">'+$(this).text()+'</li>';
 						      }
 						      $("#nav_title").empty().append(activeTitles);
-							  $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height()-50);
+							  $("#menuFrame").css('min-height',$("div.content-wrapper").height()-$('section.content-header').height());
 					    });
             
         });
