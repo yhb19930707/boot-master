@@ -51,8 +51,10 @@ public class DemoApplicationTests {
 	@Test
 	public void testJmsQueue() {
 		Destination destination = new ActiveMQQueue("springboot.queue.test");
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			jmsProducer.sendMessage(destination, "生成队列消息"+i);
+			jmsProducer.sendMessage(new ActiveMQQueue("qghappy"), "qghappy通用生成队列消息"+i);
+			jmsProducer.sendMessage(new ActiveMQQueue("edgm"), "edgm通用生成队列消息"+i);
 		}
 	}
 
@@ -70,7 +72,9 @@ public class DemoApplicationTests {
 		Destination topic = new ActiveMQTopic("springboot.topic.test");
 		for (int i = 0; i < 10; i++) {
 			jmsProducer.sendMessage(destination, "生成队列消息"+i);
+			jmsProducer.sendMessage("springboot.queue.test", "队列消息"+i);
 			jmsProducer.publish(topic, "发布主题消息" + i);
+			jmsProducer.publish("springboot.topic.test", "主题消息"+i);
 		}
 	}
 	

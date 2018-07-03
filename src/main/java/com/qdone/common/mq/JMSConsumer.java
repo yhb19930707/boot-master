@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JMSConsumer {
 	
-	private final static Logger logger = LoggerFactory.getLogger(JMSConsumer.class);
+	private Logger logger = LoggerFactory.getLogger(JMSConsumer.class);
 	
     /**
      * 接收队列消息

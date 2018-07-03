@@ -2,6 +2,8 @@ package com.qdone.common.mq;
 
 import javax.jms.Destination;
 
+import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
@@ -26,6 +28,16 @@ public class JMSProducer {
 	public void sendMessage(Destination destination, String message) {
 		this.jmsTemplate.convertAndSend(destination, message);
 	}
+	/**
+	 * 
+	 * @param destination 
+	 *        队列名称
+	 * @param message
+	 *        消息体
+	 */
+	public void sendMessage(String destination, String message) {
+		this.jmsTemplate.convertAndSend(new ActiveMQQueue(destination), message);
+	}
 	
 	 /**
      * 向指定的topic发布消息
@@ -39,5 +51,13 @@ public class JMSProducer {
 		    return session.createTextMessage(msg);
 		});
     	
+    }
+    
+    /**
+     * @param topic 主题名称
+     * @param msg  消息体
+     */
+    public void publish(String topic,String msg) {
+    	this.jmsTemplate.convertAndSend(new ActiveMQTopic(topic), msg);
     }
 }
