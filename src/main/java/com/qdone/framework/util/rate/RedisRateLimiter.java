@@ -54,7 +54,6 @@ public class RedisRateLimiter{
 		    RRateLimiter rateLimiter = redisClient.getRateLimiter(rateKey);
 		    //初始化,最大流速 = 每1秒钟产生10个令牌
 		    /*rateLimiter.trySetRate(RateType.OVERALL, 1000, 1, RateIntervalUnit.SECONDS);//1秒1000个token*/
-		    System.err.println(timeUnit.toUpperCase());
 		    switch (timeUnit.toUpperCase()) {
 			case "SECONDS":
 				rateLimiter.trySetRate(RateType.OVERALL, permits, timeout, RateIntervalUnit.SECONDS);//1秒permits个token
