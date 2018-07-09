@@ -26,7 +26,7 @@ import com.qdone.framework.core.constant.Constants;
  * @author 傅为地
  */
 
-public class CoreUtil {
+public final strictfp class CoreUtil {
 	
 	/**
 	 * 列转换成驼峰
@@ -142,7 +142,7 @@ public class CoreUtil {
 			}
 		}
 	}
-	/***********开始***********************bootstrap-table分页page-helper插件 核心代码*********************************************************/
+	/***********开始***********************bootstrap-table分页page-helper插件（map参数方式） 核心代码*********************************************************/
 	/**
 	 * 创建page-helper排序字段信息
 	 *  支持多表连接排序eg:
@@ -158,9 +158,9 @@ public class CoreUtil {
 	 * 使用时，请注意sortName支持的格式(table.cloumName desc/asc)格式
 	 * 务必不要写(table_cloumName desc/asc)别名中不要传递"_",会被转换驼峰
 	 * )
-	 * @param pageInfo
-	 * @param isAuto
-	 * @return
+	 * @param pageInfo 分页参数
+	 * @param isAuto  是否自动转换
+	 * @return 排序参数串
 	 */
 	public static final String createSort(PageInfo pageInfo,boolean isAuto) {
 		String sortString="";
@@ -174,8 +174,9 @@ public class CoreUtil {
 	
 	/**
 	 * 处理单列排序
-	 * @param pageInfo
-	 * @return
+	 * @param pageInfo 分页参数
+	 * @param isAuto 是否自动转换
+	 * @return 单列排序参数串
 	 */
 	public static final String handleSingleSort(PageInfo pageInfo,boolean isAuto) {
 		String sortString = "";
@@ -202,9 +203,9 @@ public class CoreUtil {
 	 * 组装Bootstrap-table分页方式有两种/本处都做了适配
 	 * @warn(注意事项 – 可选)
 	 * 是否自动将:areaName转换成area_name表字段排序
-	 * @param param
+	 * @param param 传入参数
 	 * @param isAuto:true自动|false不转换(默认转换)
-	 * @return
+	 * @return 分页对象
 	 */
 	  public static final PageInfo buildBootStrapPage(Map<String, Object> param,boolean isAuto) {
 			boolean isMutiSort=false;//默认单列排序
@@ -274,10 +275,10 @@ public class CoreUtil {
 	   * handleMutiSort
 	   * 处理bootstrap-table多列排序:multiSort[0][sortName]=sname, multiSort[0][sortOrder]=asc此种形式 
 	   * @warn(注意事项 – 可选)
-	   * @param param
+	   * @param param 传入参数
 	   * @param isAuto:是否自动将:areaName转换成area_name表字段排序 
 	   *           true自动|false不转换(默认转换)
-	   * @return
+	   * @return 队列排序结果串
 	   */
 	  public static final  String handleMutiSort(Map<String, Object> param,boolean isAuto){
 				String mutiSort="";
@@ -313,8 +314,8 @@ public class CoreUtil {
 			}
 	  
 	  
-	 /***********结束***********************bootstrap-table分页核心代码*********************************************************/
-	 /***********开始***********************bootstrap-table分页核心代码*********************************************************/
+	 /***********结束***********************bootstrap-table分页  （map参数方式） 核心代码*********************************************************/
+	 /***********开始***********************bootstrap-table分页   (mutiSort方式)核心代码*********************************************************/
      /*采用统一mutiSort实体类方式,传入参数不在使用map,提高代码可读性
       * 代码eg:
       * public class DataInterrupt extends MutiSort {
@@ -327,7 +328,10 @@ public class CoreUtil {
       * }
       * MutiSort:针对分页排序,做了集中封装,子类必须继承MutiSort类,不允许扩展分页排序信息
       *    针对上面controller传入map方式做了优化,提高代码可读性
-      * */
+	   * @param param 传入参数
+	   * @param isAuto 是否自动转换
+	   * @return 返回分页对象
+	   */
 	 public static final PageInfo createBootStrapPage(Object param,boolean isAuto) {
 			// 修改分页数目
 			PageInfo pageInfo = new PageInfo();
@@ -381,7 +385,10 @@ public class CoreUtil {
 	  * MutiSort:针对分页排序,做了集中封装,子类必须继承MutiSort类,不允许扩展分页排序信息
       *    针对上面controller传入map方式做了优化,提高代码可读性
       *    辅助方法  
-	  * */
+	  * @param param 传入参数
+	  * @param isAuto 是否自动转换 
+	  * @return 多列排序参数串
+	  */
 	 public static final  String createMutiSort(MutiSort param,boolean isAuto){
 			String mutiSort="";
 			List<String> sorts=new ArrayList<String>();
@@ -401,9 +408,13 @@ public class CoreUtil {
 			mutiSort=mutiSort.length()>2?mutiSort.substring(1, mutiSort.length()-1):"";
 			return mutiSort;
 		}
+	 /***********结束***********************bootstrap-table分页    (mutiSort方式)核心代码*********************************************************/
 	 /***********开始***********************通用日志打印处理参数核心代码*********************************************************/
 	 /**
 	  * 格式化传入参数
+	  * @param args 传入参数数组
+	  * @param paremClassTypes 参数类数组
+	  * @return 返回参数字符串
 	  */
 	 public static final String buildInputParamToString(Object[] args,Class<?>[] paremClassTypes){
 		    String inputArgString="";//传入参数格式化结果字符串
@@ -417,12 +428,10 @@ public class CoreUtil {
 				if (HttpServletRequest.class.isAssignableFrom(paremClassTypes[i])) {//优先request
 					isReq=1;
 					isReqIndex=i;
-				}
-				else if (Map.class.isAssignableFrom(paremClassTypes[i])) {//优先Map
+				}else if (Map.class.isAssignableFrom(paremClassTypes[i])) {//优先Map
 					isMap=1;
 					isMapIndex=i;
-				}
-				else if (MutiSort.class.isAssignableFrom(paremClassTypes[i])) {//MutiSort
+				}else if (MutiSort.class.isAssignableFrom(paremClassTypes[i])) {//MutiSort
 					isMutiSort=1;
 					isMutiSortIndex=i;
 				}
@@ -431,8 +440,7 @@ public class CoreUtil {
 		    if (isReq == 1&&HttpServletRequest.class.isAssignableFrom(paremClassTypes[isReqIndex])) {//打印request，最高优先级
 				HttpServletRequest req = (HttpServletRequest) args[isReqIndex];
 				inputParamMap.add(getParameterMap(req));
-			} 
-			else if(isMap == 1&& Map.class.isAssignableFrom(paremClassTypes[isMapIndex])) {//打印map，第二优先级
+			}else if(isMap == 1&& Map.class.isAssignableFrom(paremClassTypes[isMapIndex])) {//打印map，第二优先级
 				inputParamMap.add(args[isMapIndex]);
 			}else{//打印String,Integer,long常规数据类型
 				for (int i = 0; i < args.length; i++) {
@@ -448,8 +456,6 @@ public class CoreUtil {
 								inputParamMap.add(args[i]);
 							}
 					    }
-					    
-					    
 				}
 			}
 		    if (isMutiSort == 1&& MutiSort.class.isAssignableFrom(paremClassTypes[isMutiSortIndex])) {//打印MutiSort最后显示
@@ -473,10 +479,11 @@ public class CoreUtil {
 		    }
 		   return inputArgString; 
 	   }
-		
-		/**
-	     * 读取request参数到map
-	     */
+		 /**
+		  * 读取request参数到map
+		  * @param request 传入request参数
+		  * @return 返回结果对象
+		  */
 		public static final Map<String, Object> getParameterMap(HttpServletRequest request) {
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			Set<String> keys = request.getParameterMap().keySet();
@@ -500,5 +507,5 @@ public class CoreUtil {
 			}
 			return sb.toString();
 		}
-	 /***********结束***********************通用日志打印处理参数核心代码*********************************************************/
+	   /***********结束***********************通用日志打印处理参数核心代码*********************************************************/
 }

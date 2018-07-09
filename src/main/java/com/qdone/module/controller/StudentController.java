@@ -486,7 +486,7 @@ public class StudentController extends BaseController {
 
 	@ApiOperation(value = "测试格式化显示", notes = "测试格式化显示", httpMethod = "GET")
 	@RequestMapping(value = "/formatCode", method = RequestMethod.GET)
-	@RateLimiter(limit = 1, timeout = 5,rateKey="formatCode")
+	@RateLimiter(limit = 1,timeUnit=Constants.RateLimiterTimeUnit.SECONDS,timeout = 5,rateKey="formatCode")
 	public String formatCode(HttpServletRequest req) {
 		System.err.println("formatJson");
 		List<Student> arr = studentService.selectList(null);

@@ -8,7 +8,9 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 
- * 通用针对bootstrap-table分页基类
+ * @author 付为地
+ *   通用针对bootstrap-table分页基类
+ *   项目中数据库表对应实体类，只需要集成此类即可
  */
 @ApiModel(value = "分页对象", description = "分页实体")
 public class MutiSort implements Serializable {

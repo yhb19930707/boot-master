@@ -19,7 +19,7 @@ public class RedisRateLimiter{
     public  final static String REDISSON_RATE_LIMITER_KEY = "REDISSON_RATE_LIMITER:";//redisson默认限流key
     public  final  static int REDISSON_RATE_LIMITER_PERMITS = 1000;//redisson默认限流次数
     public  final  static long REDISSON_RATE_LIMITER_TIMEOUT = 1L;//redisson默认限流超时数
-    public  final static TimeUnit REDISSON_RATE_LIMITER_TIMEUNIt = TimeUnit.SECONDS;//redisson默认有效期单位
+    public  final static String REDISSON_RATE_LIMITER_TIMEUNIt = "SECONDS";//redisson默认有效期单位
 	
      /**
 	   * 采用redisson方式，
@@ -48,13 +48,29 @@ public class RedisRateLimiter{
 	   * @param rateKey：自定义key
 	   * @param permits:允许最大限流数
 	   * @param timeout:时间间隔单位秒
-	   * @param timeUnit:时间间隔类型，默认秒
+	   * @param timeUnit:时间间隔类型，默认秒(SECONDS,MINUTES,HOURS,DAYS)
 	   */
-	  public static boolean tryAcquire(RedissonClient redisClient,String rateKey,long permits,long timeout,TimeUnit timeUnit) {
+	  public static boolean tryAcquire(RedissonClient redisClient,String rateKey,long permits,long timeout,String timeUnit) {
 		    RRateLimiter rateLimiter = redisClient.getRateLimiter(rateKey);
 		    //初始化,最大流速 = 每1秒钟产生10个令牌
 		    /*rateLimiter.trySetRate(RateType.OVERALL, 1000, 1, RateIntervalUnit.SECONDS);//1秒1000个token*/
-		    rateLimiter.trySetRate(RateType.OVERALL, permits, timeout, RateIntervalUnit.SECONDS);//1秒1000个token
-		    return rateLimiter.tryAcquire(1,0, TimeUnit.SECONDS);//间隔一秒，尝试一次，失败就不重试，直接拒绝访问，0换成正数，就会间隔重试
-	  }
+		    System.err.println(timeUnit.toUpperCase());
+		    switch (timeUnit.toUpperCase()) {
+			case "SECONDS":
+				rateLimiter.trySetRate(RateType.OVERALL, permits, timeout, RateIntervalUnit.SECONDS);//1秒permits个token
+				return rateLimiter.tryAcquire(1,0, TimeUnit.SECONDS);//间隔一秒，尝试一次，失败就不重试，直接拒绝访问，0换成正数，就会间隔重试
+			case "MINUTES":
+				rateLimiter.trySetRate(RateType.OVERALL, permits, timeout, RateIntervalUnit.MINUTES);//1分钟permits个token
+				return rateLimiter.tryAcquire(1,0, TimeUnit.MINUTES);//间隔一分钟，尝试一次，失败就不重试，直接拒绝访问，0换成正数，就会间隔重试
+			case "HOURS":
+				rateLimiter.trySetRate(RateType.OVERALL, permits, timeout, RateIntervalUnit.HOURS);//1小时permits个token
+				return rateLimiter.tryAcquire(1,0, TimeUnit.HOURS);//间隔一小时，尝试一次，失败就不重试，直接拒绝访问，0换成正数，就会间隔重试
+			case "DAYS":
+				rateLimiter.trySetRate(RateType.OVERALL, permits, timeout, RateIntervalUnit.DAYS);//1天permits个token
+				return rateLimiter.tryAcquire(1,0, TimeUnit.DAYS);//间隔一天，尝试一次，失败就不重试，直接拒绝访问，0换成正数，就会间隔重试
+			default:
+				rateLimiter.trySetRate(RateType.OVERALL, permits, timeout, RateIntervalUnit.SECONDS);//1秒permits个token
+				return rateLimiter.tryAcquire(1,0, TimeUnit.SECONDS);//间隔一秒，尝试一次，失败就不重试，直接拒绝访问，0换成正数，就会间隔重试
+			}
+  }
 }

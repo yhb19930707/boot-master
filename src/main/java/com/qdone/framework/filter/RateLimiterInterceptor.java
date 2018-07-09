@@ -1,7 +1,6 @@
 package com.qdone.framework.filter;
 
 import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,7 +44,7 @@ public class RateLimiterInterceptor extends HandlerInterceptorAdapter {
 		             long timeout = ObjectUtils.isEmpty(rateLimiter.timeout())?RedisRateLimiter.REDISSON_RATE_LIMITER_TIMEOUT:rateLimiter.timeout();
 		             String rateKey=StringUtils.isEmpty(rateLimiter.rateKey())?request.getRequestURI():rateLimiter.rateKey();//key为空判断
 		             rateKey=RedisRateLimiter.REDISSON_RATE_LIMITER_KEY+rateKey;
-		             TimeUnit timeUnit=ObjectUtils.isEmpty(rateLimiter.timeout())?RedisRateLimiter.REDISSON_RATE_LIMITER_TIMEUNIt:rateLimiter.timeUnit();
+		             String timeUnit=ObjectUtils.isEmpty(rateLimiter.timeUnit())?RedisRateLimiter.REDISSON_RATE_LIMITER_TIMEUNIt:rateLimiter.timeUnit();
 		             /*Boolean isAllow=RedisRateLimiter.acquire(redisClient, rateKey, limit, timeout, timeUnit);*/
 		             Boolean isAllow=RedisRateLimiter.tryAcquire(redisClient, rateKey, limit, timeout, timeUnit);
 		             if(!isAllow){
@@ -56,6 +55,4 @@ public class RateLimiterInterceptor extends HandlerInterceptorAdapter {
 			}
 			return true;
 		}
-	
-	
 }

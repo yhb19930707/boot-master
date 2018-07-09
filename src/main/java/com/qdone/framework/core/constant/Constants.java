@@ -51,6 +51,15 @@ public  class Constants {
 		String DEFAULT = UTF8;
 		String JSON = "application/json; charset=UTF-8";
 	}
+	/**
+	 * 限流器默认时间间隔单位
+	 */
+	public interface RateLimiterTimeUnit{//限流器时间间隔单位
+	    	String SECONDS="SECONDS";//秒
+	    	String MINUTES="MINUTES";//分钟
+	    	String HOURS="HOURS";//小时
+	    	String DAYS="DAYS";//天
+	 }
 	
 	/**
 	 * LogPrinter异常日志类型
@@ -98,6 +107,5 @@ public  class Constants {
             return value;
         }
     }
-
 
 }
