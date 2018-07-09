@@ -75,8 +75,9 @@ boot-master
 │  │  ├─static 静态资源
 │  │  │  ├─css  css样式
 │  │  │  ├─js   js文件 
-│  │  │  ├─images  图片文件 
-│  │  │  └─plugins 前端插件
+│  │  │  ├─images   图片文件 
+│  │  │  ├─adminLTE 模板组件  
+│  │  │  └─plugins  前端插件
 │  │  │
 │  │  └─view  前端页面
 │  │     ├─error 系统错误页
