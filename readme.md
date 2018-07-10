@@ -46,7 +46,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
 > * 配置fileupload(默认配置最大100MB)，下载文件，生成二维码，二维码打印，mail发邮件等功能。<br>
 > * 配置https安全协议，提高系统安全性,配置log4j日志，系统出现异常自动发送邮件。<br>
 > * 配置poi和csv简单导出excel功能点,poi目前是多sheet智能导出。<br>
-> * 前端使用vkbeautify插件,页面格式化json，xml,css,sql数据显示。<br>
+> * 前端使用vkbeautify插件,页面格式化json,xml,css,sql数据显示。<br>
 > * 配置[activeMq](https://gitee.com/bootstrap2table/boot_master/blob/master/src/test/java/com/qdone/DemoApplicationTests.java)支持同时发送队列和主题消息。<br>
 > * 配置[solr和solrCloud](https://gitee.com/bootstrap2table/boot_master/blob/master/src/main/java/com/qdone/module/app/SolrDataController.java)支持分词搜索查询。<br>
 
