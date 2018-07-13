@@ -1,12 +1,8 @@
 package com.qdone.common.util.log;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -37,7 +33,7 @@ public class LogUtil {
 	 * 记录日志 在LogUtil中出现出现异常时, 不允许回滚,可以采用如下注解式事务
 	 */
 	@Transactional(readOnly=false,noRollbackFor = Exception.class)
-	public int insert(SysLog object) throws ServletException, IOException {
+	public int insert(SysLog object){
 		 return baseDao.insert("com.qdone.common.util.log.mapper.SysLog.insert", object);
 	}
 

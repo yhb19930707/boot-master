@@ -25,7 +25,7 @@
         <result property="actionEndTime" column="ACTION_END_TIME"/>
         <result property="actionTime" column="ACTION_TIME"/>
         <result property="createDate" column="CREATE_DATE"/>
-        <result property="database" column="dbName"/>
+        <result property="dbname" column="dbName"/>
     </resultMap>
 
     <sql id="allColumns">
@@ -94,8 +94,8 @@
           <if test="createDate!=null">
              AND CREATE_DATE = #{createDate}
           </if>
-          <if test="database!=null and database!=''">
-             AND DBNAME LIKE concat('%',#{database},'%')
+          <if test="dbname!=null and dbname!=''">
+             AND DBNAME LIKE concat('%',#{dbname},'%')
           </if>
        </trim>
     </sql>
@@ -127,7 +127,7 @@
                 #{item.id,jdbcType=BIGINT},#{item.title,jdbcType=VARCHAR},#{item.type,jdbcType=CHAR},#{item.userId,jdbcType=VARCHAR},#{item.requestUri,jdbcType=VARCHAR},#{item.className,jdbcType=VARCHAR},
         #{item.methodName,jdbcType=VARCHAR},#{item.functionName,jdbcType=VARCHAR},#{item.userAgent,jdbcType=VARCHAR},#{item.remoteIp,jdbcType=VARCHAR},#{item.requestMethod,jdbcType=VARCHAR},#{item.requestParams,jdbcType=LONGVARCHAR},
         #{item.requestMac,jdbcType=VARCHAR},#{item.exception,jdbcType=LONGVARCHAR},#{item.actionThread,jdbcType=VARCHAR},#{item.actionStartTime,jdbcType=TIMESTAMP},#{item.actionEndTime,jdbcType=TIMESTAMP},#{item.actionTime,jdbcType=BIGINT},
-        #{item.createDate,jdbcType=TIMESTAMP},#{item.database,jdbcType=VARCHAR}      
+        #{item.createDate,jdbcType=TIMESTAMP},#{item.dbname,jdbcType=VARCHAR}      
             )      
           </foreach>
     </select>
@@ -139,7 +139,7 @@
         #{id,jdbcType=BIGINT},#{title,jdbcType=VARCHAR},#{type,jdbcType=CHAR},#{userId,jdbcType=VARCHAR},#{requestUri,jdbcType=VARCHAR},#{className,jdbcType=VARCHAR},
         #{methodName,jdbcType=VARCHAR},#{functionName,jdbcType=VARCHAR},#{userAgent,jdbcType=VARCHAR},#{remoteIp,jdbcType=VARCHAR},#{requestMethod,jdbcType=VARCHAR},#{requestParams,jdbcType=LONGVARCHAR},
         #{requestMac,jdbcType=VARCHAR},#{exception,jdbcType=LONGVARCHAR},#{actionThread,jdbcType=VARCHAR},#{actionStartTime,jdbcType=TIMESTAMP},#{actionEndTime,jdbcType=TIMESTAMP},#{actionTime,jdbcType=BIGINT},
-        #{createDate,jdbcType=TIMESTAMP},#{database,jdbcType=VARCHAR}
+        #{createDate,jdbcType=TIMESTAMP},#{dbname,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -165,7 +165,7 @@
              ACTION_END_TIME = #{actionEndTime,jdbcType=TIMESTAMP},
              ACTION_TIME = #{actionTime,jdbcType=BIGINT},
              CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-             DBNAME = #{database,jdbcType=VARCHAR}
+             DBNAME = #{dbname,jdbcType=VARCHAR}
          </set>
 		WHERE id = #{id,jdbcType=BIGINT}
     </update>
@@ -192,7 +192,7 @@
              ACTION_END_TIME = #{actionEndTime,jdbcType=TIMESTAMP},
              ACTION_TIME = #{actionTime,jdbcType=BIGINT},
              CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-             DBNAME = #{database,jdbcType=VARCHAR}
+             DBNAME = #{dbname,jdbcType=VARCHAR}
          </set>
 		WHERE id IN 
       <foreach collection="pkList" index="index" item="item" open="(" separator="," close=")"> 

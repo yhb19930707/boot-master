@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>sysLog管理</title>
+  <meta name="description" content="" />
+  <meta name="author" content="pc" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <meta name="screen-orientation"content="portrait">
+  <meta name="format-detection" content="telephone=no" />
+  <#include "/inc/common.html">
+</head>
+<body>
+		    <table  id="sysLogDg" 
+				    data-toggle="table"  
+				    data-method="post" 
+				    data-content-type="application/json"
+				    data-url="${request.contextPath}/sysLog/selectPage"
+				    data-toolbar="#sysLogTb"
+				    data-height="355"
+					data-show-header="true" 
+					data-cache="false"
+					data-click-to-select="true"  
+					data-single-select="false" 
+					data-striped="true"
+					data-search="false" 
+					data-pagination="true"
+					data-side-pagination="server"
+					data-query-params-type="''"
+					data-page-size="10"
+					data-page-number="1"
+					data-page-list="[10,20,50,100,500,1000]"
+					data-query-params="sysLogQueryParams"
+					data-pagination-loop="false"
+					data-classes="table table-hover table-condensed"
+			        data-sort-stable="true"
+			        data-show-footer="false"
+			        data-resizable="true"
+			        data-reorderable-columns="true"
+					data-show-toggle="true"
+			        data-show-columns="true"
+					data-show-multi-sort="true"
+					data-show-pagination-switch="true"
+					data-show-export="true"
+					data-export-types="['excel']"
+					data-export-options='{
+				         "fileName": "sysLog列表", 
+				         "worksheetName": "sheet"
+				    }'
+			>
+			<thead>
+				<tr>
+                      <th data-field="state"  data-align="center"  data-radio="true"></th>
+                      <th data-field="index" data-title="序号" data-align="center" data-visible="false" data-formatter="getRowIndex"></th> 
+                      <th data-field='id' data-sortable='true' data-align='center'  data-title='编号'></th>
+                      <th data-field='title' data-sortable='true' data-align='center'  data-title='日志标题'></th>
+                      <th data-field='type' data-sortable='true' data-align='center'  data-title='日志类型 ' data-formatter="typeFormatter"></th>
+                      <th data-field='userId' data-sortable='true' data-align='center'  data-title='操作用户'></th>
+                      <th data-field='requestUri' data-sortable='true' data-align='center'  data-title='请求URI'></th>
+                      <th data-field='className' data-sortable='true' data-align='center' data-visible="false" data-title='执行类名'></th>
+                      <th data-field='methodName' data-sortable='true' data-align='center' data-visible="false" data-title='执行方法'></th>
+                      <th data-field='functionName' data-sortable='true' data-align='center' data-visible="false" data-title='功能模块名称'></th> 
+                      <th data-field='userAgent' data-sortable='true' data-align='center' data-visible="false"  data-title='用户代理'></th>
+                      <th data-field='remoteIp' data-sortable='true' data-align='center'  data-title='操作地址'></th>
+                      <th data-field='requestMac' data-sortable='true' data-align='center'  data-title='设备MAC'></th>
+                      <th data-field='requestMethod' data-sortable='true' data-align='center'  data-title='操作方式'></th>
+                      <th data-field='requestParams' data-sortable='true' data-align='center'  data-title='请求参数'></th>
+                      <th data-field='actionThread' data-sortable='true' data-align='center'  data-title='执行线程'></th>
+                      <th data-field='actionStartTime' data-sortable='true' data-align='center' data-visible="false"  data-title='开始时刻'></th>
+                      <th data-field='actionEndTime' data-sortable='true' data-align='center' data-visible="false"  data-title='结束时刻'></th>
+                      <th data-field='actionTime' data-sortable='true' data-align='center' data-visible="false" data-title='耗时(毫秒)'></th>
+                      <th data-field='createDate' data-sortable='true' data-align='center'  data-title='创建时间'></th>
+                      <th data-field='exception' data-sortable='true' data-align='center' data-visible="false" data-title='异常信息'></th>
+                      <th data-field='dbname' data-sortable='true' data-align='center' data-visible="false" data-title='数据库'></th>
+				</tr>
+			</thead>
+		</table>
+		
+        <div id="sysLogTb"  style="padding: 5px; height: auto">
+			<div style="margin-bottom: 5px">
+			    <input type="button" value="添加" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="addSysLog()" /> 
+				<input type="button" value="查看" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="editSysLog()" /> 
+				<input type="button" value="查询" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="findSysLog()" /> 
+			    <input type="button" value="清空" style="width: 80px; height: 30px; vertical-align: bottom; line-height: 10px;" class="btn-primary" onclick="clearSysLog()" /> 
+			</div>
+			<div>
+			   <form id="sysLogQueryForm" method="post" action="">
+                           <table align="left">
+                              <tr>
+                                      <!-- <td>编号:<input id='id' name='id'  style="width: 80px;height:25px;"/></td> -->
+                                      <td>操作用户:<input id='userId' name='userId'  style="width: 100px;height:25px;"/></td>
+                                      <td>日志标题:<input id='title' name='title'  style="width: 100px;height:25px;"/></td>
+                                      <td>
+                                                                                                               日志类型:<select id='type' name='type' style="width:100px;" class="publicSelect2" >
+                                            <option value="">全部日志</option>
+						              	    <option value="1">正常日志</option>
+						             	    <option value="2">异常日志</option>
+						                 </select>
+                                      </td>
+                                     
+                                      <td>请求URI:<input id='requestUri' name='requestUri'  style="width: 100px;height:25px;"/></td>
+                                      <td>执行方法:<input id='methodName' name='methodName'  style="width: 100px;height:25px;"/></td>
+                                      <!--  <td>执行类名:<input id='className' name='className'  style="width: 80px;height:25px;"/></td>
+                                      <td>功能模块名称:<input id='functionName' name='functionName'  style="width: 80px;height:25px;"/></td>
+                                      <td>用户代理:<input id='userAgent' name='userAgent'  style="width: 80px;height:25px;"/></td> -->
+                                      <!--  <td>执行线程:<input id='actionThread' name='actionThread'  style="width: 80px;height:25px;"/></td>
+                                      <td>开始执行时刻:<input id='actionStartTime' name='actionStartTime'  readonly='true' onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" style="width: 80px;height:25px;"/></td>
+                                      <td>结束执行时刻:<input id='actionEndTime' name='actionEndTime'  readonly='true' onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" style="width: 80px;height:25px;"/></td>
+                                      <td>执行耗时 单位(毫秒):<input id='actionTime' name='actionTime'  style="width: 80px;height:25px;"/></td>
+                                      <td>创建日志时间:<input id='createDate' name='createDate'  readonly='true' onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" style="width: 80px;height:25px;"/></td>
+                                      <td>数据库实例:<input id='dbname' name='dbname'  style="width: 80px;height:25px;"/></td> -->
+                             </tr>
+                             <tr>
+                                      <td>操作地址:<input id='remoteIp' name='remoteIp'  style="width: 100px;height:25px;"/></td>
+                                      <td>操作方式:<input id='requestMethod' name='requestMethod'  style="width: 100px;height:25px;"/></td>
+                                      <td>请求参数:<input id='requestParams' name='requestParams'  style="width: 100px;height:25px;"/></td>
+                                      <td>设备MAC:<input id='requestMac' name='requestMac'  style="width: 100px;height:25px;"/></td>
+                                      <td>异常信息:<input id='exception' name='exception'  style="width: 100px;height:25px;"/></td>
+                             </tr>
+                           </table>         
+			   </form>
+			</div>
+		</div>
+		<script type="text/javascript">
+		$(function(){
+			$(".publicSelect2").select2();
+		    Waves.init();
+		    Waves.attach('.waves');
+		})
+	   	function sysLogQueryParams(params){
+			params.title=$('#title').val();
+			params.type=$('#type').val();
+			params.userId=$('#userId').val();
+			params.requestUri=$('#requestUri').val();
+			params.className=$('#className').val();
+			params.methodName=$('#methodName').val();
+			params.functionName=$('#functionName').val();
+			params.userAgent=$('#userAgent').val();
+			params.remoteIp=$('#remoteIp').val();
+			params.requestMethod=$('#requestMethod').val();
+			params.requestParams=$('#requestParams').val();
+			params.requestMac=$('#requestMac').val();
+			params.exception=$('#exception').val();
+			params.actionThread=$('#actionThread').val();
+			params.actionStartTime=$('#actionStartTime').val();
+			params.actionEndTime=$('#actionEndTime').val();
+			params.actionTime=$('#actionTime').val();
+			params.createDate=$('#createDate').val();
+			params.dbname=$('#dbname').val();
+			return params;
+	    }
+	    //显示行号
+		function getRowIndex(value, row, index) {  
+		   var page=$("#sysLogDg").bootstrapTable("getOptions");
+		   return page.pageSize*(page.pageNumber-1)+index+1;
+		} 
+	    
+		//日志类型
+	    function typeFormatter(value,row,index) {
+	    	if(value==null||value.length==0||value==undefined){
+	    		return "正常";
+	    	}else if(value=="1"){
+	    	  return "正常";
+	    	}else{
+	    		return "异常";
+	    	}
+	    } 
+	
+	    //添加
+	    function addSysLog(){
+	         var index=layer.open({
+		    	      id:"insertSysLog",//唯一Id    
+		    		  type: 2,//iframe模式
+		    		  area: ['800px', '500px'],
+		    		  title: '添加SysLog',//标题
+		    		  shade: 0.6 ,//遮罩透明度
+		    		  maxmin: true, //允许全屏最小化
+		    		  anim: 1, //0-6的动画形式，-1不开启
+		    		  content: "${request.contextPath}/sysLog/preInsert",//内容
+	    	});
+	        //window.location.href="${request.contextPath}/sysLog/preInsert";
+	    }
+	    //修改 
+	    function editSysLog(){
+	        var row = $('#sysLogDg').bootstrapTable('getSelections');
+		    if (row.length==1&&row[0].id!=null&&row[0].id!=""){//主键不为空
+			    	var index=layer.open({
+					    	      id:"updateSysLog",//唯一Id    
+					    		  type: 2,//iframe模式
+					    		  area: ['800px', '500px'],
+					    		  title: '查看日志详情',//标题
+					    		  shade: 0.6 ,//遮罩透明度
+					    		  maxmin: true, //允许全屏最小化
+					    		  anim: 1, //0-6的动画形式，-1不开启
+					    		  content: "${request.contextPath}/sysLog/preUpdate?id="+row[0].id,//内容
+			    	});
+				//window.location.href="${request.contextPath}/sysLog/preUpdate?id="+row[0].id;
+    		}else{
+    			layer.open({
+				  title: '提示信息'
+				  ,content: '请选择一行记录'
+				});  
+    		}
+	    }
+	    //查询
+		function findSysLog(){
+			$("#sysLogDg").bootstrapTable("refresh",{
+					"silent":true,
+					"resetOffset":false,
+					"url":"${request.contextPath}/sysLog/selectPage",
+					query:$('#sysLogQueryForm').serializeObject()
+			}); 
+		} 
+	    //清空查询条件
+	   function clearSysLog(){
+	       $(':input','#sysLogQueryForm') 
+		    .not(':button, :submit, :reset, :hidden') 
+		    .val('') 
+		    .removeAttr('checked') 
+		    .removeAttr('selected'); 
+	   }
+	</script>
+ </body>
+</html>

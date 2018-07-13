@@ -113,7 +113,7 @@ public class LogPrinter {
 						    sysLog.setTitle(functionName);
 						    sysLog.setType(Constants.LogType.NORMAL.getVal());
 						    sysLog.setUserId(userName);
-						    sysLog.setDatabase(logUtil.getDataBase());
+						    sysLog.setDbname(logUtil.getDataBase());
 						    sysLog.setCreateDate(new Date());
 						    sysLog.setUserAgent(request.getHeader("user-agent"));
 						    sysLog.setRemoteIp(request.getRemoteHost());

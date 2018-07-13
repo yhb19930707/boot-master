@@ -48,19 +48,20 @@ public class SysLog  extends MutiSort {
     private String exception;//异常信息
     @ApiModelProperty(value = "执行线程", required = false) 
     private String actionThread;//执行线程
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss S")
     @ApiModelProperty(value = "开始执行时刻", required = false) 
     private Date actionStartTime;//开始执行时刻
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss S")
     @ApiModelProperty(value = "结束执行时刻", required = false) 
     private Date actionEndTime;//结束执行时刻
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss S")
     @ApiModelProperty(value = "执行耗时 单位(毫秒)", required = false) 
     private Long actionTime;//执行耗时 单位(毫秒)
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss S")
     @ApiModelProperty(value = "创建日志时间", required = false) 
     private Date createDate;//创建日志时间
     @ApiModelProperty(value = "数据库实例", required = false) 
-    private String database;//数据库实例
+    private String dbname;//数据库实例
     
     // Constructors
 
@@ -191,19 +192,19 @@ public class SysLog  extends MutiSort {
     }
 
     public void setActionStartTime(Date actionStartTime) {
-        this.actionStartTime = (Date) actionStartTime.clone();
+        this.actionStartTime = actionStartTime;
     }
 
     public Date getActionStartTime() {
-        return (Date)this.actionStartTime.clone();
+        return this.actionStartTime;
     }
 
     public void setActionEndTime(Date actionEndTime) {
-        this.actionEndTime = (Date)actionEndTime.clone();
+        this.actionEndTime = actionEndTime;
     }
 
     public Date getActionEndTime() {
-        return (Date)this.actionEndTime.clone();
+        return this.actionEndTime;
     }
 
     public void setActionTime(Long actionTime) {
@@ -215,19 +216,19 @@ public class SysLog  extends MutiSort {
     }
 
     public void setCreateDate(Date createDate) {
-        this.createDate = (Date)createDate.clone();
+        this.createDate = createDate;
     }
 
     public Date getCreateDate() {
-        return (Date)this.createDate.clone();
+        return this.createDate;
     }
 
-    public void setDatabase(String database) {
-        this.database = database;
+    public void setDbname(String dbname) {
+        this.dbname = dbname;
     }
 
-    public String getDatabase() {
-        return this.database;
+    public String getDbname() {
+        return this.dbname;
     }
 
 }
