@@ -8,7 +8,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
 
 #### 极速入门
 [精简版本](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-single)   &nbsp;[入门配置](https://gitee.com/bootstrap2table/boot_master/wikis/welcome)   &nbsp;[分布式事务](https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid)  &nbsp;[SpringCloud](https://gitee.com/bootstrap2table/spring-cloud)   &nbsp;[Dubbo](https://gitee.com/bootstrap2table/api-master)
-
+  &nbsp;[AutoCode](http://117.48.201.35:9527)
 
 #### 技术选型
     ● 系统核心框架：SpringBoot
