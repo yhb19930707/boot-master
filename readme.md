@@ -1,7 +1,9 @@
 ﻿# boot-master
 
 #### 项目介绍
-boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您快速上手使用SpringBoot，欢迎大家提意见，您的宝贵意见，是我们进步的动力。<br>
+boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您快速上手使用SpringBoot，欢迎大家提意见，您的宝贵意见，是我们进步的动力。
+最新代码分支[boot-simple](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-simple)全注解配置
+<br>
 
 #### 在线演示
 [HAdmin演示1](https://bootstrap2table.gitee.io)  &nbsp;[HAdmin演示2](http://106.12.21.175:99)  &nbsp;[AdminLTE演示](http://117.48.201.35)  &nbsp;[AutoCode](http://106.12.21.175:9527)
