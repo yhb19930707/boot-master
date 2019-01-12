@@ -117,6 +117,7 @@ boot-master
 - sharding-jdbc版本: https://gitee.com/bootstrap2table/boot-sharding<br>
 - jtaDruid版本: https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid<br>
 - 代码生成： https://github.com/apple987/AutoCode<br>
+- 阿里GTS： https://github.com/alibaba/fescar<br>
 
 #### **问题反馈：**
 - 意见反馈：https://gitee.com/bootstrap2table/boot_master/issues
@@ -124,23 +125,23 @@ boot-master
 - 作者QQ: 1335157415<br>
 - 作者邮箱: m15171479289@163.com<br>
 - 加入QQ群：<br>
-![boot-qq](https://github.com/apple987/static/raw/master/boot/image/qq.jpg "QQ群")<br>
+![boot-qq](https://images.gitee.com/uploads/images/2019/0112/104238_654d4e4e_1006985.jpeg "QQ群")<br>
 
 ### 项目截图
 **项目启动效果图：** 
-![boot-start](https://github.com/apple987/static/raw/master/boot/image/start.png "项目启动")<br>	
+![boot-start](https://images.gitee.com/uploads/images/2019/0112/104238_7ab41d58_1006985.png "项目启动")<br>	
 **Https跳转效果图：** 
-![boot-ssl](https://github.com/apple987/static/raw/master/boot/image/ssl.png "初始化")<br>
+![boot-ssl](https://images.gitee.com/uploads/images/2019/0112/104238_658957a1_1006985.png "初始化")<br>
 **登陆页面效果图：** 
-![boot-login](https://github.com/apple987/static/raw/master/boot/image/login.jpg "登陆页面")<br>
+![boot-login](https://images.gitee.com/uploads/images/2019/0112/104238_1fcc2e3c_1006985.jpeg "登陆页面")<br>
 **欢迎页面效果图：** 
-![boot-welcome](https://github.com/apple987/static/raw/master/boot/image/welcome.jpg "欢迎页面")<br>
+![boot-welcome](https://images.gitee.com/uploads/images/2019/0112/104238_2a1f82df_1006985.jpeg "欢迎页面")<br>
 **学生管理效果图：** 
-![boot-index](https://github.com/apple987/static/raw/master/boot/image/index.png "学生管理")<br>
+![boot-index](https://images.gitee.com/uploads/images/2019/0112/104238_174d64cf_1006985.png "学生管理")<br>
 **接口文档效果图：** 
 ![boot-swagger](https://github.com/apple987/static/raw/master/boot/image/swagger.png "swagger在线文档")<br>
 **登录接口效果图：** 
-![boot-applogin](https://github.com/apple987/static/raw/master/boot/image/appLogin.jpg "app登陆接口")<br>
+![boot-applogin](https://images.gitee.com/uploads/images/2019/0112/104240_b52faf90_1006985.jpeg "app登陆接口")<br>
 **获取用户效果图：** 
 ![boot-appGetUser](https://github.com/apple987/static/raw/master/boot/image/appGetUser.jpg "app获得登陆信息接口")<br>
 **邮件异常效果图：** 
