@@ -6,7 +6,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
 <br>
 
 #### 在线演示
-[HAdmin演示1](https://bootstrap2table.gitee.io)  &nbsp;[HAdmin演示2](http://106.12.21.175:99)  &nbsp;[AdminLTE演示](http://117.48.201.35)  
+[HAdmin演示1](https://bootstrap2table.gitee.io)  &nbsp;[HAdmin演示2](http://106.12.21.175:99)  &nbsp;[AdminLTE演示](http://117.48.201.35:9090)
 #### 极速入门
 [精简版本](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-single)   &nbsp;[入门配置](https://gitee.com/bootstrap2table/boot_master/wikis/welcome)   &nbsp;[分布式事务](https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid)  &nbsp;[SpringCloud](https://gitee.com/bootstrap2table/spring-cloud)   &nbsp;[Dubbo](https://gitee.com/bootstrap2table/api-master)
 
@@ -138,39 +138,39 @@ boot-master
 **学生管理效果图：** 
 ![boot-index](https://images.gitee.com/uploads/images/2019/0112/104238_174d64cf_1006985.png "学生管理")<br>
 **接口文档效果图：** 
-![boot-swagger](https://github.com/apple987/static/raw/master/boot/image/swagger.png "swagger在线文档")<br>
+![boot-swagger](https://gitee.com/uploads/images/2019/0506/103033_adea4493_1006985.png "swagger在线文档")<br>
 **登录接口效果图：** 
 ![boot-applogin](https://images.gitee.com/uploads/images/2019/0112/104240_b52faf90_1006985.jpeg "app登陆接口")<br>
 **获取用户效果图：** 
-![boot-appGetUser](https://github.com/apple987/static/raw/master/boot/image/appGetUser.jpg "app获得登陆信息接口")<br>
+![boot-appGetUser](https://gitee.com/uploads/images/2019/0506/103033_527e984d_1006985.jpeg "app获得登陆信息接口")<br>
 **邮件异常效果图：** 
-![boot-emailError](https://github.com/apple987/static/raw/master/boot/image/emailError.jpg "邮件发送异常")<br>
+![boot-emailError](https://gitee.com/uploads/images/2019/0506/103032_351aaaea_1006985.jpeg "邮件发送异常")<br>
 **发送消息效果图：** 
-![boot-runmq](https://github.com/apple987/static/raw/master/boot/image/runmq.jpg "发送MQ消息")<br>
+![boot-runmq](https://gitee.com/uploads/images/2019/0506/103032_fcf9f466_1006985.jpeg "发送MQ消息")<br>
 **接收消息效果图：** 
-![boot-mq](https://github.com/apple987/static/raw/master/boot/image/mq.jpg "MQ队列和订阅")<br>
+![boot-mq](https://gitee.com/uploads/images/2019/0506/103032_b65dfcce_1006985.jpeg "MQ队列和订阅")<br>
 **职员列表效果图：** 
-![boot-selectStaff](https://github.com/apple987/static/raw/master/boot/image/selectStaff.jpg "职员信息列表")<br>
+![boot-selectStaff](https://gitee.com/uploads/images/2019/0506/103033_9f4be254_1006985.jpeg "职员信息列表")<br>
 **添加职员效果图：** 
-![boot-insertStaff](https://github.com/apple987/static/raw/master/boot/image/insertStaff.jpg "添加职员信息")<br>
+![boot-insertStaff](https://gitee.com/uploads/images/2019/0506/103033_bb7cd3c3_1006985.jpeg "添加职员信息")<br>
 **验证失败效果图：** 
-![boot-insertError](https://github.com/apple987/static/raw/master/boot/image/insertStaffError.jpg "validate验证信息")<br>
+![boot-insertError](https://gitee.com/uploads/images/2019/0506/103033_fc1c8e91_1006985.jpeg "validate验证信息")<br>
 **AlibabaDurid效果图：** 
-![boot-durid](https://github.com/apple987/static/raw/master/boot/image/druid.png "durid监控")<br>
+![boot-durid](https://gitee.com/uploads/images/2019/0506/103034_9a0b2cde_1006985.png "durid监控")<br>
 **JavaMelody效果图：** 
-![boot-javaMelody](https://github.com/apple987/static/raw/master/boot/image/javaMelody.png "javaMelody监控")<br>
+![boot-javaMelody](https://gitee.com/uploads/images/2019/0506/103034_87f896fc_1006985.png "javaMelody监控")<br>
 **生成二维码效果图：** 	
-![boot-qrcode](https://github.com/apple987/static/raw/master/boot/image/qrcode.png "生成二维码")<br>
+![boot-qrcode](https://gitee.com/uploads/images/2019/0506/103034_519b6c5b_1006985.png "生成二维码")<br>
 **打印二维码效果图：** 
-![boot-print](https://github.com/apple987/static/raw/master/boot/image/print.png "打印二维码")<br>
+![boot-print](https://gitee.com/uploads/images/2019/0506/103034_1427e1da_1006985.png "打印二维码")<br>
 **Solr操作效果图：** 
-![boot-solr](https://github.com/apple987/static/raw/master/boot/image/solr.png "solr导入数据")<br>
+![boot-solr](https://gitee.com/uploads/images/2019/0506/103036_948552a3_1006985.png "solr导入数据")<br>
 **文本上传效果图：** 
-![boot-upload](https://github.com/apple987/static/raw/master/boot/image/upload.jpg "文本上传")<br>
+![boot-upload](https://gitee.com/uploads/images/2019/0506/103035_df507501_1006985.jpeg "文本上传")<br>
 **上传出错效果图：**
-![boot-uploadError](https://github.com/apple987/static/raw/master/boot/image/uploadError.jpg "文件上传异常")<br>
+![boot-uploadError](https://gitee.com/uploads/images/2019/0506/103036_bc0b458c_1006985.jpeg "文件上传异常")<br>
 **限流生效效果图：**
-![boot-ratelimter](https://github.com/apple987/static/raw/master/boot/image/ratelimter.jpg "限流接口请求")<br>
+![boot-ratelimter](https://gitee.com/uploads/images/2019/0506/103036_7c0504a0_1006985.jpeg "限流接口请求")<br>
 
 	
 
