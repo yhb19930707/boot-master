@@ -24,8 +24,10 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
     ● 分布式限流器：Redisson
     ● 系统消息队列：ActiveMq
     ● 安全授权框架：JwtToken+AES 
+    ● 接口文档工具：SWAGGER2+swagger2markup
  
-#### **项目特点**   
+#### **项目特点**  
+> * http协议在线访问swaggerJSON地址，可以直接生成swagger离线makdown和html文档。<br> 
 > * 配置App模块，针对相同接口重复提交，直接拒绝访问(针对多读情况，可手动关闭限制)。<br>
 > * 配置接口限流器，接口端直接拒绝超过允许数量的请求，减轻服务器端在高并发环境下的压力。<br>
 > * 配置坦克大战小游戏，让您在学习之余可以愉快的放松休息。<br>
