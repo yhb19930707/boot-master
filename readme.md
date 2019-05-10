@@ -113,7 +113,7 @@ boot-master
 - 6.运行StartUpApplication启动项目，浏览器访问http://localhost<br>
 #### **懒人部署:**
 - 1.下载&nbsp;[swagger.jar](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar)
-- 2.本地进入下载目录，执行:java -jar swagger.jar
+- 2.本地进入下载目录，执行:java -jar swagger-1.0.0.jar
 - 3.浏览器访问:http://localhost:9090/main
 	
 #### **友情链接：**
