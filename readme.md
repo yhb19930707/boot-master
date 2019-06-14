@@ -26,6 +26,8 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
     ● 系统消息队列：ActiveMq
     ● 安全授权框架：JwtToken+AES 
     ● 接口文档工具：SWAGGER2+swagger2markup
+    ● 全文检索工具：RedisSearch
+    ● 日志查询处理：RediSQL
  
 #### **项目特点**  
 > * http协议在线访问swaggerJSON地址，可以直接生成swagger离线makdown和html文档。<br> 
