@@ -28,6 +28,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
     ● 接口文档工具：SWAGGER2+swagger2markup
     ● 全文检索工具：RedisSearch
     ● 日志查询处理：RediSQL
+    ● 代码分析插件：Sonar
  
 #### **项目特点**  
 > * 用户操作日志写入REDIS，通过SWAGGER在线文档直接查看REDIS日志。<br>
