@@ -7,7 +7,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
 <br>
 
 #### 在线演示
-[HAdmin演示1](https://bootstrap2table.gitee.io)    &nbsp;[功能演示](http://106.12.24.186:9090)  &nbsp;[Sonar](http://106.12.75.109:9000)
+[HAdmin演示1](https://bootstrap2table.gitee.io)    &nbsp;[功能演示](http://106.12.24.186:9090)  &nbsp;[Sonar分析](http://106.12.75.109:9000)
 #### 极速入门
 [精简版本](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-single)   &nbsp;[入门配置](https://gitee.com/bootstrap2table/boot_master/wikis/welcome)   &nbsp;[分布式事务](https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid)  &nbsp;[SpringCloud](https://gitee.com/bootstrap2table/spring-cloud)   &nbsp;[Dubbo](https://gitee.com/bootstrap2table/api-master)
 
@@ -115,6 +115,10 @@ boot-master
 - 4.启动solr(默认单机版)。<br>
 - 5.启动zookeeper(默认单机版本2181)。<br>
 - 6.运行StartUpApplication启动项目，浏览器访问http://localhost<br>
+- 7.Sonar代码分析，请在eclipse或者idea工具：<br>
+    maven命令:sonar:sonar -Dsonar.host.url=http://ip:port -Dsonar.login=X -Dsonar.password=X -Dsonar.scm.provider=git<br>
+                   
+
 #### **懒人部署:**
 - 1.下载&nbsp;[swagger.jar](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar)
 - 2.百度网盘[swagger.jar](https://pan.baidu.com/s/1yGzkIe4PG0-sAdUT0UCQ1w),提取码:jq7s
