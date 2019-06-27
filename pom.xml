@@ -385,6 +385,12 @@
 	                </execution>
 	            </executions>
 	        </plugin>
+			<!-- sonar-scanner -->
+		   <plugin>
+		      <groupId>org.sonarsource.scanner.maven</groupId>
+		      <artifactId>sonar-maven-plugin</artifactId>
+		      <version>3.6.0.1398</version>
+		    </plugin>
 		</plugins>
 		 <!--本处需要，resources和java两个路径都指定-->
 		<resources>
