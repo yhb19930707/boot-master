@@ -61,6 +61,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
 > * 前端使用vkbeautify插件,页面格式化json,xml,css,sql数据显示。<br>
 > * 配置[activeMq](https://gitee.com/bootstrap2table/boot_master/blob/master/src/test/java/com/qdone/DemoApplicationTests.java)支持同时发送队列和主题消息。<br>
 > * 配置[solr和solrCloud](https://gitee.com/bootstrap2table/boot_master/blob/master/src/main/java/com/qdone/module/app/SolrDataController.java)支持分词搜索查询。<br>
+> * 配置LOG4JDBC格式化打印Mybatis执行sql日志，快捷定位脚本错误<br>
 
 
 #### **项目结构**
