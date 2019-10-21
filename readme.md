@@ -123,7 +123,8 @@ boot-master
 - 6.运行StartUpApplication启动项目，浏览器访问http://localhost<br>
 - 7.Sonar代码分析，请在eclipse或者idea工具：<br>
     maven命令:sonar:sonar -Dsonar.host.url=http://ip:port -Dsonar.login=X -Dsonar.password=X -Dsonar.scm.provider=git<br>
-                   
+#### **注意事项：**
+- 1.项目目前启2台实例，发送队列消息时，存在多个消费者，可能会出现某一客户端接收不到队列消息，主题消息不存在这个问题。<br>                   
 
 #### **懒人部署:**
 - 1.下载&nbsp;[swagger.jar](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar)
