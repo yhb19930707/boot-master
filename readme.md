@@ -124,7 +124,8 @@ boot-master
 - 7.Sonar代码分析，请在eclipse或者idea工具：<br>
     maven命令:sonar:sonar -Dsonar.host.url=http://ip:port -Dsonar.login=X -Dsonar.password=X -Dsonar.scm.provider=git<br>
 #### **注意事项：**
-- 1.项目目前启2台实例，发送队列消息时，存在多个消费者，可能会出现某一客户端接收不到队列消息，主题消息不存在这个问题。<br>                   
+- 1.目前启动2台实例，发送队列消息时，存在一个队列对应多个消费者，某一消费者可能读取不到队列消息的情况。<br>
+- 2.代码配置有通用和特定队列的两种监听器，当向相同队列发送消息时，专门监听该队列的监听器会处理此消息。<br>
 
 #### **懒人部署:**
 - 1.下载&nbsp;[swagger.jar](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar)
