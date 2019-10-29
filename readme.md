@@ -2,7 +2,7 @@
 
 #### 项目介绍
 boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您快速上手使用SpringBoot，欢迎大家提意见，您的宝贵意见，是我们进步的动力。
-最新代码请查看[boot-simple](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-simple)  本地部署：&nbsp;[离线版本](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar).
+最新代码请查看[boot-win](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-win)  本地部署：&nbsp;[离线版本](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar).
 
 <br>
 
