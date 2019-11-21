@@ -126,6 +126,8 @@ boot-master
 #### **注意事项：**
 - 1.目前启动2台实例，发送队列消息时，存在一个队列对应多个消费者，某一消费者可能读取不到队列消息的情况。<br>
 - 2.代码配置有通用和特定队列的两种监听器，当向相同队列发送消息时，专门监听该队列的监听器会处理此消息。<br>
+- 3.开源分布式定时任务架构有很多，常用Elastic-job,XXL_JOB,light-task-scheduler。<br>
+
 
 #### **懒人部署:**
 - 1.下载&nbsp;[swagger.jar](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar)
