@@ -7,7 +7,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
 <br>
 
 #### 在线演示
-[HAdmin演示](https://bootstrap2table.gitee.io)  &nbsp;[SOLR](http://106.12.75.109:8888/solr)  &nbsp;[WIN10演示](http://106.12.24.186:9090) &nbsp;[ZKUI演示](http://106.12.24.186:9999) &nbsp;[XXL_JOB](http://106.12.24.186/xxl-job-admin)
+[HAdmin演示](https://bootstrap2table.gitee.io)  &nbsp;[SOLR](http://106.12.75.109:8888/solr)  &nbsp;[WIN10演示](http://106.12.24.186:9090) &nbsp;[ZKUI演示](http://106.12.24.186:9999) &nbsp;[XXL_JOB](http://106.12.24.186:8484/xxl-job-admin)
 #### 极速入门
 [精简版本](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-single)   &nbsp;[入门配置](https://gitee.com/bootstrap2table/boot_master/wikis/welcome)   &nbsp;[分布式事务](https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid)  &nbsp;[SpringCloud](https://gitee.com/bootstrap2table/spring-cloud)   &nbsp;[Dubbo](https://gitee.com/bootstrap2table/api-master)
 
@@ -35,6 +35,7 @@ boot-master基于SpringBoot2.0.2版本，整合项目中常用技术,帮助您�
 
  
 #### **项目特点**  
+> * 利用REDISSON实现多个服务之间的远程调用，发送方发送指令成功，接收方确认会处理。<br>
 > * 用户操作日志写入REDIS，通过SWAGGER在线文档直接查看REDIS日志。<br>
 > * http协议在线访问swaggerJSON地址，可以直接生成swagger离线makdown和html文档。<br> 
 > * 配置App模块，针对相同接口重复提交，直接拒绝访问(针对多读情况，可手动关闭限制)。<br>
@@ -127,7 +128,7 @@ boot-master
 - 1.目前启动2台实例，发送队列消息时，存在一个队列对应多个消费者，某一消费者可能读取不到队列消息的情况。<br>
 - 2.代码配置有通用和特定队列的两种监听器，当向相同队列发送消息时，专门监听该队列的监听器会处理此消息。<br>
 - 3.开源分布式定时任务架构有很多，常用Elastic-job,XXL_JOB,light-task-scheduler。<br>
-
+- 4.REDISSON可以做远程调用，发布订阅功能，可以实现类似MQ的轻量级功能。<br>
 
 #### **懒人部署:**
 - 1.下载&nbsp;[swagger.jar](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar)
