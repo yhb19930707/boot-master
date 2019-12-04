@@ -129,7 +129,7 @@ boot-master
 - 2.代码配置有通用和特定队列的两种监听器，当向相同队列发送消息时，专门监听该队列的监听器会处理此消息。<br>
 - 3.开源分布式定时任务架构有很多，常用Elastic-job,XXL_JOB,light-task-scheduler。<br>
 - 4.REDISSON可以做远程调用，发布订阅功能，可以实现类似MQ的轻量级功能。<br>
-- 5.使用XXL-JOB时，需要在自己的业务方法里处理完毕之后，需要将handle异常抛出，便于admin捕获处理。<br>
+- 5.使用XXL-JOB时，需要在自己的业务方法里处理完毕之后，需要将handler异常抛出，便于admin捕获处理。<br>
 
 #### **懒人部署:**
 - 1.下载&nbsp;[swagger.jar](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar)
@@ -143,7 +143,7 @@ boot-master
 - sharding-jdbc版本: https://gitee.com/bootstrap2table/boot-sharding<br>
 - jtaDruid版本: https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid<br>
 - 代码生成： https://github.com/apple987/AutoCode<br>
-- 阿里GTS： https://github.com/alibaba/fescar<br>
+- 阿里GTS： https://github.com/seata/seata<br>
 
 #### **问题反馈：**
 - 意见反馈：https://gitee.com/bootstrap2table/boot_master/issues
