@@ -130,6 +130,7 @@ boot-master
 - 3.开源分布式定时任务架构有很多，常用Elastic-job,XXL_JOB,light-task-scheduler。<br>
 - 4.REDISSON可以做远程调用，发布订阅功能，可以实现类似MQ的轻量级功能。<br>
 - 5.使用XXL-JOB时，需要在自己的业务方法里处理完毕之后，需要将handler异常抛出，便于admin捕获处理。<br>
+- 6.系统风格有AdminLTE和Win10两种，鉴于服务器原因，此处只是展示Win10页面。<br>
 
 #### **懒人部署:**
 - 1.下载&nbsp;[swagger.jar](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar)
