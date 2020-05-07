@@ -7,7 +7,7 @@ boot-master基于SpringBoot2.2.0版本，整合项目中常用技术,帮助您�
 <br>
 
 #### 在线演示
-[HAdmin演示](https://bootstrap2table.gitee.io)  &nbsp;[SOLR](http://106.12.75.109:8888/solr)  &nbsp;[WIN10演示](http://106.12.24.186:9090) &nbsp;[ZKUI演示](http://106.12.24.186:9999) &nbsp;[XXL_JOB](http://106.12.24.186:8484/xxl-job-admin)
+[HAdmin演示](https://bootstrap2table.gitee.io)  &nbsp;[SOLR](http://106.12.75.109:8888/solr)  &nbsp;[WIN10演示](http://114.67.207.106:9090) &nbsp; &nbsp;[XXL_JOB](http://114.67.207.106:8484/xxl-job-admin)
 #### 极速入门
 [精简版本](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-single)   &nbsp;[入门配置](https://gitee.com/bootstrap2table/boot_master/wikis/welcome)   &nbsp;[分布式事务](https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid)  &nbsp;[SpringCloud](https://gitee.com/bootstrap2table/spring-cloud)   &nbsp;[Dubbo](https://gitee.com/bootstrap2table/api-master)
 
