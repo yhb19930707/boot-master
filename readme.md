@@ -2,12 +2,12 @@
 
 #### 项目介绍
 boot-master基于SpringBoot2.2.0版本，整合项目中常用技术,帮助您快速上手使用SpringBoot，欢迎大家提意见，您的宝贵意见，是我们进步的动力。
-最新代码请查看[boot-win](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-win)  本地部署：&nbsp;[离线版本](http://106.12.24.186:8081/nexus/content/groups/public/com/qdone/swagger/1.0.0/swagger-1.0.0.jar).
+最新代码请查看[boot-win](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-win)  本地部署：&nbsp;[离线版本](http://114.67.207.106:8081/nexus/content/groups/public/boot-win/boot-win/1.0.0.RELEASE/boot-win-1.0.0.RELEASE.jar).
 
 <br>
 
 #### 在线演示
-[HAdmin演示](https://bootstrap2table.gitee.io)  &nbsp;[SOLR](http://114.67.207.106:8888/solr) &nbsp;[WIN10演示](http://114.67.207.106:9090) &nbsp;[RAP](http://114.67.207.106:8888) &nbsp;[XXL_JOB](http://114.67.207.106:8484/xxl-job-admin) &nbsp;[ZKUI](http://114.67.207.106:9999)  
+[HAdmin演示](https://bootstrap2table.gitee.io)  &nbsp;[SOLR](http://114.67.207.106:8888/solr) &nbsp;[WIN10演示](http://114.67.207.106:9090) &nbsp;[RAP](http://114.67.207.106:8888) &nbsp;[XXL_JOB](http://114.67.207.106:8484/xxl-job-admin) 
 #### 极速入门
 [精简版本](https://gitee.com/bootstrap2table/boot_master/tree/feature/boot-single)   &nbsp;[入门配置](https://gitee.com/bootstrap2table/boot_master/wikis/welcome)   &nbsp;[分布式事务](https://gitee.com/bootstrap2table/boot_master/tree/feature/jta/druid)  &nbsp;[SpringCloud](https://gitee.com/bootstrap2table/spring-cloud)   &nbsp;[Dubbo](https://gitee.com/bootstrap2table/api-master)
 
